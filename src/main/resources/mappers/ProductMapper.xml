@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.green.portpolio.dao.ProductDao">
+
+	<insert id="productRegis" parameterType="kr.green.portpolio.vo.ProductVo">
+		insert into portpolio.product(product_category, product_title, product_content, product_amount, product_cost) 
+			values(#{product.product_category}, #{product.product_title}, #{product.product_content}, #{product.product_amount}, #{product.product_cost})
+	</insert>
+	
+</mapper>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.green.portpolio.dao.UserDao">
+
+  <select id="getUser" resultType="kr.green.portpolio.vo.UserVo">
+    select * from portpolio.user where user_id = #{id}
+  </select>
+  
+  <insert id="userRegis" parameterType="kr.green.portpolio.vo.UserVo">
+  	insert into portpolio.user(user_id, user_pw, user_name, user_age, user_email, user_phone, user_grade)
+  				values(#{user.user_id},#{user.user_pw},#{user.user_name},#{user.user_age},#{user.user_email},#{user.user_phone},#{user.user_grade})
+  </insert>
+  
+  <select id="getAllUser" resultType="kr.green.portpolio.vo.UserVo">
+    select * from portpolio.user
+  </select>
+  
+  <update id="updateGrade">
+  	update portpolio.user set user_grade = #{user.user_grade} where user_id = #{user.user_id}
+  </update>
+ 
+</mapper>
+
+

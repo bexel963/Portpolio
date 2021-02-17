@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.green.portpolio.dao.BoardDao">
+
+	<insert id="boardRegis" parameterType="kr.green.portpolio.vo.BoardVo">
+		insert into portpolio.board(title, writer, content) values(#{board.title}, #{board.writer}, #{board.content})
+	</insert>
+	
+	<select id="getBoardList" resultType="kr.green.portpolio.vo.BoardVo">
+		select * from portpolio.board where isDel='N' order by num desc limit #{cri.pageStart}, #{cri.perPageNum}
+	</select>
+	
+	<select id="getBoardDetail" resultType="kr.green.portpolio.vo.BoardVo">
+		select * from portpolio.board where num = #{num}
+	</select>
+	
+	<update id="boardModify" parameterType="kr.green.portpolio.vo.BoardVo">
+		update portpolio.board set title=#{board.title}, content=#{board.content}, isDel=#{board.isDel} where num=#{board.num}
+	</update>
+	
+	<select id="getTotalCount" resultType="int">
+		select count(*) from portpolio.board where isDel = 'N'
+	</select>
+	
+	<update id="updateViews">
+		update portpolio.board set views = views+1 where num = #{num} and isDel = 'N'
+	</update>
+	
+	<select id="getLike" resultType="kr.green.portpolio.vo.LikeVo">
+		select * from portpolio.likes where boardNum = #{like.boardNum} and userId = #{like.userId}
+	</select>
+	
+	<insert id="insertLike">
+		insert into portpolio.likes(boardNum, userId, up) values(#{like.boardNum}, #{like.userId}, #{like.up})
+	</insert>
+	
+	<update id="updateLike">
+		update portpolio.likes set up = #{like.up} where userId = #{like.userId} and boardNum = #{like.boardNum}
+	</update>
+</mapper>
+
