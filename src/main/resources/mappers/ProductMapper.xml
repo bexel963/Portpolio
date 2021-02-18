@@ -2,9 +2,20 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.green.portpolio.dao.ProductDao">
 
-	<insert id="productRegis" parameterType="kr.green.portpolio.vo.ProductVo">
+	<insert id="productRegis" parameterType="kr.green.portpolio.vo.ProductVo" useGeneratedKeys="true" keyProperty="product.product_num">
 		insert into portpolio.product(product_category, product_title, product_content, product_amount, product_cost) 
 			values(#{product.product_category}, #{product.product_title}, #{product.product_content}, #{product.product_amount}, #{product.product_cost})
 	</insert>
 	
+	<insert id="fileRegis" parameterType="kr.green.portpolio.vo.FileVo">
+		insert into portpolio.files(product_num, file_oriName, file_name) values(#{product_num}, #{file_oriName}, #{file_name})
+	</insert>
+	
+	<select id="getProductList" resultType="kr.green.portpolio.vo.ProductVo">
+		select * from portpolio.product where isDel = 'N'
+	</select>
+	
+	<select id="getFileList" resultType="kr.green.portpolio.vo.FileVo">
+		select * from portpolio.files where isDel = 'N'
+	</select>
 </mapper>

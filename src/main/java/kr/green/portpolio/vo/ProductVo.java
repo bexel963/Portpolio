@@ -12,7 +12,7 @@ public class ProductVo {
 	private String product_content;
 	private int product_amount;
 	private int product_cost;
-	private Date registerDate;
+	private Date product_registerDate;
 	
 	public int getProduct_num() {
 		return product_num;
@@ -50,27 +50,28 @@ public class ProductVo {
 	public void setProduct_cost(int product_cost) {
 		this.product_cost = product_cost;
 	}
-	public String getRegisterDate() {
+	public String getProduct_registerDate() {
 		SimpleDateFormat simpleFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-		String dateString = simpleFormat.format(registerDate);
+		String dateString = simpleFormat.format(product_registerDate);
 		return dateString;
 	}
-	public void setRegisterDate(Date registerDate) {
-		this.registerDate = registerDate;
+	public void setProduct_registerDate(Date registerDate) {
+		this.product_registerDate = registerDate;
 	}
 	public void setRegisterDate(String registerDate) throws ParseException {
 		SimpleDateFormat simpleFormat2 = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 		Date date2 = simpleFormat2.parse(registerDate);
-		this.registerDate = date2;
+		this.product_registerDate = date2;
 	}
 	
 	@Override
 	public String toString() {
 		return "ProductVo [product_num=" + product_num + ", product_category=" + product_category + ", product_title="
 				+ product_title + ", product_content=" + product_content + ", product_amount=" + product_amount
-				+ ", product_cost=" + product_cost + ", product_oriPictureName=" + ", product_pictureName="  
-				+ ", registerDate=" + registerDate + ", isDel=" + "]";
+				+ ", product_cost=" + product_cost + ", registerDate=" + product_registerDate + "]";
 	}
+	
+	
 	
 	
 	

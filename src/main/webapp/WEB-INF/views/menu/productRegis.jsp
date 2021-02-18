@@ -83,6 +83,10 @@
 	  .photo>input{
 	  	margin-right: 56px;
 	  }
+	  .file>img{
+	  	width: 100%;
+  		height: 100%;
+	  }
     </style>
 </head>
 <body>
@@ -100,7 +104,7 @@
 			</div>
 			<div class="right">
 				<div class="category">
-					<select name="category">
+					<select name="product_category">
 						<option value="1">생활</option>       
 						<option value="2">주방</option>       
 						<option value="3">뷰티</option>
@@ -109,25 +113,25 @@
 					</select>
 				</div>
 				<div class="title">
-					<input type="text" class="text" style="width:400px;" name="title">
+					<input type="text" class="text" style="width:400px;" name="product_title">
 				</div>
 				<div class="photo">
-					<div class="file"></div>
-					<div class="file"></div>
-					<div class="file"></div>
-					<input type="file" name="fileList" style="width:200px;"/>
-					<input type="file" name="fileList" style="width:200px;"/>
-					<input type="file" name="fileList" style="width:200px;"/>
+					<div class="file"><img id="img1" src="#" /></div>
+					<div class="file"><img id="img2" src="#" /></div>
+					<div class="file"><img id="img3" src="#" /></div>
+					<input type="file"  onchange="readURL(this);" name="fileList" style="width:200px;" />
+					<input type="file"  onchange="readURL(this);" name="fileList" style="width:200px;"/>
+					<input type="file"  onchange="readURL(this);" name="fileList" style="width:200px;"/>
 				</div>
 				<div class="content">
-					<textarea style="display:none;"rows="10" name="content"></textarea>
+					<textarea style="display:none;"rows="100" name="product_content"></textarea>
 					<div id="summernote"></div>
 				</div>
 				<div class="amount">
-					<input type="number" name="amount">
+					<input type="number" name="product_amount">
 				</div>
 				<div class="cost">
-					<input type="number" name="cost">
+					<input type="number" name="product_cost">
 				</div>
 			</div>
 		</div><br>
@@ -135,7 +139,7 @@
 	</form>
 	
 	<br><br>
-    <script>
+    <script type="text/javascript">
 	    $('#summernote').summernote({
 	      placeholder: 'Hello Bootstrap 4',
 	      tabsize: 2,
@@ -143,8 +147,21 @@
 	    });
 	    $('form').submit(function(){
 	  	  var content = $('#summernote').summernote('code');
-	  	  $('textarea[name=content]').val(content);
+	  	  $('textarea[name=product_content]').val(content);
 	    })
+	   
+	    function readURL(input) {
+			if (input.files) {
+				var reader = new FileReader();
+				reader.onload = function (e) {
+					$('#img1').attr('src', e.target.result);
+				}
+				reader.readAsDataURL(input.files[0]);
+			}
+		}
+	    
+
+
   	</script>
    
 </body>

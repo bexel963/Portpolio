@@ -17,7 +17,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import kr.green.portpolio.service.ProductService;
 import kr.green.portpolio.service.UserService;
+import kr.green.portpolio.vo.FileVo;
+import kr.green.portpolio.vo.ProductVo;
 import kr.green.portpolio.vo.UserVo;
 
 
@@ -30,12 +33,22 @@ public class HomeController {
 	UserService userService;
 	
 	@Autowired
+	ProductService productService;
+	
+	@Autowired
 	BCryptPasswordEncoder passwordEncoder;
 	
 	/* 홈 */
 	@RequestMapping(value= "/", method = RequestMethod.GET)
 	public ModelAndView home(Locale locale, ModelAndView mv){
 		
+		ArrayList<ProductVo> productList = productService.getProductList();
+		ArrayList<FileVo> fileList = productService.getFileList();
+		System.out.println("DB에서 가져온 제품 리스트 정보 : " + productList);
+		System.out.println("DB에서 가져온 파일 리스트 정보 : " + fileList);
+		
+		mv.addObject("productList", productList);
+		mv.addObject("fileList", fileList);
 	    mv.setViewName("/main/home");
 	    return mv;
 	}

@@ -11,6 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import kr.green.portpolio.service.ProductService;
+import kr.green.portpolio.utils.UploadFileUtils;
 import kr.green.portpolio.vo.ProductVo;
 //import kr.green.portpolio.utils.UploadFileUtils;
 
@@ -21,7 +22,7 @@ public class ProductController {
 	@Autowired
 	ProductService productService;
 	
-	//private String uploadPath = "D:\\digit\\a\\upload";
+	private String uploadPath = "D:\\digit\\a\\digital\\Portpolio\\src\\main\\resources";
 	
 	/* 상품등록 GET */
 	@RequestMapping(value= "/productRegis", method = RequestMethod.GET)
@@ -34,16 +35,18 @@ public class ProductController {
 	@RequestMapping(value= "/productRegis", method = RequestMethod.POST)
 	public ModelAndView productRegisPost(Locale locale, ModelAndView mv, ProductVo product, MultipartFile[] fileList) throws IOException, Exception{
 		
+		System.out.println("받아온 제품정보 : " + product);
 		productService.productRegis(product);
 		
-//		if(fileList != null){
-//			for(MultipartFile file : fileList) {
-//				if(file != null && file.getOriginalFilename().length() != 0) {
-//					String fileName = UploadFileUtils.uploadFile(uploadPath, file.getOriginalFilename(), file.getBytes());
-//					productService.registerFile(product.getProduct_num(), file.getOriginalFilename(), fileName);
-//				}
-//			}
-//		}
+		System.out.println("받아온 파일 개수 : " + fileList.length);
+		if(fileList != null){
+			for(MultipartFile file : fileList) {
+				if(file != null && file.getOriginalFilename().length() != 0) {
+					String fileName = UploadFileUtils.uploadFile(uploadPath, file.getOriginalFilename(), file.getBytes());
+					productService.fileRegis(product.getProduct_num(), file.getOriginalFilename(), fileName);
+				}
+			}
+		}
 		
 	    mv.setViewName("redirect:/");
 	    return mv;
