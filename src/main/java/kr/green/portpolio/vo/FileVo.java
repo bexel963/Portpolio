@@ -5,7 +5,14 @@ public class FileVo {
 	private int product_num;
 	private String file_oriName;
 	private String file_name;
+	private String main;
 	
+	public String getMain() {
+		return main;
+	}
+	public void setMain(String main) {
+		this.main = main;
+	}
 	public int getFile_num() {
 		return file_num;
 	}
@@ -33,8 +40,9 @@ public class FileVo {
 	@Override
 	public String toString() {
 		return "FileVo [file_num=" + file_num + ", product_num=" + product_num + ", file_oriName=" + file_oriName
-				+ ", file_name=" + file_name + "]";
+				+ ", file_name=" + file_name + ", main=" + main + "]";
 	}
+	
 	
 	
 }

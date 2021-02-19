@@ -13,7 +13,13 @@ public interface ProductService {
 
 	ArrayList<ProductVo> getProductList();
 
-	ArrayList<FileVo> getFileList();
+	ArrayList<FileVo> getMainFileList();
+
+	void mainFileRegis(int product_num, String file_oriName, String file_name);
+
+
+
+	
 
 
 }

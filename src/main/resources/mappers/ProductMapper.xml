@@ -7,6 +7,10 @@
 			values(#{product.product_category}, #{product.product_title}, #{product.product_content}, #{product.product_amount}, #{product.product_cost})
 	</insert>
 	
+	<insert id="mainFileRegis" parameterType="kr.green.portpolio.vo.FileVo">
+		insert into portpolio.files(product_num, file_oriName, file_name, main) values(#{product_num}, #{file_oriName}, #{file_name}, 'Y')
+	</insert>
+	
 	<insert id="fileRegis" parameterType="kr.green.portpolio.vo.FileVo">
 		insert into portpolio.files(product_num, file_oriName, file_name) values(#{product_num}, #{file_oriName}, #{file_name})
 	</insert>
@@ -15,7 +19,7 @@
 		select * from portpolio.product where isDel = 'N'
 	</select>
 	
-	<select id="getFileList" resultType="kr.green.portpolio.vo.FileVo">
-		select * from portpolio.files where isDel = 'N'
+	<select id="getMainFileList" resultType="kr.green.portpolio.vo.FileVo">
+		select * from portpolio.files where isDel = 'N' and main ='Y'
 	</select>
 </mapper>

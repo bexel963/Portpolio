@@ -43,12 +43,12 @@ public class HomeController {
 	public ModelAndView home(Locale locale, ModelAndView mv){
 		
 		ArrayList<ProductVo> productList = productService.getProductList();
-		ArrayList<FileVo> fileList = productService.getFileList();
+		ArrayList<FileVo> MainfileList = productService.getMainFileList();
 		System.out.println("DB에서 가져온 제품 리스트 정보 : " + productList);
-		System.out.println("DB에서 가져온 파일 리스트 정보 : " + fileList);
+		System.out.println("DB에서 가져온 파일 리스트 정보 : " + MainfileList);
 		
 		mv.addObject("productList", productList);
-		mv.addObject("fileList", fileList);
+		mv.addObject("fileList", MainfileList);
 	    mv.setViewName("/main/home");
 	    return mv;
 	}

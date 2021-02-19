@@ -19,7 +19,12 @@ public class ProductServiceImp implements ProductService {
 	public void productRegis(ProductVo product) {
 		productDao.productRegis(product);
 	}
-
+	
+	@Override
+	public void mainFileRegis(int product_num, String file_oriName, String file_name) {
+		productDao.mainFileRegis(product_num, file_oriName, file_name);
+	}
+	
 	@Override
 	public void fileRegis(int product_num, String file_oriName, String file_name) {
 		productDao.fileRegis(product_num, file_oriName, file_name);	
@@ -31,8 +36,12 @@ public class ProductServiceImp implements ProductService {
 	}
 
 	@Override
-	public ArrayList<FileVo> getFileList() {
-		return productDao.getFileList();
+	public ArrayList<FileVo> getMainFileList() {
+		return productDao.getMainFileList();
 	}
+
+	
+
+	
 
 }

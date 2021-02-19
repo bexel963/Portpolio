@@ -22,7 +22,7 @@ public class ProductController {
 	@Autowired
 	ProductService productService;
 	
-	private String uploadPath = "D:\\digit\\a\\digital\\Portpolio\\src\\main\\resources";
+	private String uploadPath = "D:\\digit\\a\\digital\\Portpolio\\src\\main\\webapp\\resources\\img";
 	
 	/* 상품등록 GET */
 	@RequestMapping(value= "/productRegis", method = RequestMethod.GET)
@@ -35,15 +35,17 @@ public class ProductController {
 	@RequestMapping(value= "/productRegis", method = RequestMethod.POST)
 	public ModelAndView productRegisPost(Locale locale, ModelAndView mv, ProductVo product, MultipartFile[] fileList) throws IOException, Exception{
 		
-		System.out.println("받아온 제품정보 : " + product);
+		
 		productService.productRegis(product);
 		
-		System.out.println("받아온 파일 개수 : " + fileList.length);
+		
 		if(fileList != null){
-			for(MultipartFile file : fileList) {
-				if(file != null && file.getOriginalFilename().length() != 0) {
-					String fileName = UploadFileUtils.uploadFile(uploadPath, file.getOriginalFilename(), file.getBytes());
-					productService.fileRegis(product.getProduct_num(), file.getOriginalFilename(), fileName);
+			String mainFileName = UploadFileUtils.uploadFile(uploadPath, fileList[0].getOriginalFilename(), fileList[0].getBytes());
+			productService.mainFileRegis(product.getProduct_num(), fileList[0].getOriginalFilename(), mainFileName);
+			for(int i=1 ; i<fileList.length ; i++) {
+				if(fileList != null && fileList[i].getOriginalFilename().length() != 0) {
+					String fileName = UploadFileUtils.uploadFile(uploadPath, fileList[i].getOriginalFilename(), fileList[i].getBytes());
+					productService.fileRegis(product.getProduct_num(), fileList[i].getOriginalFilename(), fileName);
 				}
 			}
 		}

@@ -8,7 +8,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
+	<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
  	<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
 <title>Insert title here</title>
 	<style>
@@ -19,7 +19,7 @@
 	        
       .productRegis.container2{
 		width: 1000px;
-		height: 1000px;
+		height: 1200px;
 		margin: 0 auto;
 		border-bottom: 1px solid #ced4da;
 	  }
@@ -27,7 +27,6 @@
 		box-sizing: border-box;
 		float: left;
 		width: calc(1000px * 0.2);
-		height: 100%;
 		background-color: #e9ecef;
 	  }
 	  .productRegis.container2 .left>div, .productRegis.container2 .right>div{
@@ -39,27 +38,31 @@
 		border-left: none;
 	  }
 	  .productRegis.container2 .category{
-	  	padding: 35px 0 0 10px;
-		height: 10%;
+	  	padding: 25px 0 0 10px;
+		height: 75px;
 	  }
 	  .productRegis.container2 .title{
-	  	padding: 35px 0 0 10px;
-		height: 10%;
+	  	padding: 25px 0 0 10px;
+		height: 75px;
 	  }
 	  .productRegis.container2 .cost{
-		height: 10%;
-		padding: 35px 0 0 10px;
+		height: 75px;
+		padding: 25px 0 0 10px;
 	  }
 	  .productRegis.container2 .amount{
-	  	padding: 35px 0 0 10px;
-		height: 10%;
+	  	padding: 25px 0 0 10px;
+		height: 75px;
 	  }
 	  .productRegis.container2 .photo{
-		height: 30%;
-		padding: 10px 0 0 10px;
+		height: 300px;
+		padding: 20px 0 0 10px;
+	  }
+	  .productRegis.container2 .main-photo{
+	  	height: 300px;
+		padding: 10px 0 0 210px;
 	  }
 	  .productRegis.container2 .content{
-		height: 30%;
+		height: 300px;
 		padding: 20px 10px 10px 10px;
 	  }
 	  .productRegis.container2 .right{
@@ -75,6 +78,12 @@
 	  	border: 1px solid #ced4da;
 	  	margin-right: 60px;
 	  }	
+	  .main-file{
+	  	float: left;
+	  	width: 400px;
+	  	height: 250px;
+	  	border: 1px solid #ced4da;
+	  }
 	  .regis-btn{
 	  	width: 1000px;
 	  	display: block;
@@ -82,8 +91,9 @@
 	  }
 	  .photo>input{
 	  	margin-right: 56px;
+	  	margin-top: 50px;
 	  }
-	  .file>img{
+	  .main-file>img{
 	  	width: 100%;
   		height: 100%;
 	  }
@@ -97,6 +107,7 @@
 			<div class="left" >
 				<div class="category">카테고리</div>
 				<div class="title">제품명</div>
+				<div class="photo">메인사진</div>
 				<div class="photo">사진</div>
 				<div class="content">내용</div>
 				<div class="amount">수량</div>
@@ -108,20 +119,24 @@
 						<option value="1">생활</option>       
 						<option value="2">주방</option>       
 						<option value="3">뷰티</option>
-						<option value="4">컴퓨터</option>
+						<option value="4">컴퓨터관련</option>
 						<option value="5">기타</option>
 					</select>
 				</div>
 				<div class="title">
 					<input type="text" class="text" style="width:400px;" name="product_title">
 				</div>
-				<div class="photo">
-					<div class="file"><img id="img1" src="#" /></div>
-					<div class="file"><img id="img2" src="#" /></div>
-					<div class="file"><img id="img3" src="#" /></div>
+				<div class="main-photo">
+					<div class="main-file"><img id="mainImg" src="#" /></div>
 					<input type="file"  onchange="readURL(this);" name="fileList" style="width:200px;" />
-					<input type="file"  onchange="readURL(this);" name="fileList" style="width:200px;"/>
-					<input type="file"  onchange="readURL(this);" name="fileList" style="width:200px;"/>
+				</div>
+				<div class="photo">
+					<input type="file"  name="fileList" style="width:200px;" />
+					<input type="file"  name="fileList" style="width:200px;"/>
+					<input type="file"  name="fileList" style="width:200px;"/>
+					<input type="file"  name="fileList" style="width:200px;" />
+					<input type="file"  name="fileList" style="width:200px;"/>
+					<input type="file"  name="fileList" style="width:200px;"/>
 				</div>
 				<div class="content">
 					<textarea style="display:none;"rows="100" name="product_content"></textarea>
@@ -143,7 +158,7 @@
 	    $('#summernote').summernote({
 	      placeholder: 'Hello Bootstrap 4',
 	      tabsize: 2,
-	      height: 200
+	      height: 150
 	    });
 	    $('form').submit(function(){
 	  	  var content = $('#summernote').summernote('code');
@@ -154,7 +169,7 @@
 			if (input.files) {
 				var reader = new FileReader();
 				reader.onload = function (e) {
-					$('#img1').attr('src', e.target.result);
+					$('#mainImg').attr('src', e.target.result);
 				}
 				reader.readAsDataURL(input.files[0]);
 			}

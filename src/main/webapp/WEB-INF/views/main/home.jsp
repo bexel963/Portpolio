@@ -73,9 +73,13 @@
         .list li{
             width: 427px;
             height: 480px;
-           
         }
         .list .article{
+        	margin: 5px 0;
+            color: #6e6e6e;
+            font-size: 16px;
+            line-height: 25px;
+            height: 150px;
 			display:-webkit-box;
 			overflow: hidden;
 			text-overflow: ellipsis;
@@ -111,12 +115,6 @@
             font-size: 12px;
             color: #888;
             display: inline-block;
-        }
-        .list .article{
-            margin: 5px 0;
-            color: #6e6e6e;
-            font-size: 16px;
-            line-height: 25px;
         }
         .list li{
             float: left;
@@ -188,9 +186,9 @@
                 	<c:forEach items="${productList}" var="product">
 	                    <li>
 	                    	<c:forEach items="${fileList}" var="file">
-                   		      	<a href="#">
-			                        <c:if test="${file.product_num == product.product_num }">
-			                            <img src="<%=request.getContextPath() %>/resources/img${file.file_name}" alt="" width="100%" height="248">
+                   		      	<a href="#" class="img-box">
+			                        <c:if test="${file.product_num == product.product_num}">			                        	
+			                            <img src="<%=request.getContextPath() %>/resources/img${file.file_name}" alt="" width="100%" height="248">			                           
 			                        </c:if>
 			                    </a>
 	                        </c:forEach>
@@ -208,7 +206,6 @@
     </div>
     
     <script>
-        
         $('.rolling-box .fa-chevron-left').click(function(e){
              e.preventDefault();
             if(!$('.rolling-box .product').is(':animated')){ 

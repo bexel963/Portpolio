@@ -11,10 +11,15 @@ public interface ProductDao {
 
 	void productRegis(@Param("product")ProductVo product);
 
+	void mainFileRegis(@Param("product_num")int product_num,  @Param("file_oriName")String file_oriName, @Param("file_name")String file_name);
+	
 	void fileRegis(@Param("product_num")int product_num, @Param("file_oriName")String file_oriName, @Param("file_name")String file_name);
 
 	ArrayList<ProductVo> getProductList();
 
-	ArrayList<FileVo> getFileList();
+	ArrayList<FileVo> getMainFileList();
+
+
+	
 
 }
