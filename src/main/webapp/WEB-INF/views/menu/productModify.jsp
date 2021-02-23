@@ -19,7 +19,7 @@
 	        
       .productRegis.container2{
 		width: 1000px;
-		height: 1275px;
+		height: 1350px;
 		margin: 0 auto;
 		border-bottom: 1px solid #ced4da;
 	  }
@@ -68,7 +68,7 @@
 	  .productRegis.container2 .right{
 		box-sizing: border-box;
 		float: right;
-		height: 1275px;
+		height: 1350px;
 		width: calc(1000px * 0.8);
 	  }
 	  .file{
@@ -102,12 +102,14 @@
 <body>
 	<br><br>
 	
-	<form action="<%=request.getContextPath()%>/productRegis" method="post" enctype="multipart/form-data">
+	<form action="<%=request.getContextPath()%>/productModify" method="post" enctype="multipart/form-data">
+	<input type="hidden" name="product_num" value="${product.product_num}">
 		<div class="container2 productRegis">
 			<div class="left" >
+				<div class="category">제품번호</div>
 				<div class="category">카테고리</div>
 				<div class="title">제품명</div>
-				<div class="title">원산지</div>
+				<div class="title origin">원산지</div>
 				<div class="photo">메인사진</div>
 				<div class="photo">사진</div>
 				<div class="content">내용</div>
@@ -115,23 +117,24 @@
 				<div class="cost">판매가</div>
 			</div>
 			<div class="right">
+				<div class="category">${product.product_num}</div>
 				<div class="category">
 					<select name="product_category">
-						<option value="1">생활</option>       
-						<option value="2">주방</option>       
+						<option value="1">건강</option>       
+						<option value="2">생활</option>       
 						<option value="3">뷰티</option>
 						<option value="4">컴퓨터관련</option>
 						<option value="5">기타</option>
 					</select>
 				</div>
 				<div class="title">
-					<input type="text" class="text" style="width:400px;" name="product_title">
+					<input type="text" class="text" style="width:400px;" name="product_title" value="${product.product_title}">
 				</div>
 				<div class="title origin">
-					<input type="text" class="text" style="width:400px;" name="product_origin">
+					<input type="text" class="text" style="width:400px;" name="product_origin" value="${product.product_origin}">
 				</div>
 				<div class="main-photo">
-					<div class="main-file"><img id="mainImg" src="#" /></div>
+					<div class="main-file"><img id="mainImg" src="#"/></div>
 					<input type="file"  onchange="readURL(this);" name="fileList" style="width:200px;" />
 				</div>
 				<div class="photo">
@@ -144,17 +147,17 @@
 				</div>
 				<div class="content">
 					<textarea style="display:none;"rows="100" name="product_content"></textarea>
-					<div id="summernote"></div>
+					<div id="summernote">${product.product_content}</div>
 				</div>
 				<div class="amount">
-					<input type="number" name="product_amount">
+					<input type="number" name="product_amount" value="${product.product_amount}">
 				</div>
 				<div class="cost">
-					<input type="number" name="product_cost">
+					<input type="number" name="product_cost" value="${product.product_cost}">
 				</div>
 			</div>
 		</div><br>
-		<button type="submit" class="btn btn-secondary regis-btn">등록</button><br>
+		<button type="submit" class="btn btn-secondary regis-btn">수정</button><br>
 	</form>
 	
 	<br><br>

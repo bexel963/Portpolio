@@ -186,13 +186,13 @@
                 	<c:forEach items="${productList}" var="product">
 	                    <li>
 	                    	<c:forEach items="${fileList}" var="file">
-                   		      	<a href="#" class="img-box">
+                   		      	<a href="<%=request.getContextPath()%>/productDetail?product_num=${product.product_num}" class="img-box">
 			                        <c:if test="${file.product_num == product.product_num}">			                        	
 			                            <img src="<%=request.getContextPath() %>/resources/img${file.file_name}" alt="" width="100%" height="248">			                           
 			                        </c:if>
 			                    </a>
 	                        </c:forEach>
-	                        <a href="#">
+	                        <a href="<%=request.getContextPath()%>/productDetail?product_num=${product.product_num}">
 	                            <div class="title">${product.product_title}</div>
 	                            <div class="category">${product.product_category}</div>
 	                            <div class="date">${product.product_registerDate}</div>

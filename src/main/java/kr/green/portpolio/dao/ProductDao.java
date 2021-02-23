@@ -15,9 +15,19 @@ public interface ProductDao {
 	
 	void fileRegis(@Param("product_num")int product_num, @Param("file_oriName")String file_oriName, @Param("file_name")String file_name);
 
+	ProductVo getProduct(@Param("product_num")Integer product_num);
 	ArrayList<ProductVo> getProductList();
 
 	ArrayList<FileVo> getMainFileList();
+	ArrayList<FileVo> getSubFileList(@Param("product_num")Integer product_num);
+
+	FileVo getMainFile(@Param("product_num")Integer product_num);
+
+	void deleteFiles(@Param("product_num")Integer product_num);
+
+	void modifyProduct(@Param("product")ProductVo product);
+
+	void deleteProduct(@Param("product")Integer product_num);
 
 
 	

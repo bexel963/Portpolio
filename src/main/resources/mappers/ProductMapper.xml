@@ -3,23 +3,41 @@
 <mapper namespace="kr.green.portpolio.dao.ProductDao">
 
 	<insert id="productRegis" parameterType="kr.green.portpolio.vo.ProductVo" useGeneratedKeys="true" keyProperty="product.product_num">
-		insert into portpolio.product(product_category, product_title, product_content, product_amount, product_cost) 
-			values(#{product.product_category}, #{product.product_title}, #{product.product_content}, #{product.product_amount}, #{product.product_cost})
+		insert into portpolio.product(product_category, product_title, product_content, product_amount, product_cost, product_origin) 
+			values(#{product.product_category}, #{product.product_title}, #{product.product_content}, #{product.product_amount}, #{product.product_cost}, #{product.product_origin})
 	</insert>
 	
 	<insert id="mainFileRegis" parameterType="kr.green.portpolio.vo.FileVo">
 		insert into portpolio.files(product_num, file_oriName, file_name, main) values(#{product_num}, #{file_oriName}, #{file_name}, 'Y')
 	</insert>
-	
 	<insert id="fileRegis" parameterType="kr.green.portpolio.vo.FileVo">
 		insert into portpolio.files(product_num, file_oriName, file_name) values(#{product_num}, #{file_oriName}, #{file_name})
 	</insert>
 	
+	<select id="getProduct" resultType="kr.green.portpolio.vo.ProductVo">
+		select * from portpolio.product where isDel = 'N' and product_num = #{product_num}
+	</select>
 	<select id="getProductList" resultType="kr.green.portpolio.vo.ProductVo">
 		select * from portpolio.product where isDel = 'N'
 	</select>
 	
+	<select id="getMainFile" resultType="kr.green.portpolio.vo.FileVo">
+		select * from portpolio.files where isDel = 'N' and main ='Y' and product_num = #{product_num}
+	</select>
 	<select id="getMainFileList" resultType="kr.green.portpolio.vo.FileVo">
 		select * from portpolio.files where isDel = 'N' and main ='Y'
 	</select>
+	<select id="getSubFileList" resultType="kr.green.portpolio.vo.FileVo">
+		select * from portpolio.files where isDel ='N' and main = 'N' and product_num = #{product_num}
+	</select>
+	
+	<update id="deleteFiles" parameterType="Integer">
+		update portpolio.files set isDel = 'Y' where product_num = #{product_num}
+	</update>
+	
+	<update id="modifyProduct" parameterType="kr.green.portpolio.vo.FileVo">
+		update portpolio.product set product_category=#{product.product_categoryNum}, product_title=#{product.product_title}, product_content=#{product.product_content},
+									 product_amount=#{product.product_amount}, product_cost=#{product.product_cost}, product_origin=#{product.product_origin}
+		where product_num = #{product.product_num}
+	</update>
 </mapper>
