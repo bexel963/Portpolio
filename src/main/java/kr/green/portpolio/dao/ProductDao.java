@@ -29,6 +29,8 @@ public interface ProductDao {
 
 	void deleteProduct(@Param("product")Integer product_num);
 
+	void regisMyBox(@Param("user_id")String user_id, @Param("product_num")Integer product_num);
+
 
 	
 

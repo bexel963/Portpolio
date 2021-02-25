@@ -15,6 +15,7 @@ import kr.green.portpolio.service.ProductService;
 import kr.green.portpolio.utils.UploadFileUtils;
 import kr.green.portpolio.vo.FileVo;
 import kr.green.portpolio.vo.ProductVo;
+import kr.green.portpolio.vo.UserVo;
 //import kr.green.portpolio.utils.UploadFileUtils;
 
 
@@ -101,13 +102,28 @@ public class ProductController {
 	    return mv;
 	}
 	
-	/* 상품수정 GET */
+	/* 상품삭제 GET */
 	@RequestMapping(value= "/productDelete", method = RequestMethod.GET)
 	public ModelAndView productDeleteGet(Locale locale, ModelAndView mv, Integer product_num){
 		
 		productService.productDelete(product_num);
 		
 		mv.setViewName("redirect:/");
+	    return mv;
+	}
+	
+	/* 마이박스 GET */
+	@RequestMapping(value= "/myBox", method = RequestMethod.GET)
+	public ModelAndView myBoxGet(Locale locale, ModelAndView mv, String user_id, Integer product_num){
+		
+		productService.regisMyBox(user_id, product_num);
+		
+		FileVo file = productService.getMainFile(product_num);
+		ProductVo product = productService.getProduct(product_num);
+		
+		mv.addObject("file", file);
+		mv.addObject("product", product);
+		mv.setViewName("/menu/productDetail");
 	    return mv;
 	}
 }

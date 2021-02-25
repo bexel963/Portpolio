@@ -40,4 +40,8 @@
 									 product_amount=#{product.product_amount}, product_cost=#{product.product_cost}, product_origin=#{product.product_origin}
 		where product_num = #{product.product_num}
 	</update>
+	
+	<insert id="regisMyBox">
+		insert into portpolio.myBox(product_num, user_id) values(#{product_num}, #{user_id})
+	</insert>
 </mapper>

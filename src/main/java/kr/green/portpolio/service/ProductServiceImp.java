@@ -80,6 +80,11 @@ public class ProductServiceImp implements ProductService {
 		productDao.deleteFiles(product_num);
 		productDao.deleteProduct(product_num);
 	}
+
+	@Override
+	public void regisMyBox(String user_id, Integer product_num) {
+		productDao.regisMyBox(user_id, product_num);
+	}
 	
 
 }

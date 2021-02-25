@@ -235,6 +235,7 @@
 			margin-left: 20px;
 			font-size: 12px;
 			border: 1px solid #b1b0b4;
+			text-align: center;
 		}
 		.hidden-box table tr:first-child{
 			background-color: #EEEEEE;
@@ -249,6 +250,7 @@
 			margin-top: -10px;
 			font-size: 12px;
 			line-height: 1.6;
+			margin-left: 25px;
 		}
     </style>
 </head>
@@ -289,7 +291,7 @@
 					</div>
 					<div class="btn-box">
 						<a href="#"><img src="<%=request.getContextPath() %>/resources/img/btn_buy.gif" alt=""></a>
-						<a href="#"><img src="<%=request.getContextPath() %>/resources/img/btn_cart.gif" alt=""></a>
+						<a class="myBox-btn" href="<%=request.getContextPath()%>/myBox?user_id=${user.user_id}&product_num=${product.product_num}"><img src="<%=request.getContextPath() %>/resources/img/btn_cart.gif" alt=""></a>
 						<a href="#"><img src="<%=request.getContextPath() %>/resources/img/btn_wishlist.gif" alt=""></a>
 					</div>
 					<c:if test="${user.user_grade == 0}">
@@ -366,10 +368,10 @@
 			<div class="title">
 				<div class="text-box">21년 2월 신용카드 무이자 할부</div>
 				<div class="img-box">
-					<img src="<%=request.getContextPath() %>/resources/img/images/X.png" alt="">
+					<img src="<%=request.getContextPath() %>/resources/img/X.png" alt="">
 				</div>
 			</div>
-			<table border="1" bordercolor="black" width="95%">
+			<table border="1" bordercolor="black" width="95%"  style="border-collapse:collapse">
 				<tr>                          
 					<th>적용기간</th>                 
 					<th>카드사명</th>
@@ -483,6 +485,13 @@
 		$('.hidden-box .img-box').click(function(e){
 			e.preventDefault();
 			$('.overlay').hide();
+		})
+		$('.myBox-btn').click(function(){
+			console.log('${user.getUser_id()}');
+			if('${user.getUser_id()}' == ''){
+				alert('로그인 후 이용할 수 있습니다.');
+				return;
+			}
 		})
 	</script>
 </body>
