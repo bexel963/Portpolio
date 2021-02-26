@@ -44,8 +44,6 @@ public class HomeController {
 		
 		ArrayList<ProductVo> productList = productService.getProductList();
 		ArrayList<FileVo> MainfileList = productService.getMainFileList();
-		System.out.println("DB에서 가져온 제품 리스트 정보 : " + productList);
-		System.out.println("DB에서 가져온 파일 리스트 정보 : " + MainfileList);
 		
 		mv.addObject("productList", productList);
 		mv.addObject("fileList", MainfileList);

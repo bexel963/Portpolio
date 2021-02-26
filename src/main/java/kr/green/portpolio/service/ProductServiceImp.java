@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import kr.green.portpolio.dao.ProductDao;
 import kr.green.portpolio.vo.BoardVo;
 import kr.green.portpolio.vo.FileVo;
+import kr.green.portpolio.vo.MyBoxVo;
 import kr.green.portpolio.vo.ProductVo;
 import kr.green.portpolio.vo.UserVo;
 
@@ -18,11 +19,11 @@ public class ProductServiceImp implements ProductService {
 	ProductDao productDao;
 	
 	@Override
-	public void productRegis(ProductVo product) {
+	public void regisProduct(ProductVo product) {
 		if(product==null) {
 			return;
 		}
-		productDao.productRegis(product);
+		productDao.regisProduct(product);
 	}
 	
 	@Override
@@ -76,7 +77,7 @@ public class ProductServiceImp implements ProductService {
 	}
 
 	@Override
-	public void productDelete(Integer product_num) {
+	public void deleteProduct(Integer product_num) {
 		productDao.deleteFiles(product_num);
 		productDao.deleteProduct(product_num);
 	}
@@ -84,6 +85,11 @@ public class ProductServiceImp implements ProductService {
 	@Override
 	public void regisMyBox(String user_id, Integer product_num) {
 		productDao.regisMyBox(user_id, product_num);
+	}
+
+	@Override
+	public ArrayList<MyBoxVo> getMyBox(String user_id) {
+		return productDao.getMyBox(user_id);
 	}
 	
 

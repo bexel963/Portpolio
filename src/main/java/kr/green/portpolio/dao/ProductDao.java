@@ -5,11 +5,12 @@ import java.util.ArrayList;
 import org.apache.ibatis.annotations.Param;
 
 import kr.green.portpolio.vo.FileVo;
+import kr.green.portpolio.vo.MyBoxVo;
 import kr.green.portpolio.vo.ProductVo;
 
 public interface ProductDao {
 
-	void productRegis(@Param("product")ProductVo product);
+	void regisProduct(@Param("product")ProductVo product);
 
 	void mainFileRegis(@Param("product_num")int product_num,  @Param("file_oriName")String file_oriName, @Param("file_name")String file_name);
 	
@@ -30,6 +31,8 @@ public interface ProductDao {
 	void deleteProduct(@Param("product")Integer product_num);
 
 	void regisMyBox(@Param("user_id")String user_id, @Param("product_num")Integer product_num);
+
+	ArrayList<MyBoxVo> getMyBox(@Param("user_id")String user_id);
 
 
 	

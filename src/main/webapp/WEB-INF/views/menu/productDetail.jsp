@@ -256,11 +256,13 @@
 </head>
 <body>
 	<div class="main-box">
+	
 		<div class="top">
 			<div class="left">${product.product_title}</div>
 			<div class="right">제품 번호 : ${product.product_num}</div>
 		</div>
 		<div class="bottom">
+			
 			<div class="product-img">
 				<a href="#">
 					<img style="width: 90%" src="<%=request.getContextPath() %>/resources/img${mainFile.file_name}" alt="">
@@ -268,13 +270,14 @@
 			</div>
 			<div class="product-info">
 				<div class="left">
+					<div>분류</div>
 					<div>원산지</div>
 					<div>판매국가</div>
 					<div>배송구분</div>
 					<div class="row4">카드혜택</div>
-					<div>수량</div>
 				</div>
 				<div class="right">
+					<div>${product.product_category}</div>
 					<div>${product.product_origin}</div>
 					<div>한국</div>
 					<div>업체배송(배송비 2,500원 / 30,000원 이상 무료 배송)</div>
@@ -283,17 +286,19 @@
 						<div class="view-img-box">
 							<img src="<%=request.getContextPath()%>/resources/img/card-view.jpg" alt="">
 						</div>
-					<div><input type="number"></div>
 					<div class="sum-box">
 						<pre>원</pre>
 						<pre class="sum">${product.product_cost}</pre>
 						<pre class="sum-text">선택상품 합계금액 : </pre>
 					</div>
-					<div class="btn-box">
-						<a href="#"><img src="<%=request.getContextPath() %>/resources/img/btn_buy.gif" alt=""></a>
-						<a class="myBox-btn" href="<%=request.getContextPath()%>/myBox?user_id=${user.user_id}&product_num=${product.product_num}"><img src="<%=request.getContextPath() %>/resources/img/btn_cart.gif" alt=""></a>
-						<a href="#"><img src="<%=request.getContextPath() %>/resources/img/btn_wishlist.gif" alt=""></a>
-					</div>
+					<form action="">
+						<input type="hidden" name="product_num" value="${product.product_num}">
+						<div class="btn-box">
+							<a href="#"><img src="<%=request.getContextPath() %>/resources/img/btn_buy.gif" alt=""></a>
+							<a class="myBox-btn" href="<%=request.getContextPath()%>/myBoxRegis?user_id=${user.user_id}&product_num=${product.product_num}"><img src="<%=request.getContextPath() %>/resources/img/btn_cart.gif" alt=""></a>
+							<a href="#"><img src="<%=request.getContextPath() %>/resources/img/btn_wishlist.gif" alt=""></a>
+						</div>
+					</form>
 					<c:if test="${user.user_grade == 0}">
 					  	<a href="<%=request.getContextPath()%>/productModify?product_num=${product.product_num}"><button type="submit" class="btn btn-secondary">수정</button></a>
 					  	<a href="<%=request.getContextPath()%>/productDelete?product_num=${product.product_num}"><button type="submit" class="btn btn-secondary">삭제</button></a>
@@ -302,68 +307,69 @@
 			</div>
 		</div>
 	</div>
-	<div class="detail-box">
-		<div class="detail-tab">
-			<div class="tab tab1"><a href="#">상품설명</a></div>
-			<div class="tab tab2"><a href="#">댓글&사진후기</a></div>
-			<div class="tab tab3"><a href="#">상품 Q & A</a></div>
+		<div class="detail-box">
+			<div class="detail-tab">
+				<div class="tab tab1"><a href="#">상품설명</a></div>
+				<div class="tab tab2"><a href="#">댓글&사진후기</a></div>
+				<div class="tab tab3"><a href="#">상품 Q & A</a></div>
+			</div>
 		</div>
-	</div>
-	<div class="description-box">
-		<div class="title-img-box">
-			<img src="<%=request.getContextPath() %>/resources/img/description.png" alt="">
-		</div>
-		<div class="product-container">
-			<c:forEach items="${subFileList}" var="file">
-				<div class="img-box">
-					<img src="<%=request.getContextPath() %>/resources/img${file.file_name}" alt="">
-				</div>
-			</c:forEach>
-		</div>
-		<div class="policy-box">
+		<div class="description-box">
 			<div class="title-img-box">
-				<img src="<%=request.getContextPath() %>/resources/img/policy.gif" alt="">
+				<img src="<%=request.getContextPath() %>/resources/img/description.png" alt="">
 			</div>
-			<div class="delivery">
-				<div class="img-box">
-					<img src="<%=request.getContextPath() %>/resources/img/delivery.gif" alt="">
-				</div>
-				<ul>
-					<li>- 배송기간은 주문일(무통장 입금은 결제 완료일)로 부터 2일~5일(주말/공휴일 제외)이 소요됩니다.</li>
-					<li>- 배송비는 30,000원 이상 구매시 무료 입니다.</li>
-					<li>- 각 공급사마다 배송비가 부가되며, 배송비 부과 기준에 따라 별도의 배송비가 책정될 수도 있습니다.</li>
-					<li>- 직접수령은 불가합니다. 온라인 주문/배송만 가능합니다.</li>
-					<li>- 묶음배송은 불가합니다. 각 주문건벼로 별도로 배송됩니다.</li>
-					<li>- 제주 및 도서산간지역은 추가 배송비가 발생합니다.</li>
-					<li>- 준비 후 상품 준비기간(영업일기준 1일~3일)동안 간혹 예기치 못한 재고부족으로 인한 품절 및 출고지연이 발생될 수 있습니다.</li>
-				</ul>
+			<div class="product-container">
+				<c:forEach items="${subFileList}" var="file">
+					<div class="img-box">
+						<img src="<%=request.getContextPath() %>/resources/img${file.file_name}" alt="">
+					</div>
+				</c:forEach>
 			</div>
-			<div class="refund">
-				<div class="img-box">
-					<img src="<%=request.getContextPath() %>/resources/img/fund.gif" alt="">
+			<div class="policy-box">
+				<div class="title-img-box">
+					<img src="<%=request.getContextPath() %>/resources/img/policy.gif" alt="">
 				</div>
+				<div class="delivery">
+					<div class="img-box">
+						<img src="<%=request.getContextPath() %>/resources/img/delivery.gif" alt="">
+					</div>
 					<ul>
-						<li>- 교환/반품 신청은 배송완료 후 7일 이내 가능합니다. (식품류 제외)</li>
-						<li>- 변심반품/교환 제품의 하자나  불량이 아닌 변심건의 경우 왕복배송비를 고객부담으로 하며, 제품 및 포장 상태가 재판매 가능하여야 합니다.</li>
-						<li>- 환불 승인 후 영업일 기준 3~7일 이내 환불 및 취소여부 확인 가능합니다.</li>
-						<li>- 상품 불량확정 시 배송비를 포함한 전액이 환불됩니다.</li>
-						<li>- 상품가치가 훼손된 경우 교환/반품이 불가합니다. (제품포장 개봉 및 주문제작상품/밀봉포장상품 및 스티커부착 상품 / 텍 제거상품 / 식품 등)</li>
-						<li>- 출고 이후 환불요청 시 상품 회수 후 처리됩니다.</li>
-						<li>- 교환/환불에 대한 브랜드 개별기준이 있는 경우에는 해당 내용이 우선 적용 됩니다.</li>
+						<li>- 배송기간은 주문일(무통장 입금은 결제 완료일)로 부터 2일~5일(주말/공휴일 제외)이 소요됩니다.</li>
+						<li>- 배송비는 30,000원 이상 구매시 무료 입니다.</li>
+						<li>- 각 공급사마다 배송비가 부가되며, 배송비 부과 기준에 따라 별도의 배송비가 책정될 수도 있습니다.</li>
+						<li>- 직접수령은 불가합니다. 온라인 주문/배송만 가능합니다.</li>
+						<li>- 묶음배송은 불가합니다. 각 주문건벼로 별도로 배송됩니다.</li>
+						<li>- 제주 및 도서산간지역은 추가 배송비가 발생합니다.</li>
+						<li>- 준비 후 상품 준비기간(영업일기준 1일~3일)동안 간혹 예기치 못한 재고부족으로 인한 품절 및 출고지연이 발생될 수 있습니다.</li>
 					</ul>
-			</div>
-			<div class="as">
-				<div class="img-box">
-					<img src="<%=request.getContextPath() %>/resources/img/as.gif" alt="">
 				</div>
-					<ul>
-						<li>- A/S 센터를 운영하고 있는 경우 해당 상품의 판매사 A/S 정책을 따르며, 완제품으로 수입된 상품의 경우 A/S가 불가합니다.</li>
-					</ul>
-				
+				<div class="refund">
+					<div class="img-box">
+						<img src="<%=request.getContextPath() %>/resources/img/fund.gif" alt="">
+					</div>
+						<ul>
+							<li>- 교환/반품 신청은 배송완료 후 7일 이내 가능합니다. (식품류 제외)</li>
+							<li>- 변심반품/교환 제품의 하자나  불량이 아닌 변심건의 경우 왕복배송비를 고객부담으로 하며, 제품 및 포장 상태가 재판매 가능하여야 합니다.</li>
+							<li>- 환불 승인 후 영업일 기준 3~7일 이내 환불 및 취소여부 확인 가능합니다.</li>
+							<li>- 상품 불량확정 시 배송비를 포함한 전액이 환불됩니다.</li>
+							<li>- 상품가치가 훼손된 경우 교환/반품이 불가합니다. (제품포장 개봉 및 주문제작상품/밀봉포장상품 및 스티커부착 상품 / 텍 제거상품 / 식품 등)</li>
+							<li>- 출고 이후 환불요청 시 상품 회수 후 처리됩니다.</li>
+							<li>- 교환/환불에 대한 브랜드 개별기준이 있는 경우에는 해당 내용이 우선 적용 됩니다.</li>
+						</ul>
+				</div>
+				<div class="as">
+					<div class="img-box">
+						<img src="<%=request.getContextPath() %>/resources/img/as.gif" alt="">
+					</div>
+						<ul>
+							<li>- A/S 센터를 운영하고 있는 경우 해당 상품의 판매사 A/S 정책을 따르며, 완제품으로 수입된 상품의 경우 A/S가 불가합니다.</li>
+						</ul>
+					
+				</div>
 			</div>
 		</div>
-	</div>
-	<div class="overlay">
+	
+		<div class="overlay">
 		<div class="hidden-box">
 			<div class="title">
 				<div class="text-box">21년 2월 신용카드 무이자 할부</div>
@@ -476,8 +482,10 @@
 			</div>
 		</div>
 	</div>
+	
 	</div>
-	<script>
+	<script type="text/javascript">
+	
 		$('.view-img-box').click(function(e){
             e.preventDefault();
 			$('.overlay').show();
@@ -486,13 +494,36 @@
 			e.preventDefault();
 			$('.overlay').hide();
 		})
-		$('.myBox-btn').click(function(){
-			console.log('${user.getUser_id()}');
-			if('${user.getUser_id()}' == ''){
-				alert('로그인 후 이용할 수 있습니다.');
-				return;
-			}
-		})
+
+        $('.myBox-btn').click(function(e){
+        	e.preventDefault(); // myBox-btn에 지정한 url로 못가게 막는거
+        	var id = '${user.user_id}';
+        	var product_num = $('input[name=product_num]').val();	
+        	
+        	if(id == ''){
+        		alert('로그인하세요.');
+        		return;
+        	}
+        	var data = { 'product_num' : product_num };	
+        	$.ajax({
+				url : '<%=request.getContextPath()%>/myBoxRegis',
+				type : 'post',
+				data : data,
+				success : function(data){
+					console.log(data);
+					if(data == 'fail'){
+						alert('이미 등록된 제품 입니다.');
+					}
+					else if(data == 'success'){
+						alert('등록 되었습니다.');					
+					}
+				},
+				error : function(){
+					console.log('실패');
+				}
+			})
+        })
 	</script>
+
 </body>
 </html>

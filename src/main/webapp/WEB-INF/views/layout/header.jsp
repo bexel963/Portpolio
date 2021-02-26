@@ -202,10 +202,12 @@
                         <li class="menu"><a href="<%=request.getContextPath()%>/">HOME</a></li>
                         <li class="menu"><a href="#">CATEGORY</a></li>
                         <li class="menu"><a href="#">HOT 10</a></li>
-                        <li class="menu"><a href="<%=request.getContextPath()%>/myBox">MY BOX</a></li>
+                        <c:if test="${user != null}">
+                        	<li class="menu"><a href="<%=request.getContextPath()%>/myBox">MY BOX</a></li>
+                        </c:if>
                         <li class="menu"><a href="<%=request.getContextPath()%>/boardList">게시판</a></li>
                         <c:if test="${user.user_grade == 0}">
-                        <li class="menu"><a href="<%=request.getContextPath()%>/productRegis">상품등록</a></li>
+                        	<li class="menu"><a href="<%=request.getContextPath()%>/productRegis">상품등록</a></li>
                         </c:if>
                     </ul>
                 </div>

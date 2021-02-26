@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.green.portpolio.dao.ProductDao">
 
-	<insert id="productRegis" parameterType="kr.green.portpolio.vo.ProductVo" useGeneratedKeys="true" keyProperty="product.product_num">
+	<insert id="regisProduct" parameterType="kr.green.portpolio.vo.ProductVo" useGeneratedKeys="true" keyProperty="product.product_num">
 		insert into portpolio.product(product_category, product_title, product_content, product_amount, product_cost, product_origin) 
 			values(#{product.product_category}, #{product.product_title}, #{product.product_content}, #{product.product_amount}, #{product.product_cost}, #{product.product_origin})
 	</insert>
@@ -44,4 +44,8 @@
 	<insert id="regisMyBox">
 		insert into portpolio.myBox(product_num, user_id) values(#{product_num}, #{user_id})
 	</insert>
+	
+	<select id="getMyBox" resultType="kr.green.portpolio.vo.MyBoxVo">
+		select * from portpolio.myBox where user_id = #{user_id}
+	</select>
 </mapper>

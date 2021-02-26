@@ -94,6 +94,9 @@
 		{
 			padding-top: 15px;
 		}
+		.product-box .table .middle .row2 .title-box{
+			padding-left: 30px;
+		}
 		.product-box .table .middle .row2 div{
 			float: left;
 		}
@@ -223,37 +226,41 @@
 							<li class="row7">관리</li>
 						</ul>
 					</div>
-					<div class="middle">
-						<ul>
-							<li class="row1"><input type="checkbox"></li>
-							<li class="row2">
-								<div class="img-box">
-									<img src="<%=request.getContextPath()%>/resources/img/15지지고 휴대용 쑥뜸기1.jpg" alt="">
-								</div>
-								<div class="title-box">
-									휴테크 바디케어 듀얼웨이브 발 마사지기 - HT-2801
-								</div>
-							</li>
-							<li class="row3">299,000원</li>
-							<li class="row4">
-								<select name="amount" id="" style="width: 45px">
-									<option>1</option>                   <!-- 2020이 전송된다.-->
-									<option>2</option>
-									<option>3</option>
-									<option>5</option>
-									<option>6</option>
-									<option>7</option>
-									<option>8</option>
-									<option>9</option>
-								</select>
-							</li>
-							<li class="row5">299,000원</li>
-							<li class="row6">무료</li>
-							<li class="row7">
-								<button type="button" class="delete-btn"><b>삭제하기</b></button>
-							</li>
-						</ul>	
-					</div>
+					<c:forEach items="${productList}" var="product">
+						<div class="middle">
+							<ul>
+								<li class="row1"><input type="checkbox"></li>
+								<li class="row2">
+									<c:forEach items="${fileList}" var="file">
+										<c:if test="${product.product_num == file.product_num}">
+											<div class="img-box">
+												<img src="<%=request.getContextPath()%>/resources/img/${file.file_name}" alt="">
+											</div>
+										</c:if>
+									</c:forEach>
+									<div class="title-box">${product.product_title}</div>						
+								</li>
+								<li class="row3">${product.product_cost}</li>
+								<li class="row4">
+									<select name="amount" id="" style="width: 45px">
+										<option>1</option>                  
+										<option>2</option>
+										<option>3</option>
+										<option>5</option>
+										<option>6</option>
+										<option>7</option>
+										<option>8</option>
+										<option>9</option>
+									</select>
+								</li>
+								<li class="row5">299,000원</li>
+								<li class="row6">무료</li>
+								<li class="row7">
+									<button type="button" class="delete-btn"><b>삭제하기</b></button>
+								</li>
+							</ul>	
+						</div>
+					</c:forEach>
 					<div class="bottom">
 						<div class="cal">
 							<span class="text">상품 수량 </span><span class="value">2</span><span class="text"> 개</span><img src="<%=request.getContextPath()%>/resources/img/icon_sum.gif" alt="">

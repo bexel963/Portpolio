@@ -2,18 +2,25 @@ package kr.green.portpolio.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Locale;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import kr.green.portpolio.service.ProductService;
+import kr.green.portpolio.service.UserService;
 import kr.green.portpolio.utils.UploadFileUtils;
 import kr.green.portpolio.vo.FileVo;
+import kr.green.portpolio.vo.MyBoxVo;
 import kr.green.portpolio.vo.ProductVo;
 import kr.green.portpolio.vo.UserVo;
 //import kr.green.portpolio.utils.UploadFileUtils;
@@ -24,6 +31,9 @@ public class ProductController {
 	
 	@Autowired
 	ProductService productService;
+	
+	@Autowired
+	UserService userService;
 	
 	private String uploadPath = "D:\\digit\\a\\digital\\Portpolio\\src\\main\\webapp\\resources\\img";
 	
@@ -38,7 +48,7 @@ public class ProductController {
 	@RequestMapping(value= "/productRegis", method = RequestMethod.POST)
 	public ModelAndView productRegisPost(Locale locale, ModelAndView mv, ProductVo product, MultipartFile[] fileList) throws IOException, Exception{
 		
-		productService.productRegis(product);	
+		productService.regisProduct(product);	
 		
 		if(fileList != null){
 			String mainFileName = UploadFileUtils.uploadFile(uploadPath, fileList[0].getOriginalFilename(), fileList[0].getBytes());
@@ -57,8 +67,9 @@ public class ProductController {
 	
 	/* 상품상세 GET */
 	@RequestMapping(value= "/productDetail", method = RequestMethod.GET)
-	public ModelAndView productDetailGet(Locale locale, ModelAndView mv, Integer product_num){
-	
+	public ModelAndView productDetailGet(Locale locale, ModelAndView mv, Integer product_num, HttpServletRequest request){
+		
+		UserVo user = userService.getUser(request);
 		ProductVo product = productService.getProduct(product_num);
 		ArrayList<FileVo> subfileList = productService.getSubFileList(product_num);
 		FileVo mainFile = productService.getMainFile(product_num);
@@ -84,7 +95,7 @@ public class ProductController {
 	/* 상품수정 POST */
 	@RequestMapping(value= "/productModify", method = RequestMethod.POST)
 	public ModelAndView productModifyPost(Locale locale, ModelAndView mv, ProductVo product, MultipartFile[] fileList) throws IOException, Exception{
-		System.out.println(product);
+		
 		productService.modifyProduct(product);
 		
 		if(fileList != null){
@@ -106,24 +117,48 @@ public class ProductController {
 	@RequestMapping(value= "/productDelete", method = RequestMethod.GET)
 	public ModelAndView productDeleteGet(Locale locale, ModelAndView mv, Integer product_num){
 		
-		productService.productDelete(product_num);
+		productService.deleteProduct(product_num);
 		
 		mv.setViewName("redirect:/");
 	    return mv;
 	}
 	
-	/* 마이박스 GET */
+	/* 마이박스 리스트 GET */
 	@RequestMapping(value= "/myBox", method = RequestMethod.GET)
-	public ModelAndView myBoxGet(Locale locale, ModelAndView mv, String user_id, Integer product_num){
+	public ModelAndView myBoxGet(Locale locale, ModelAndView mv, HttpServletRequest request){
 		
-		productService.regisMyBox(user_id, product_num);
+		ArrayList<ProductVo> productList = new ArrayList<ProductVo>();
+		ArrayList<FileVo> fileList = new ArrayList<FileVo>();
+		UserVo user = userService.getUser(request);
 		
-		FileVo file = productService.getMainFile(product_num);
-		ProductVo product = productService.getProduct(product_num);
+		ArrayList<MyBoxVo> myBoxList = productService.getMyBox(user.getUser_id());
+		for(MyBoxVo myBox : myBoxList) {
+			productList.add(productService.getProduct(myBox.getProduct_num()));
+			fileList.add(productService.getMainFile(myBox.getProduct_num()));
+		}
+		mv.addObject("productList", productList);
+		mv.addObject("fileList", fileList);
+		mv.addObject("myBoxList", myBoxList);
 		
-		mv.addObject("file", file);
-		mv.addObject("product", product);
-		mv.setViewName("/menu/productDetail");
+		mv.setViewName("/menu/myBox");
 	    return mv;
+	}
+	
+	/* 마이박스 등록 POST */
+	@RequestMapping(value="/myBoxRegis", method = RequestMethod.POST)
+	@ResponseBody
+	public String myBoxPost(Integer product_num, HttpServletRequest request){
+		
+		UserVo user = userService.getUser(request);
+		ArrayList<MyBoxVo> myBoxList = productService.getMyBox(user.getUser_id());
+		
+		for(int i=0 ; i<myBoxList.size() ; i++){
+			if(myBoxList.get(i).getProduct_num() == product_num){
+				return "false";
+			}
+		}
+		productService.regisMyBox(user.getUser_id(), product_num);
+		
+	    return "success";
 	}
 }

@@ -3,11 +3,12 @@ package kr.green.portpolio.service;
 import java.util.ArrayList;
 
 import kr.green.portpolio.vo.FileVo;
+import kr.green.portpolio.vo.MyBoxVo;
 import kr.green.portpolio.vo.ProductVo;
 
 public interface ProductService {
 
-	void productRegis(ProductVo product);	// 제품 등록
+	void regisProduct(ProductVo product);	// 제품 등록
 	
 	void mainFileRegis(int product_num, String file_oriName, String file_name); // 메인사진 등록
 	void fileRegis(int product_num, String file_oriName, String file_name);		// 서브사진들 등록
@@ -23,9 +24,11 @@ public interface ProductService {
 
 	void modifyProduct(ProductVo product);		// 제품 수정
 
-	void productDelete(Integer product_num);	// 해당번호 제품 삭제
+	void deleteProduct(Integer product_num);	// 해당번호 제품 삭제
 
-	void regisMyBox(String user_id, Integer product_num);
+	void regisMyBox(String user_id, Integer product_num);	// 마이박스에 제품 등록하기
+
+	ArrayList<MyBoxVo> getMyBox(String user_id);
 
 	
 
