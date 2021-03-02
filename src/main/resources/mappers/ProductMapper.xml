@@ -48,4 +48,20 @@
 	<select id="getMyBox" resultType="kr.green.portpolio.vo.MyBoxVo">
 		select * from portpolio.myBox where user_id = #{user_id}
 	</select>
+	
+	<delete id="deleteMyBox">
+		delete from portpolio.myBox where product_num = #{product_num} and user_id = #{user.user_id}
+	</delete>
+	
+	<insert id="regisOrderInfo">
+		insert into portpolio.order(order_amount, product_num, order_cost, user_id) values(#{order_amount}, #{product.product_num}, #{order_cost}, #{user.user_id})
+	</insert>
+	
+	<select id="getOrderInfo" resultType="kr.green.portpolio.vo.OrderVo">
+		select * from portpolio.order where user_id = #{user.user_id}
+	</select>
+	
+	<update id="modifyOrderInfo">
+		update portpolio.order set order_amount=#{order_amount}, order_cost=#{order_cost} where product_num = #{product.product_num}
+	</update>
 </mapper>

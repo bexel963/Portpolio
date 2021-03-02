@@ -6,9 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kr.green.portpolio.dao.ProductDao;
-import kr.green.portpolio.vo.BoardVo;
 import kr.green.portpolio.vo.FileVo;
 import kr.green.portpolio.vo.MyBoxVo;
+import kr.green.portpolio.vo.OrderVo;
 import kr.green.portpolio.vo.ProductVo;
 import kr.green.portpolio.vo.UserVo;
 
@@ -81,7 +81,7 @@ public class ProductServiceImp implements ProductService {
 		productDao.deleteFiles(product_num);
 		productDao.deleteProduct(product_num);
 	}
-
+	
 	@Override
 	public void regisMyBox(String user_id, Integer product_num) {
 		productDao.regisMyBox(user_id, product_num);
@@ -90,6 +90,33 @@ public class ProductServiceImp implements ProductService {
 	@Override
 	public ArrayList<MyBoxVo> getMyBox(String user_id) {
 		return productDao.getMyBox(user_id);
+	}
+
+	@Override
+	public void deleteMyBox(UserVo user, Integer product_num) {
+		productDao.deleteMyBox(user, product_num);
+	}
+
+	@Override
+	public void regisOrderInfo(Integer order_amount, ProductVo product, UserVo user) {
+		
+		ArrayList<OrderVo> orderInfoList = productDao.getOrderInfo(user);
+		
+		for(OrderVo order : orderInfoList) {
+			if(product.getProduct_num() == order.getProduct_num()) {
+				int order_cost = order_amount * product.getProduct_cost();
+				System.out.println(order_cost + "원");
+				productDao.modifyOrderInfo(order_amount, product, order_cost);
+				return;
+			}
+		}
+		int order_cost = order_amount * product.getProduct_cost();
+		productDao.regisOrderInfo(order_amount, product, order_cost, user);
+	}
+
+	@Override
+	public ArrayList<OrderVo> getOrderInfo(UserVo user) {
+		return productDao.getOrderInfo(user);
 	}
 	
 

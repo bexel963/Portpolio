@@ -2,14 +2,12 @@ package kr.green.portpolio.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -21,6 +19,7 @@ import kr.green.portpolio.service.UserService;
 import kr.green.portpolio.utils.UploadFileUtils;
 import kr.green.portpolio.vo.FileVo;
 import kr.green.portpolio.vo.MyBoxVo;
+import kr.green.portpolio.vo.OrderVo;
 import kr.green.portpolio.vo.ProductVo;
 import kr.green.portpolio.vo.UserVo;
 //import kr.green.portpolio.utils.UploadFileUtils;
@@ -69,7 +68,6 @@ public class ProductController {
 	@RequestMapping(value= "/productDetail", method = RequestMethod.GET)
 	public ModelAndView productDetailGet(Locale locale, ModelAndView mv, Integer product_num, HttpServletRequest request){
 		
-		UserVo user = userService.getUser(request);
 		ProductVo product = productService.getProduct(product_num);
 		ArrayList<FileVo> subfileList = productService.getSubFileList(product_num);
 		FileVo mainFile = productService.getMainFile(product_num);
@@ -130,15 +128,17 @@ public class ProductController {
 		ArrayList<ProductVo> productList = new ArrayList<ProductVo>();
 		ArrayList<FileVo> fileList = new ArrayList<FileVo>();
 		UserVo user = userService.getUser(request);
-		
 		ArrayList<MyBoxVo> myBoxList = productService.getMyBox(user.getUser_id());
 		for(MyBoxVo myBox : myBoxList) {
 			productList.add(productService.getProduct(myBox.getProduct_num()));
 			fileList.add(productService.getMainFile(myBox.getProduct_num()));
 		}
+		ArrayList<OrderVo> orderInfoList = productService.getOrderInfo(user);
+		System.out.println(orderInfoList);
 		mv.addObject("productList", productList);
 		mv.addObject("fileList", fileList);
 		mv.addObject("myBoxList", myBoxList);
+		mv.addObject("orderInfoList", orderInfoList);
 		
 		mv.setViewName("/menu/myBox");
 	    return mv;
@@ -159,6 +159,28 @@ public class ProductController {
 		}
 		productService.regisMyBox(user.getUser_id(), product_num);
 		
+	    return "success";
+	}
+	
+	/* 마이박스 삭제 POST */
+	@RequestMapping(value="/myBoxDelete", method = RequestMethod.POST)
+	@ResponseBody
+	public String myBoxRegisDeletePost(Integer product_num, HttpServletRequest request){
+		
+		UserVo user = userService.getUser(request);
+		productService.deleteMyBox(user, product_num);
+		
+	    return "success";
+	}
+	
+	/* 주문정보 POST */
+	@RequestMapping(value="/orderInfo", method = RequestMethod.POST)
+	@ResponseBody
+	public String orderInfoPost(Integer order_amount, Integer product_num, HttpServletRequest request){
+		
+		UserVo user = userService.getUser(request);
+		ProductVo product = productService.getProduct(product_num);
+		productService.regisOrderInfo(order_amount, product, user);
 	    return "success";
 	}
 }

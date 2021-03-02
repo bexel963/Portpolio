@@ -227,39 +227,45 @@
 						</ul>
 					</div>
 					<c:forEach items="${productList}" var="product">
-						<div class="middle">
-							<ul>
-								<li class="row1"><input type="checkbox"></li>
-								<li class="row2">
-									<c:forEach items="${fileList}" var="file">
-										<c:if test="${product.product_num == file.product_num}">
-											<div class="img-box">
-												<img src="<%=request.getContextPath()%>/resources/img/${file.file_name}" alt="">
-											</div>
+						
+							<div class="middle">
+								<ul>
+									<li class="row1"><input type="checkbox"></li>
+									<li class="row2">
+										<c:forEach items="${fileList}" var="file">
+											<c:if test="${product.product_num == file.product_num}">
+												<div class="img-box">
+													<img src="<%=request.getContextPath()%>/resources/img/${file.file_name}" alt="">
+												</div>
+											</c:if>
+										</c:forEach>
+										<div class="title-box">${product.product_title}</div>						
+									</li>
+									<li class="row3">${product.product_cost}</li>
+									<li class="row4">
+										<input type="hidden" name="product_cost" value="${product.product_cost}"><!--  --><!--  --><!--  --><!--  -->
+										<input type="hidden" name="product_num" value="${product.product_num}">
+										<select class="select-btn" name="order_amount" id="" style="width: 45px">
+											<c:forEach begin="1" end="99" var="index">
+												<c:forEach items="${orderInfoList}" var="orderInfo">
+													<option class="option" value="${index}" <c:if test="${orderInfo.order_amount == index && orderInfo.product_num == product.product_num}">selected</c:if>>${index}</option>
+												</c:forEach>                  
+											</c:forEach>
+										</select>
+									</li>
+									<c:forEach items="${orderInfoList}" var="orderInfo">
+										<c:if test="${orderInfo.product_num == product.product_num}">
+											<li class="row5">${orderInfo.order_cost}원</li>
 										</c:if>
 									</c:forEach>
-									<div class="title-box">${product.product_title}</div>						
-								</li>
-								<li class="row3">${product.product_cost}</li>
-								<li class="row4">
-									<select name="amount" id="" style="width: 45px">
-										<option>1</option>                  
-										<option>2</option>
-										<option>3</option>
-										<option>5</option>
-										<option>6</option>
-										<option>7</option>
-										<option>8</option>
-										<option>9</option>
-									</select>
-								</li>
-								<li class="row5">299,000원</li>
-								<li class="row6">무료</li>
-								<li class="row7">
-									<button type="button" class="delete-btn"><b>삭제하기</b></button>
-								</li>
-							</ul>	
-						</div>
+									<li class="row6">무료</li>
+									<li class="row7">
+										<input type="hidden" name="product_num" value="${product.product_num}">
+										<button type="button" class="delete-btn"><b>삭제하기</b></button>
+									</li>
+								</ul>	
+							</div>
+						
 					</c:forEach>
 					<div class="bottom">
 						<div class="cal">
@@ -281,5 +287,47 @@
 			</div>
 		</div>
 	</div>
+	
+	<script>
+		$('.delete-btn').click(function(){
+	    	var product_num = $(this).siblings('input').val();
+	    	var obj = $(this)
+	    	
+	    	var data = { 'product_num' : product_num };	
+	    	$.ajax({
+				url : '<%=request.getContextPath()%>/myBoxDelete',
+				type : 'post',
+				data : data,
+				success : function(data){
+					console.log(data);
+					obj.parents('.middle').remove();
+				},
+				error : function(){
+					console.log('실패');
+				}
+			})
+	    })
+	    
+	    $('.select-btn').change(function(){
+	    	var amount = $(this).val();<!--  --><!--  --><!--  --><!--  -->
+	    	var product_num = $(this).siblings('input[name=product_num]').val();
+	    	var product_cost = $(this).siblings('input[name=product_cost]').val();<!--  --><!--  --><!--  --><!--  -->
+	    	var sum = amount * product_cost;<!--  --><!--  --><!--  --><!--  -->
+	  		var obj = $(this)
+	    	var data = { 'order_amount' : amount, 'product_num' : product_num};	
+	    	$.ajax({
+				url : '<%=request.getContextPath()%>/orderInfo',
+				type : 'post',
+				data : data,
+				success : function(data){
+					obj.parent().siblings('.row5').html('sum'));<!--  --><!--  --><!--  --><!--  -->
+					
+				},
+				error : function(){
+					console.log('실패');
+				}
+			})
+	    })
+	</script>
 </body>
 </html>

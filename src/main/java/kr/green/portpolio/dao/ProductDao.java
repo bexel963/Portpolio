@@ -6,7 +6,9 @@ import org.apache.ibatis.annotations.Param;
 
 import kr.green.portpolio.vo.FileVo;
 import kr.green.portpolio.vo.MyBoxVo;
+import kr.green.portpolio.vo.OrderVo;
 import kr.green.portpolio.vo.ProductVo;
+import kr.green.portpolio.vo.UserVo;
 
 public interface ProductDao {
 
@@ -34,7 +36,13 @@ public interface ProductDao {
 
 	ArrayList<MyBoxVo> getMyBox(@Param("user_id")String user_id);
 
+	void deleteMyBox(@Param("user")UserVo user, @Param("product_num")Integer product_num);
 
+	void regisOrderInfo(@Param("order_amount")Integer order_amount, @Param("product")ProductVo product, @Param("order_cost")Integer order_cost, @Param("user")UserVo user);
+
+	ArrayList<OrderVo> getOrderInfo(@Param("user")UserVo user);
+
+	void modifyOrderInfo(@Param("order_amount")Integer order_amount, @Param("product")ProductVo product, @Param("order_cost")Integer order_cost);
 	
 
 }

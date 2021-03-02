@@ -4,7 +4,9 @@ import java.util.ArrayList;
 
 import kr.green.portpolio.vo.FileVo;
 import kr.green.portpolio.vo.MyBoxVo;
+import kr.green.portpolio.vo.OrderVo;
 import kr.green.portpolio.vo.ProductVo;
+import kr.green.portpolio.vo.UserVo;
 
 public interface ProductService {
 
@@ -28,7 +30,13 @@ public interface ProductService {
 
 	void regisMyBox(String user_id, Integer product_num);	// 마이박스에 제품 등록하기
 
-	ArrayList<MyBoxVo> getMyBox(String user_id);
+	ArrayList<MyBoxVo> getMyBox(String user_id);	// 마이박스 정보 가져오기
+
+	void deleteMyBox(UserVo user, Integer product_num);	// 마이박스 목록 삭제
+
+	void regisOrderInfo(Integer order_amount, ProductVo product, UserVo user);	// 주문정보 등록
+
+	ArrayList<OrderVo> getOrderInfo(UserVo user);	// 주문정보 가져오기
 
 	
 
