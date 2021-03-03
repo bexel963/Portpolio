@@ -40,9 +40,11 @@ public interface ProductDao {
 
 	void regisOrderInfo(@Param("order_amount")Integer order_amount, @Param("product")ProductVo product, @Param("order_cost")Integer order_cost, @Param("user")UserVo user);
 
-	ArrayList<OrderVo> getOrderInfo(@Param("user")UserVo user);
+	ArrayList<OrderVo> getOrderInfos(@Param("user")UserVo user);
 
 	void modifyOrderInfo(@Param("order_amount")Integer order_amount, @Param("product")ProductVo product, @Param("order_cost")Integer order_cost);
+
+	OrderVo getOrderInfo(@Param("product_num")int product_num, @Param("user")UserVo user);
 	
 
 }

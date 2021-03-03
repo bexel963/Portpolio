@@ -117,7 +117,9 @@ public class ProductController {
 		
 		productService.deleteProduct(product_num);
 		
-		mv.setViewName("redirect:/");
+		mv.setViewName("redirect:"
+				+ ""
+				+ "");
 	    return mv;
 	}
 	
@@ -133,12 +135,12 @@ public class ProductController {
 			productList.add(productService.getProduct(myBox.getProduct_num()));
 			fileList.add(productService.getMainFile(myBox.getProduct_num()));
 		}
-		ArrayList<OrderVo> orderInfoList = productService.getOrderInfo(user);
-		System.out.println(orderInfoList);
+		ArrayList<OrderVo> orderInfoList = productService.getOrderInfos(user);
+		
 		mv.addObject("productList", productList);
 		mv.addObject("fileList", fileList);
-		mv.addObject("myBoxList", myBoxList);
 		mv.addObject("orderInfoList", orderInfoList);
+		mv.addObject("myBoxList", myBoxList);
 		
 		mv.setViewName("/menu/myBox");
 	    return mv;
@@ -182,5 +184,30 @@ public class ProductController {
 		ProductVo product = productService.getProduct(product_num);
 		productService.regisOrderInfo(order_amount, product, user);
 	    return "success";
+	}
+	
+	/* 결제창 POST */
+	@RequestMapping(value= "/productPayment", method = RequestMethod.GET)
+	public ModelAndView productPaymentGet(Locale locale, ModelAndView mv, Integer[] num, HttpServletRequest request){
+		
+		UserVo user = userService.getUser(request);
+		ArrayList<ProductVo> productList = new ArrayList<ProductVo>();
+		ArrayList<FileVo> fileList = new ArrayList<FileVo>();
+		ArrayList<OrderVo> orderList = new ArrayList<OrderVo>();
+		for(int product_num : num) {
+			productList.add(productService.getProduct(product_num));
+		}
+		for(int product_num : num) {
+			fileList.add(productService.getMainFile(product_num));
+		}
+		for(int product_num : num) {
+			orderList.add(productService.getOrderInfo(product_num, user));
+		}
+		
+		mv.addObject("productList", productList);
+		mv.addObject("fileList", fileList);
+		mv.addObject("orderInfoList", orderList);
+		mv.setViewName("/menu/productPayment");
+	    return mv;
 	}
 }

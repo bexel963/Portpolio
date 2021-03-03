@@ -36,7 +36,9 @@ public interface ProductService {
 
 	void regisOrderInfo(Integer order_amount, ProductVo product, UserVo user);	// 주문정보 등록
 
-	ArrayList<OrderVo> getOrderInfo(UserVo user);	// 주문정보 가져오기
+	ArrayList<OrderVo> getOrderInfos(UserVo user);	// 해당 유저에 대한 주문정보들 가져오기
+
+	OrderVo getOrderInfo(int product_num, UserVo user);	// 해당 제품에 대한 주문정보 가져오기
 
 	
 

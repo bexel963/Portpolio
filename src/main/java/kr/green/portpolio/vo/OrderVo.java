@@ -11,7 +11,7 @@ public class OrderVo {
 	private int order_cost;
 	private int product_num;
 	private Date order_date;
-	private String order_way;
+	
 	public int getOrder_num() {
 		return order_num;
 	}
@@ -49,18 +49,11 @@ public class OrderVo {
 		Date date2 = simpleFormat2.parse(orderDate);
 		this.order_date = date2;
 	}
-	public String getOrder_way() {
-		return order_way;
-	}
-	public void setOrder_way(String order_way) {
-		this.order_way = order_way;
-	}
 	
 	@Override
 	public String toString() {
 		return "OrderVo [order_num=" + order_num + ", order_amount=" + order_amount + ", order_cost=" + order_cost
-				+ ", product_num=" + product_num + ", order_date=" + order_date + ", order_way=" + order_way + "]";
+				+ ", product_num=" + product_num + ", order_date=" + order_date + "]";
 	}
-	
-	
+
 }

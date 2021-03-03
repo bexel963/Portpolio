@@ -100,7 +100,7 @@ public class ProductServiceImp implements ProductService {
 	@Override
 	public void regisOrderInfo(Integer order_amount, ProductVo product, UserVo user) {
 		
-		ArrayList<OrderVo> orderInfoList = productDao.getOrderInfo(user);
+		ArrayList<OrderVo> orderInfoList = productDao.getOrderInfos(user);
 		
 		for(OrderVo order : orderInfoList) {
 			if(product.getProduct_num() == order.getProduct_num()) {
@@ -115,8 +115,13 @@ public class ProductServiceImp implements ProductService {
 	}
 
 	@Override
-	public ArrayList<OrderVo> getOrderInfo(UserVo user) {
-		return productDao.getOrderInfo(user);
+	public ArrayList<OrderVo> getOrderInfos(UserVo user) {
+		return productDao.getOrderInfos(user);
+	}
+
+	@Override
+	public OrderVo getOrderInfo(int product_num, UserVo user) {
+		return productDao.getOrderInfo(product_num, user);
 	}
 	
 
