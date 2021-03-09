@@ -49,6 +49,10 @@
                 <label for="num">전화번호</label>
                 <input type="text" class="form-control" id="usr" name="user_phone" value="">
             </div>
+            <div class="form-group">
+                <label for="num">주소</label>
+                <input type="text" class="form-control" id="usr" name="user_address" value="">
+            </div>
             <button type="submit" class="btn btn-secondary col-12">회원가입</button>
         </form>
 	</div>

@@ -98,7 +98,7 @@ public class ProductServiceImp implements ProductService {
 	}
 
 	@Override
-	public void regisOrderInfo(Integer order_amount, ProductVo product, UserVo user) {
+	public void regisOrderInfo(Integer order_amount, ProductVo product, UserVo user, String isDel) {
 		
 		ArrayList<OrderVo> orderInfoList = productDao.getOrderInfos(user);
 		
@@ -106,7 +106,7 @@ public class ProductServiceImp implements ProductService {
 			if(product.getProduct_num() == order.getProduct_num()) {
 				int order_cost = order_amount * product.getProduct_cost();
 				System.out.println(order_cost + "원");
-				productDao.modifyOrderInfo(order_amount, product, order_cost);
+				productDao.modifyOrderInfo(order_amount, product, order_cost, user.getUser_id(), isDel);
 				return;
 			}
 		}
@@ -121,8 +121,35 @@ public class ProductServiceImp implements ProductService {
 
 	@Override
 	public OrderVo getOrderInfo(int product_num, UserVo user) {
-		return productDao.getOrderInfo(product_num, user);
+		OrderVo order = productDao.getOrderInfo(product_num, user);
+		return order;
 	}
+
+	@Override
+	public OrderVo calTotal(ArrayList<OrderVo> orderList) {
+		OrderVo order = new OrderVo();
+		int total_amount = 0;
+		int total_cost = 0;
+		for(int i=0 ; i<orderList.size(); i++) {
+			total_amount = total_amount + orderList.get(i).getOrder_amount();
+			total_cost = total_cost + orderList.get(i).getOrder_cost();	
+		}
+		order.setTotal_amount(total_amount);
+		order.setTotal_cost(total_cost);
+		return order;
+	}
+
+	@Override
+	public void deleteOrderInfo(UserVo user, Integer product_num) {
+		productDao.deleteOrderInfo(user, product_num);
+	}
+
+
+	@Override
+	public void deleteOrder(UserVo user, Integer product_num) {
+		productDao.deleteOrder(user, product_num);
+	}
+
 	
 
 }

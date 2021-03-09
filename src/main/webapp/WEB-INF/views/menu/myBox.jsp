@@ -78,7 +78,7 @@
 			height: 40px;
 			border-bottom: 1px solid #dedede;
 			box-sizing: border-box;
-			padding: 10px 0 0 10px;
+			padding: 10px 0 0 62px;
 			text-align: center;
 		}
 		.product-box .table .middle{
@@ -108,13 +108,6 @@
 		}
 		.product-box .table .middle .row7{
 			padding-top: 45px;
-		}
-		.product-box .table .bottom .cal{
-			height: 60px;
-			border-bottom: 1px solid #dedede;
-		}
-		.product-box .table .bottom .sum{
-			height: 60px;
 		}
 		.product-box .table .row1{
 			width: 50px;
@@ -152,29 +145,8 @@
 		}
 		.product-box .bottom{
 			width: 100%;
-			height: 120px; 
-		}
-		.product-box .bottom .cal,
-		.product-box .bottom .sum{
-			height: 60px;
-			box-sizing: border-box;
-			padding-top: 20px;
-			padding-left: 513px;
-		}
-		.product-box .bottom .sum{
-			padding-left: 800px;
-		}
-		.product-box .bottom .text{
-			font-size: 14px;
-			font-weight: bold;
-		}
-		.product-box .bottom img{
-			margin: 0 20px 0 20px;
-		}
-		.product-box .bottom .value{
-			font-size: 18px;
-			font-weight: bold;
-			color: blue;
+			height: 40px;
+			background-color: #f8f8f8; 
 		}
 		.order-box .container .btn-area{
 			width: 1000px;
@@ -226,7 +198,6 @@
 					<div class="table">
 						<div class="top">				
 							<ul>
-								<li class="row1"><input type="checkbox"></li>
 								<li class="row2">상품명/옵션</li>
 								<li class="row3">판매가격</li>
 								<li class="row4">수량</li>
@@ -249,26 +220,39 @@
 											</c:forEach>
 											<div class="title-box">${product.product_title}</div>						
 										</li>
-										<li class="row3">${product.product_cost}</li>
+										<li class="row3">${product.product_cost} 원</li>
 										<li class="row4">
 											<input type="hidden" name="product_cost" value="${product.product_cost}">
 											<input type="hidden" name="product_num" value="${product.product_num}">
 											<select class="select-btn" name="order_amount" id="" style="width: 45px">
 												<c:forEach begin="1" end="99" var="index">
-													<c:forEach items="${orderInfoList}" var="orderInfo">
-														<option class="option" value="${index}" <c:if test="${orderInfo.order_amount == index && orderInfo.product_num == product.product_num}">selected</c:if>>${index}</option>
-													</c:forEach>                  
+													<c:if test="${orderInfoList.size() != 0 }">
+														<c:forEach items="${orderInfoList}" var="orderInfo">
+															<option class="option" value="${index}" <c:if test="${orderInfo.order_amount == index && orderInfo.product_num == product.product_num}">selected</c:if>>${index}</option>
+														</c:forEach>
+													</c:if>
+													<c:if test="${orderInfoList.size() == 0 }">												
+														<option class="option">${index}</option>
+													</c:if>                  
 												</c:forEach>
 											</select>
 										</li>
-										<c:forEach items="${orderInfoList}" var="orderInfo">
-											<c:if test="${orderInfo.product_num == product.product_num}">
-												<li class="row5">
-													<input type="hidden" name="order_cost" value="${orderInfo.order_cost}">
-													<span>${orderInfo.order_cost}원</span>
-												</li>
-											</c:if>
-										</c:forEach>
+										<c:if test="${orderInfoList.contains(product)}">
+											<c:forEach items="${orderInfoList}" var="orderInfo">
+												<c:if test="${orderInfo.product_num == product.product_num}">
+													<li class="row5">
+														<input type="hidden" name="order_cost" value="${orderInfo.order_cost}">
+														<span>${orderInfo.order_cost} 원</span>
+													</li>
+												</c:if>
+											</c:forEach>
+										</c:if>
+										<c:if test="${!orderInfoList.contains(product)}">
+											<li class="row5">
+												<input type="hidden" name="order_cost" value="${orderInfo.order_cost}">
+												<span>${product.product_cost} 원</span>
+											</li>
+										</c:if>
 										<li class="row6">무료</li>
 										<li class="row7">
 											<input type="hidden" name="product_num" value="${product.product_num}">
@@ -279,27 +263,20 @@
 							
 						</c:forEach>
 						<div class="bottom">
-							<div class="cal">
-								<span class="text">상품 수량 </span><span class="amount-value">0</span><span class="text"> 개</span><img src="<%=request.getContextPath()%>/resources/img/icon_sum.gif" alt="">
-								<span class="text">상품 금액 </span><span class="cost-value">0</span><span class="text"> 원</span><img src="<%=request.getContextPath()%>/resources/img/icon_sum.gif" alt="">
-								<span class="text" class="value">배송비 0 원</span>
-							</div>
-							<div class="sum">
-								<span class="text">결제 금액 </span>
-								<span class="value">598,000</span><span class="text"> 원</span>
-							</div>
+							
 						</div>
 					</div>
 				</div>
 				<div class="btn-area">
 					<img src="<%=request.getContextPath()%>/resources/img/btn_order (1).gif" alt="">
-					<button type="submit" class="account"><img src="<%=request.getContextPath()%>/resources/img/btn_select_order (1).gif" alt=""></button>
+					<button type="submit" class="account-btn"><img src="<%=request.getContextPath()%>/resources/img/btn_select_order (1).gif" alt=""></button>
 					<a href="#"><img src="<%=request.getContextPath()%>/resources/img/btn_shopping (1).gif" alt=""></a>			
 				</div>
 			</form>
 		</div>
 	</div>
 	
+	${orderInfoList.contains(productList.get(1)) }
 	<script>
 		$('.delete-btn').click(function(){
 	    	var product_num = $(this).siblings('input').val();
@@ -326,8 +303,9 @@
 	    	var product_cost = $(this).siblings('input[name=product_cost]').val();
 	    	var sum = amount * product_cost;
 	    	
-	  		var obj = $(this)
-	    	var data = { 'order_amount' : amount, 'product_num' : product_num};	
+	  		var obj = $(this);
+	  		obj.parent().siblings('.row1').find('.check-box').prop('checked',true);
+	    	var data = {'order_amount' : amount, 'product_num' : product_num, 'isDel':'N'};	
 	    	$.ajax({
 				url : '<%=request.getContextPath()%>/orderInfo',
 				type : 'post',
@@ -342,18 +320,51 @@
 			})
 	    })
 	    
+		
 	    $('.check-box').click(function(){
+	    	var check_state = $(this).prop("checked");
 	    	var product_num = $(this).parent().siblings('.row4').find('input[name=product_num]').val();
-	    	var amount = $(this).parent().siblings('.row4').find('.select-btn').val();
-	    	var order_cost = $(this).parent().siblings('.row5').find('input[name=order_cost]').val();
+	    	var order_amount = $(this).parent().siblings('.row4').find('select[name=order_amount]').val();
+	    	 
+	    		if(check_state == true){
+	    			var data = {'order_amount' : order_amount, 'product_num' : product_num, 'isDel':'N'};
+	    	    	$.ajax({
+	    				url : '<%=request.getContextPath()%>/orderInfo',
+	    				type : 'post',
+	    				data : data,
+	    				success : function(data){
+	    					
+	    				},
+	    				error : function(){
+	    					console.log('실패');
+	    				}
+	    			})
+	    		}else{
+	    			var data2 = {'product_num' : product_num, 'isDel':'Y'};
+	    	    	$.ajax({
+	    				url : '<%=request.getContextPath()%>/deleteOrderInfo',
+	    				type : 'post',
+	    				data : data2,
+	    				success : function(data){
+	    					
+	    				},
+	    				error : function(){
+	    					console.log('실패');
+	    				}
+	    			})
+	    		}
+
 	    	
-	    	var sum_amount = amount;
-	    	var sum_cost = order_cost;
-	    	
-	    	$('.amount-value').html(sum_amount);
-	    	$('.cost-value').html(sum_cost);
-	    	
-	    	
+	    })
+	    
+	    $('.account-btn').click(function(e){
+
+	    	var num = $('input[name=num]').is(':checked');
+	    	console.log(num);
+	    	if(num == false){
+	    		alert("선택하세요");	    
+	    		return false;
+	    	}
 	    })
 	</script>
 </body>

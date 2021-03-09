@@ -8,8 +8,16 @@ public class UserVo {
 	private int user_age;
 	private String user_phone;
 	private String user_email;
+	private String user_address;
 	private int user_grade = 1;
 	
+	
+	public String getUser_address() {
+		return user_address;
+	}
+	public void setUser_address(String user_address) {
+		this.user_address = user_address;
+	}
 	public String getUser_id() {
 		return user_id;
 	}
@@ -52,12 +60,24 @@ public class UserVo {
 	public void setUser_grade(int user_grade) {
 		this.user_grade = user_grade;
 	}
+	public String getNum1() {
+		String arr[] = user_phone.split("-");
+		return arr[0];
+	}
+	public String getNum2() {
+		String arr[] = user_phone.split("-");
+		return arr[1];
+	}
+	public String getNum3() {
+		String arr[] = user_phone.split("-");
+		return arr[2];
+	}
 	@Override
 	public String toString() {
 		return "UserVo [user_id=" + user_id + ", user_pw=" + user_pw + ", user_name=" + user_name + ", user_age="
-				+ user_age + ", user_phone=" + user_phone + ", user_email=" + user_email + ", user_grade=" + user_grade
-				+ "]";
+				+ user_age + ", user_phone=" + user_phone + ", user_email=" + user_email + ", user_address="
+				+ user_address + ", user_grade=" + user_grade + "]";
 	}
 	
-	
+
 }

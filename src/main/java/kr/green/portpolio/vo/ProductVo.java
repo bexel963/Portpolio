@@ -102,6 +102,35 @@ public class ProductVo {
 				+ ", product_cost=" + product_cost + ", product_registerDate=" + product_registerDate
 				+ ", product_origin=" + product_origin + "]";
 	}
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + product_num;
+		return result;
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass()) {
+			if(obj instanceof OrderVo) {
+				if(((OrderVo) obj).getProduct_num() == this.getProduct_num()) {
+					return true;
+				}
+				else {
+					return false;
+				}
+			}
+			return false;
+		}
+		ProductVo other = (ProductVo) obj;
+		if (product_num != other.product_num)
+			return false;
+		return true;
+	}
 	
 	
 	

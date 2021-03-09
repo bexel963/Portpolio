@@ -34,11 +34,18 @@ public interface ProductService {
 
 	void deleteMyBox(UserVo user, Integer product_num);	// 마이박스 목록 삭제
 
-	void regisOrderInfo(Integer order_amount, ProductVo product, UserVo user);	// 주문정보 등록
+	void regisOrderInfo(Integer order_amount, ProductVo product, UserVo user, String isDel);	// 주문정보 등록
 
 	ArrayList<OrderVo> getOrderInfos(UserVo user);	// 해당 유저에 대한 주문정보들 가져오기
 
 	OrderVo getOrderInfo(int product_num, UserVo user);	// 해당 제품에 대한 주문정보 가져오기
+
+	OrderVo calTotal(ArrayList<OrderVo> orderList);	// 총 금액 계산
+
+	void deleteOrderInfo(UserVo user, Integer product_num);	// 주문정보의 isDel을 Y로 변경
+
+	void deleteOrder(UserVo user, Integer product_num);	// 주문정보 삭제
+
 
 	
 

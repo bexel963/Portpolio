@@ -178,14 +178,17 @@
                     </div>
                 </div>
                 <div class="right">
-                	<c:if test="${user==null}">
+                	<c:if test="${user == null}">
 	                    <a href="<%=request.getContextPath()%>/login" class="login">로그인</a>
 	                    <a href="<%=request.getContextPath()%>/signup" class="signup">회원가입</a>
                     </c:if>
-                    <c:if test="${user!=null}">
+                    <c:if test="${user != null}">
                     	<a href="<%=request.getContextPath()%>/logout" class="logout">로그아웃</a>
                     	<c:if test="${user.user_grade == 0}">
                     		<a href="<%=request.getContextPath()%>/userInfo" class="userInfo">회원정보</a>
+                    	</c:if>
+                    	<c:if test="${user != null && user.user_grade != 0}">
+                    		<a href="<%=request.getContextPath()%>/userInfo" class="userInfo">내정보</a>
                     	</c:if>
                     </c:if>
                     <div class="search-btn"><i class="fas fa-search"></i></div>

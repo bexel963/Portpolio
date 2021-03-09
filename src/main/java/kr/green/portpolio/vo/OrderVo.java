@@ -5,13 +5,48 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class OrderVo {
-	
+	private String user_id;
 	private int order_num;
 	private int order_amount;
 	private int order_cost;
 	private int product_num;
+	private String payment_completion;
 	private Date order_date;
+	private int total_amount;
+	private int total_cost;
+	private String isDel;
 	
+	
+	public String getUser_id() {
+		return user_id;
+	}
+	public void setUser_id(String user_id) {
+		this.user_id = user_id;
+	}
+	public String getIsDel() {
+		return isDel;
+	}
+	public void setIsDel(String isDel) {
+		this.isDel = isDel;
+	}
+	public int getTotal_amount() {
+		return total_amount;
+	}
+	public void setTotal_amount(int total_amount) {
+		this.total_amount = total_amount;
+	}
+	public int getTotal_cost() {
+		return total_cost;
+	}
+	public void setTotal_cost(int total_cost) {
+		this.total_cost = total_cost;
+	}
+	public String getPayment_completion() {
+		return payment_completion;
+	}
+	public void setPayment_completion(String payment_completion) {
+		this.payment_completion = payment_completion;
+	}
 	public int getOrder_num() {
 		return order_num;
 	}
@@ -53,7 +88,38 @@ public class OrderVo {
 	@Override
 	public String toString() {
 		return "OrderVo [order_num=" + order_num + ", order_amount=" + order_amount + ", order_cost=" + order_cost
-				+ ", product_num=" + product_num + ", order_date=" + order_date + "]";
+				+ ", product_num=" + product_num + ", payment_completion=" + payment_completion + ", order_date="
+				+ order_date + ", total_amount=" + total_amount + ", total_cost=" + total_cost + "]";
 	}
-
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + product_num;
+		return result;
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass()) {
+			if(obj instanceof ProductVo) {
+				if(((ProductVo) obj).getProduct_num() == this.getProduct_num()) {
+					return true;
+				}else {
+					return false;
+				}
+			}
+			return false;
+			
+		}
+			
+		OrderVo other = (OrderVo) obj;
+		if (product_num != other.product_num)
+			return false;
+		return true;
+	}
+	
 }

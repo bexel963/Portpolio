@@ -117,9 +117,7 @@ public class ProductController {
 		
 		productService.deleteProduct(product_num);
 		
-		mv.setViewName("redirect:"
-				+ ""
-				+ "");
+		mv.setViewName("redirect:/");
 	    return mv;
 	}
 	
@@ -141,7 +139,6 @@ public class ProductController {
 		mv.addObject("fileList", fileList);
 		mv.addObject("orderInfoList", orderInfoList);
 		mv.addObject("myBoxList", myBoxList);
-		
 		mv.setViewName("/menu/myBox");
 	    return mv;
 	}
@@ -171,39 +168,54 @@ public class ProductController {
 		
 		UserVo user = userService.getUser(request);
 		productService.deleteMyBox(user, product_num);
-		
+		productService.deleteOrder(user, product_num);
 	    return "success";
 	}
 	
 	/* 주문정보 POST */
 	@RequestMapping(value="/orderInfo", method = RequestMethod.POST)
 	@ResponseBody
-	public String orderInfoPost(Integer order_amount, Integer product_num, HttpServletRequest request){
+	public String orderInfoPost(Integer order_amount, Integer product_num, String isDel, HttpServletRequest request){
 		
 		UserVo user = userService.getUser(request);
 		ProductVo product = productService.getProduct(product_num);
-		productService.regisOrderInfo(order_amount, product, user);
+		productService.regisOrderInfo(order_amount, product, user, isDel);
+
 	    return "success";
 	}
+	
+	/* 주문정보 POST */
+	@RequestMapping(value="/deleteOrderInfo", method = RequestMethod.POST)
+	@ResponseBody
+	public String deleteOrderInfoPost(Integer product_num, HttpServletRequest request){
+		
+		UserVo user = userService.getUser(request);
+		productService.deleteOrderInfo(user, product_num);
+	
+	    return "success";
+	}
+	
+	
 	
 	/* 결제창 POST */
 	@RequestMapping(value= "/productPayment", method = RequestMethod.GET)
 	public ModelAndView productPaymentGet(Locale locale, ModelAndView mv, Integer[] num, HttpServletRequest request){
 		
 		UserVo user = userService.getUser(request);
+
 		ArrayList<ProductVo> productList = new ArrayList<ProductVo>();
 		ArrayList<FileVo> fileList = new ArrayList<FileVo>();
 		ArrayList<OrderVo> orderList = new ArrayList<OrderVo>();
 		for(int product_num : num) {
+			orderList.add(productService.getOrderInfo(product_num, user));
 			productList.add(productService.getProduct(product_num));
-		}
-		for(int product_num : num) {
 			fileList.add(productService.getMainFile(product_num));
 		}
-		for(int product_num : num) {
-			orderList.add(productService.getOrderInfo(product_num, user));
-		}
 		
+		
+		OrderVo order = productService.calTotal(orderList);
+		
+		mv.addObject("order", order);
 		mv.addObject("productList", productList);
 		mv.addObject("fileList", fileList);
 		mv.addObject("orderInfoList", orderList);

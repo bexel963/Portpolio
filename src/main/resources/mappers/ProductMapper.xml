@@ -52,20 +52,34 @@
 	<delete id="deleteMyBox">
 		delete from portpolio.myBox where product_num = #{product_num} and user_id = #{user.user_id}
 	</delete>
+	<delete id="deleteOrder">
+		delete from portpolio.order where product_num = #{product_num} and user_id = #{user.user_id}
+	</delete>
 	
 	<insert id="regisOrderInfo">
 		insert into portpolio.order(order_amount, product_num, order_cost, user_id) values(#{order_amount}, #{product.product_num}, #{order_cost}, #{user.user_id})
 	</insert>
+	
+	<update id="deleteOrderInfo">
+		update portpolio.order set isDel='Y' where user_id = #{user.user_id} and product_num = #{product_num}
+	</update>
+	
 	
 	<select id="getOrderInfos" resultType="kr.green.portpolio.vo.OrderVo">
 		select * from portpolio.order where user_id = #{user.user_id}
 	</select>
 	
 	<update id="modifyOrderInfo">
-		update portpolio.order set order_amount=#{order_amount}, order_cost=#{order_cost} where product_num = #{product.product_num}
+		update portpolio.order set order_amount=#{order_amount}, order_cost=#{order_cost}, isDel = #{isDel} where product_num = #{product.product_num} and user_id = #{user_id}
 	</update>
 	
 	<select id="getOrderInfo" resultType="kr.green.portpolio.vo.OrderVo">
-		select * from portpolio.order where product_num = #{product_num} and user_id = #{user.user_id}
+		select * from portpolio.order where product_num = #{product_num} and user_id = #{user.user_id} and isDel = 'N'
 	</select>
+	
+	<!--  	insert한 후 기본키 가져오기
+	<insert id="registerBoard" useGeneratedKeys="true" keyProperty="board.num" parameterType="kr.green.spring.vo.BoardVo"> 
+		insert into board(title, writer, content) values(#{board.title}, #{board.writer}, #{board.content})
+	</insert>
+	-->
 </mapper>

@@ -78,14 +78,14 @@
 			height: 40px;
 			border-bottom: 1px solid #dedede;
 			box-sizing: border-box9;
-			padding: 10px 0 0 10px;
+			padding: 10px 0 0 30px;
 			text-align: center;
 		}
 		.product-box .table .middle{
 			height: 120px;
 			border-bottom: 1px solid #dedede;
 			box-sizing: border-box9;
-			padding: 0px 0 0 10px;
+			padding: 0px 0 0 30px;
 			text-align: center;
 		}.product-box .table .middle .row1{
 			padding-top: 47px;
@@ -120,14 +120,15 @@
 			width: 50px;
 		}
 		.product-box .table .row2{
-			width: 500px;
+			width: 550px;
+			padding-left: 30px;
 		}
 		.product-box .table .row3,
 		.product-box .table .row4,
 		.product-box .table .row5,
 		.product-box .table .row6,
 		.product-box .table .row7{
-			width: 100px;
+			width: 90px;
 		}
 		.product-box .img-box{
 			width: 90px;
@@ -311,6 +312,12 @@
 			padding-left: 300px;
 			cursor: pointer;
 		}
+		.check{
+			cursor: pointer;
+		}
+		.hidden{
+			display: none;
+		}
     </style>
 </head>
 <body>
@@ -337,7 +344,7 @@
 				<div class="table">
 					<div class="top">				
 						<ul>
-							<li class="row1"><input type="checkbox"></li>
+							<li class="row1">주문번호</li>
 							<li class="row2">상품명/옵션</li>
 							<li class="row3">판매가격</li>
 							<li class="row4">수량</li>
@@ -347,8 +354,10 @@
 					</div>
 					<c:forEach items="${productList}" var="product">
 							<div class="middle">
-								<ul>									
-									<li class="row1"><input class="check-box" type="checkbox"></li>									
+								<ul>		
+									<c:forEach items="${orderInfoList}" var="orderInfo">	
+										<c:if test="${orderInfo.product_num == product.product_num && orderInfo.user_id == user.user_id}"><li class="row1">${orderInfo.order_num}</li></c:if>													
+									</c:forEach> 
 									<li class="row2">
 										<c:forEach items="${fileList}" var="file">
 											<c:if test="${product.product_num == file.product_num}">
@@ -382,11 +391,11 @@
 					<div class="payment-info">
 						<p class="p1">
 							<strong>총 상품 수량</strong>
-							<span class="total">1</span>
+							<span class="total">${order.total_amount}</span>
 							<strong>개</strong>
 							<img src="<%=request.getContextPath()%>/resources/img/ico_sum2.png">
 							<strong>총 상품 금액</strong>
-							<span class="total">299,000</span>
+							<span class="total">${order.total_cost}</span>
 							<strong>원</strong>
 							<img src="<%=request.getContextPath()%>/resources/img/ico_sum2.png">
 							<strong>총 배송비</strong>
@@ -395,34 +404,44 @@
 						</p>
 						<p class="p2">
 							<strong>총 주문 금액</strong>
-							<span class="total">299,000</span>
+							<span class="total">${order.total_cost}</span>
 							<strong>원</strong>
 						</p>
 					</div>
 					<h4 class="delivery-title">배송지 정보</h4>
 					<div class="delivery-info">
+						<input type="hidden" name="user_name" value="${user.user_name}" >
+						<input type="hidden" name="user_phone" value="${user.user_phone}" >
+						<input type="hidden" name="user_address" value="${user.user_address}" >
 						<table>
 							<tr>
 								<th class="tap">배송지 선택</th>
-								<td class="input1"><input type="checkbox" class="check"> 회원주소 <input type="checkbox" class="check"> 새로운주소</td>
+								<td class="input1"><input type="checkbox" name="check" class="check_user"> 회원주소</td>
 							</tr>
 							<tr>
 								<th class="tap">수령인</th>
-								<td class="input">
+								<td class="input0 hidden">
+									<input type="text" style="width:200px">
+								</td>
+								<td class="input9 user_name">
 									<input type="text" style="width:200px">
 								</td>
 							</tr>
 							<tr>
 								<th class="tap">전화번호</th>
-								<td class="input">
-									<input type="text" style="width:80px"><img class="bar" src="<%=request.getContextPath()%>/resources/img/txt_dash.gif">
-									<input type="text" style="width:80px"><img class="bar" src="<%=request.getContextPath()%>/resources/img/txt_dash.gif">
-									<input type="text" style="width:80px"> 예) 010-1234-5778
+								<td class="input0 hidden">
+									<input type="text" style="width:200px">
+								</td>
+								<td class="input9 user_phone">
+									<input type="text" style="width:200px"> 예) 010-1234-5778
 								</td>
 							</tr>
 							<tr>
 								<th class="tap">주소</th>
-								<td class="input">
+								<td class="input0 hidden">
+									<input type="text" style="width:200px">
+								</td>
+								<td class="input9 user_address">
 									<input type="text" style="width:400px"> 예) 서울 동대문구 청계천로 539
 								</td>
 							</tr>
@@ -451,7 +470,7 @@
 					</div>
 				</div>
 				<div class="btn-box1">
-					<img src="<%=request.getContextPath()%>/resources/img/btn_gocart_step.gif" alt="">
+					<a href="<%=request.getContextPath()%>/myBox"><img src="<%=request.getContextPath()%>/resources/img/btn_gocart_step.gif" alt=""></a>
 					<img src="<%=request.getContextPath()%>/resources/img/btn_payment.gif" alt="">
 				</div>
 			</div>
@@ -459,6 +478,21 @@
 	</div>
 	<script>
 		
+		$('.check_user').click(function(){
+			var check_state = $(this).prop("checked");
+			console.log(check_state);
+			if(check_state == 'false'){
+				$(this).parent().siblings().find('.class0').removeClass('.hidden');
+				$(this).parent().siblings().find('.class9').addClass('.hidden');
+			}
+			var name = $('input[name=user_name]').val();
+			var phone = $('input[name=user_phone]').val();
+			var address = $('input[name=user_address]').val();
+			
+			$('.user_phone').html(phone);
+			$('.user_name').html(name);
+			$('.user_address').html(address);
+		})
 	</script>
 </body>
 </html>
