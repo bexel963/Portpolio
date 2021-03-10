@@ -416,33 +416,33 @@
 						<table>
 							<tr>
 								<th class="tap">배송지 선택</th>
-								<td class="input1"><input type="checkbox" name="check" class="check_user"> 회원주소</td>
+								<td class="input1"><input type="checkbox" name="check" class="check_user"> 새주소 입력</td>
 							</tr>
 							<tr>
 								<th class="tap">수령인</th>
-								<td class="input0 hidden">
+								<td class="empty hidden">
 									<input type="text" style="width:200px">
 								</td>
-								<td class="input9 user_name">
-									<input type="text" style="width:200px">
+								<td class="user1 user_name">
+									${user.user_name}
 								</td>
 							</tr>
 							<tr>
 								<th class="tap">전화번호</th>
-								<td class="input0 hidden">
-									<input type="text" style="width:200px">
+								<td class="empty hidden">
+									<input type="text" style="width:200px" placeholder=" 예) 010-1234-5778">
 								</td>
-								<td class="input9 user_phone">
-									<input type="text" style="width:200px"> 예) 010-1234-5778
+								<td class="user1 user_phone">
+									${user.user_phone}
 								</td>
 							</tr>
 							<tr>
 								<th class="tap">주소</th>
-								<td class="input0 hidden">
-									<input type="text" style="width:200px">
+								<td class="empty hidden">
+									<input type="text" style="width:200px" placeholder="예) 서울 동대문구 청계천로 539">
 								</td>
-								<td class="input9 user_address">
-									<input type="text" style="width:400px"> 예) 서울 동대문구 청계천로 539
+								<td class="user1 user_address">
+									${user.user_address} 
 								</td>
 							</tr>
 							<tr>
@@ -480,18 +480,13 @@
 		
 		$('.check_user').click(function(){
 			var check_state = $(this).prop("checked");
-			console.log(check_state);
-			if(check_state == 'false'){
-				$(this).parent().siblings().find('.class0').removeClass('.hidden');
-				$(this).parent().siblings().find('.class9').addClass('.hidden');
-			}
-			var name = $('input[name=user_name]').val();
-			var phone = $('input[name=user_phone]').val();
-			var address = $('input[name=user_address]').val();
-			
-			$('.user_phone').html(phone);
-			$('.user_name').html(name);
-			$('.user_address').html(address);
+			if(!check_state == false){
+				$(this).parents('table').find('.empty').removeClass('hidden');
+				$(this).parents('table').find('.user1').addClass('hidden')
+			}else{
+				$(this).parents('table').find('.empty').addClass('hidden')
+				$(this).parents('table').find('.user1').removeClass('hidden')
+			}	
 		})
 	</script>
 </body>

@@ -197,7 +197,7 @@ public class ProductController {
 	
 	
 	
-	/* 결제창 POST */
+	/* 결제창 GET */
 	@RequestMapping(value= "/productPayment", method = RequestMethod.GET)
 	public ModelAndView productPaymentGet(Locale locale, ModelAndView mv, Integer[] num, HttpServletRequest request){
 		

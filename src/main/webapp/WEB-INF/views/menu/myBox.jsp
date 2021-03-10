@@ -358,11 +358,9 @@
 	    })
 	    
 	    $('.account-btn').click(function(e){
-
-	    	var num = $('input[name=num]').is(':checked');
-	    	console.log(num);
-	    	if(num == false){
-	    		alert("선택하세요");	    
+	    	var check = $('input[name=num]').is(':checked');
+	    	if(check == false){
+	    		alert("상품을 선택하세요");	    
 	    		return false;
 	    	}
 	    })
