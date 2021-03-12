@@ -306,6 +306,8 @@
 		}
 		.choice div:hover{
 			background-color: rgb(81,104,238);
+			color: black;
+			font-weight: bold;
 			cursor: pointer;
 		}
 		.btn-box1{
@@ -317,6 +319,73 @@
 		}
 		.hidden{
 			display: none;
+		}
+		.hidden-card{
+			width: 100%;
+			margin-top: 20px;
+			position: relative;
+		}
+		.hidden-card .select-box{
+			width: 100%;
+			height: 50px;
+			border-top: 1px solid #bbbbbb;
+			padding: 12px 0 0 70px;
+		}
+		.hidden-card .select-box:nth-of-type(2){
+			border-top: 1px solid #bbbbbb;
+			border-bottom: 1px solid #bbbbbb;
+			margin-bottom: 40px;
+		}
+		.hidden-card .select-box span{
+			margin-right: 50px;
+			color: #767676;
+		}
+		.hidden-card .select-box select{
+			width: 200px;
+			height: 25px;
+		}
+		.hidden-card .agreement-all,
+		.hidden-card .agreement-detail{
+			
+			width: 100%;
+			height: 100px;
+			background-color: f6f6f6;
+			border: 1px solid #e6e6e6;
+			font-size: 15px;
+			padding: 20px 0 0 20px;
+		}
+		.hidden-card .check{
+			font-weight: bold;
+		}
+		.hidden-card .agreement-all .fa-angle-down,
+		.hidden-card .agreement-detail .fa-angle-up{
+			position: absolute;
+			right: 40;
+			top: 290;
+			font-size: 40px;
+			cursor: pointer;
+		}
+		.hidden-card .agreement-all div{
+			margin-bottom: 10px;
+			font-size: 15px;
+		}
+		.hidden-card .agreement-detail{
+			height: 230px;
+		}
+		.hidden-card .agreement-detail div:nth-of-type(1){
+			font-size: 15px;
+		}
+		.hidden-card .agreement-detail div:nth-of-type(2){
+			margin-top: 20px;
+		}
+		.hidden-card .agreement-detail div{
+			margin-bottom: 10px;
+			font-size: 12px;
+		}
+		.choice div.selected-choice{
+			background-color: rgb(81,104,238);
+			color: black;
+			font-weight: bold;
 		}
     </style>
 </head>
@@ -467,17 +536,64 @@
 							<div class="virtual-account">가상계좌</div>
 							<div class="account">실시간계좌이체</div>
 						</div>
+						<div class="cpva hidden-card hidden">
+							<p>
+								신용카드 결제 신청시 승인 진행에 다소 시간이 소요될 수 있으므로 ‘중지’, ‘새로고침’을 누르지 마시고 결과 화면이 나타날때까지 기다려 주십시오.<br>
+								결제하기 버튼 클릭시 결제창이 나타나지 않는 경우나 ISP/안전결제 모듈이 설치 되지 않을 경우 수동으로 플러그인을 설치하십시요.
+							</p><br>
+							<h5 style="font-weight:bold">카드선택</h5>
+							<div class="select-box">
+								<span>카드종류</span>
+								<select name="card" >
+									<option>=== 카드 선택 ===</option>
+									<option>BC카드</option>
+									<option>KB카드</option>
+									<option>NH카드</option>
+									<option>롯데카드</option>
+									<option>삼성카드</option>
+									<option>신한카드</option>
+									<option>우리카드</option>
+									<option>하나카드</option>
+									<option>현대카드</option>
+								</select>
+							</div>
+							<div class="select-box">
+								<span>할부선택</span>
+								<select name="terms">
+									<option>일시불</option>
+									<c:forEach begin="2" end="12" var="index">
+									<option>${index}개월</option>
+									</c:forEach>
+								</select>
+							</div>
+							<div class="agreement-all">
+								<div>주문 상품정보 및 결제대행 서비스 이용약관에 모두 동의하십니까?</div>
+								<input class="check-all" type="checkbox"> <span class="check">모두동의</span>
+								<i class="fas fa-angle-down"></i>
+							</div>
+							<div class="agreement-detail hidden">
+								<div>주문 상품정보 및 결제대행 서비스 이용약관에 모두 동의하십니까?</div>
+								<input class="check-all" type="checkbox"> <span class="check">모두동의</span>
+								<div><input class="check-detail" type="checkbox"> 주문 및 배송처리를 위한 개인정보 공유에 동의합니다.</div>
+								<div><input class="check-detail" type="checkbox"> 결제대행 서비스의 전자금융거래 기본약관에 동의합니다.</div>
+								<div><input class="check-detail" type="checkbox"> 결제대행 서비스의 개인정보 수집 및 이용에 동의합니다.</div>
+								<div><input class="check-detail" type="checkbox"> 결제대행 서비스의 개인정보 제공 및 위탁에 동의합니다.</div>
+								<i class="fas fa-angle-up"></i>
+							</div>
+						</div>
+						<div class="cpva hidden-phone hidden">폰결제</div>
+						<div class="cpva hidden-virtual-account hidden">가상계좌</div>
+						<div class="cpva hidden-account hidden">실시간계좌이체</div>
 					</div>
 				</div>
 				<div class="btn-box1">
 					<a href="<%=request.getContextPath()%>/myBox"><img src="<%=request.getContextPath()%>/resources/img/btn_gocart_step.gif" alt=""></a>
-					<img src="<%=request.getContextPath()%>/resources/img/btn_payment.gif" alt="">
+					<img class="payment-btn" src="<%=request.getContextPath()%>/resources/img/btn_payment.gif" alt="">
 				</div>
 			</div>
 		</div>
 	</div>
 	<script>
-		
 		$('.check_user').click(function(){
 			var check_state = $(this).prop("checked");
 			if(!check_state == false){
@@ -487,6 +603,54 @@
 				$(this).parents('table').find('.empty').addClass('hidden')
 				$(this).parents('table').find('.user1').removeClass('hidden')
 			}	
+		})
+		/*
+		$('.choice .card').click(function(){
+			$('.hidden-card').removeClass('hidden');
+			$('.choice div').removeClass('selected-choice')
+			$(this).addClass('selected-choice');
+		})
+		*/
+		
+		$('.choice div').click(function(){
+			if($(this).hasClass('card')){	
+				$('.cpva').addClass('hidden');
+				$('.hidden-card').removeClass('hidden');
+			}else if($(this).hasClass('phone')){
+				$('.cpva').addClass('hidden');
+				$('.hidden-phone').removeClass('hidden');
+			}else if($(this).hasClass('virtual-account')){
+				$('.cpva').addClass('hidden');
+				$('.hidden-virtual-account').removeClass('hidden');
+			}else if($(this).hasClass('account')){
+				$('.cpva').addClass('hidden');
+				$('.hidden-account').removeClass('hidden');
+			}
+			$('.choice div').removeClass('selected-choice')
+			$(this).addClass('selected-choice');
+		})
+		
+		$('.fa-angle-down').click(function(){
+			$('.agreement-detail').removeClass('hidden');
+			$('.agreement-all').addClass('hidden');
+		})
+		
+		$('.fa-angle-up').click(function(){
+			$('.agreement-all').removeClass('hidden');
+			$('.agreement-detail').addClass('hidden');
+		})
+		
+		$('.agreement-detail .check-all').click(function(){
+			var check_state = $(this).prop('checked'); 
+			if(check_state == true){
+				$('.check-detail').prop('checked',true);
+			}else{
+				$('.check-detail').prop('checked',false);
+			}
+		})
+		
+		$('.payment-btn').click(function(){
+			
 		})
 	</script>
 </body>
