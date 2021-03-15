@@ -2,9 +2,11 @@ package kr.green.portpolio.service;
 
 import java.util.ArrayList;
 
+import kr.green.portpolio.vo.DeliveryVo;
 import kr.green.portpolio.vo.FileVo;
 import kr.green.portpolio.vo.MyBoxVo;
 import kr.green.portpolio.vo.OrderVo;
+import kr.green.portpolio.vo.PaymentVo;
 import kr.green.portpolio.vo.ProductVo;
 import kr.green.portpolio.vo.UserVo;
 
@@ -45,6 +47,12 @@ public interface ProductService {
 	void deleteOrderInfo(UserVo user, Integer product_num);	// 주문정보의 isDel을 Y로 변경
 
 	void deleteOrder(UserVo user, Integer product_num);	// 주문정보 삭제
+
+	void regisPayment(UserVo user, PaymentVo payment);	// 결제정보 등록
+
+	void regisDelivery(int payment_num, DeliveryVo delivery);	// 배달정보 등록
+
+	void regisPresentPayment(int payment_num, int order_num);	// 결제번호-주문번호 보여주는 테이블에 정보 등록
 
 
 	

@@ -326,35 +326,34 @@
 	    	var product_num = $(this).parent().siblings('.row4').find('input[name=product_num]').val();
 	    	var order_amount = $(this).parent().siblings('.row4').find('select[name=order_amount]').val();
 	    	 
-	    		if(check_state == true){
-	    			var data = {'order_amount' : order_amount, 'product_num' : product_num, 'isDel':'N'};
-	    	    	$.ajax({
-	    				url : '<%=request.getContextPath()%>/orderInfo',
-	    				type : 'post',
-	    				data : data,
-	    				success : function(data){
-	    					
-	    				},
-	    				error : function(){
-	    					console.log('실패');
-	    				}
-	    			})
-	    		}else{
-	    			var data2 = {'product_num' : product_num, 'isDel':'Y'};
-	    	    	$.ajax({
-	    				url : '<%=request.getContextPath()%>/deleteOrderInfo',
-	    				type : 'post',
-	    				data : data2,
-	    				success : function(data){
-	    					
-	    				},
-	    				error : function(){
-	    					console.log('실패');
-	    				}
-	    			})
-	    		}
+    		if(check_state == true){
+    			var data = {'order_amount' : order_amount, 'product_num' : product_num, 'isDel':'N'};
+    	    	$.ajax({
+    				url : '<%=request.getContextPath()%>/orderInfo',
+    				type : 'post',
+    				data : data,
+    				success : function(data){
+    					
+    				},
+    				error : function(){
+    					console.log('실패');
+    				}
+    			})
+    		}else{
+    			var data2 = {'product_num' : product_num, 'isDel':'Y'};
+    	    	$.ajax({
+    				url : '<%=request.getContextPath()%>/deleteOrderInfo',
+    				type : 'post',
+    				data : data2,
+    				success : function(data){
+    					
+    				},
+    				error : function(){
+    					console.log('실패');
+    				}
+    			})
+    		}
 
-	    	
 	    })
 	    
 	    $('.account-btn').click(function(e){

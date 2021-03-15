@@ -17,9 +17,11 @@ import org.springframework.web.servlet.ModelAndView;
 import kr.green.portpolio.service.ProductService;
 import kr.green.portpolio.service.UserService;
 import kr.green.portpolio.utils.UploadFileUtils;
+import kr.green.portpolio.vo.DeliveryVo;
 import kr.green.portpolio.vo.FileVo;
 import kr.green.portpolio.vo.MyBoxVo;
 import kr.green.portpolio.vo.OrderVo;
+import kr.green.portpolio.vo.PaymentVo;
 import kr.green.portpolio.vo.ProductVo;
 import kr.green.portpolio.vo.UserVo;
 //import kr.green.portpolio.utils.UploadFileUtils;
@@ -184,7 +186,7 @@ public class ProductController {
 	    return "success";
 	}
 	
-	/* 주문정보 POST */
+	/* 주문상품 삭제 POST */
 	@RequestMapping(value="/deleteOrderInfo", method = RequestMethod.POST)
 	@ResponseBody
 	public String deleteOrderInfoPost(Integer product_num, HttpServletRequest request){
@@ -194,7 +196,6 @@ public class ProductController {
 	
 	    return "success";
 	}
-	
 	
 	
 	/* 결제창 GET */
@@ -211,8 +212,7 @@ public class ProductController {
 			productList.add(productService.getProduct(product_num));
 			fileList.add(productService.getMainFile(product_num));
 		}
-		
-		
+
 		OrderVo order = productService.calTotal(orderList);
 		
 		mv.addObject("order", order);
@@ -220,6 +220,21 @@ public class ProductController {
 		mv.addObject("fileList", fileList);
 		mv.addObject("orderInfoList", orderList);
 		mv.setViewName("/menu/productPayment");
+	    return mv;
+	}
+	
+	/* 결제 POST */
+	@RequestMapping(value= "/payment", method = RequestMethod.POST)
+	public ModelAndView paymentGet(Locale locale, ModelAndView mv, HttpServletRequest request, PaymentVo payment, DeliveryVo delivery, Integer[] order_num){
+	
+		UserVo user = userService.getUser(request);
+		productService.regisPayment(user, payment);
+		productService.regisDelivery(payment.getPayment_num(), delivery);
+		for(int num : order_num) {
+			productService.regisPresentPayment(payment.getPayment_num(), num);			
+		}
+		
+		mv.setViewName("/menu/productComplete");
 	    return mv;
 	}
 }

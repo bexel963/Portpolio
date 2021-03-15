@@ -5,7 +5,6 @@ public class PaymentVo {
 	private int payment_num;
 	private String payment_way;
 	private int payment_cost;
-	private int order_num;
 	private String user_id;
 	
 	public int getPayment_num() {
@@ -26,12 +25,6 @@ public class PaymentVo {
 	public void setPayment_cost(int payment_cost) {
 		this.payment_cost = payment_cost;
 	}
-	public int getOrder_num() {
-		return order_num;
-	}
-	public void setOrder_num(int order_num) {
-		this.order_num = order_num;
-	}
 	public String getUser_id() {
 		return user_id;
 	}
@@ -41,8 +34,9 @@ public class PaymentVo {
 	@Override
 	public String toString() {
 		return "PaymentVo [payment_num=" + payment_num + ", payment_way=" + payment_way + ", payment_cost="
-				+ payment_cost + ", order_num=" + order_num + ", user_id=" + user_id + "]";
+				+ payment_cost + ", user_id=" + user_id + "]";
 	}
+
 	
 	
 }

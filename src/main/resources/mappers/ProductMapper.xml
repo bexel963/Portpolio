@@ -77,9 +77,15 @@
 		select * from portpolio.order where product_num = #{product_num} and user_id = #{user.user_id} and isDel = 'N'
 	</select>
 	
-	<!--  	insert한 후 기본키 가져오기
-	<insert id="registerBoard" useGeneratedKeys="true" keyProperty="board.num" parameterType="kr.green.spring.vo.BoardVo"> 
-		insert into board(title, writer, content) values(#{board.title}, #{board.writer}, #{board.content})
+	<insert id="regisPayment" useGeneratedKeys="true" keyProperty="payment.payment_num">
+		insert into portpolio.payment(payment_way, payment_cost, user_id) values(#{payment.payment_way}, #{payment.payment_cost}, #{user.user_id})
 	</insert>
-	-->
+	
+	<insert id="regisDelivery">
+		insert into portpolio.delivery(payment_num, recipient, delivery_address, demand) values(#{payment_num}, #{delivery.recipient}, #{delivery.delivery_address}, #{delivery.demand})
+	</insert>
+	
+	<insert id="regisPresentPayment">
+		insert into portpolio.paymentpresent(payment_num, order_num) values(#{payment_num}, #{order_num})
+	</insert>
 </mapper>

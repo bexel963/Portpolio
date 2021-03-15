@@ -6,9 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kr.green.portpolio.dao.ProductDao;
+import kr.green.portpolio.vo.DeliveryVo;
 import kr.green.portpolio.vo.FileVo;
 import kr.green.portpolio.vo.MyBoxVo;
 import kr.green.portpolio.vo.OrderVo;
+import kr.green.portpolio.vo.PaymentVo;
 import kr.green.portpolio.vo.ProductVo;
 import kr.green.portpolio.vo.UserVo;
 
@@ -150,6 +152,20 @@ public class ProductServiceImp implements ProductService {
 		productDao.deleteOrder(user, product_num);
 	}
 
-	
+	@Override
+	public void regisPayment(UserVo user, PaymentVo payment) {
+		productDao.regisPayment(user, payment);
+	}
+
+	@Override
+	public void regisDelivery(int payment_num, DeliveryVo delivery) {
+		productDao.regisDelivery(payment_num, delivery);			
+	}
+
+	@Override
+	public void regisPresentPayment(int payment_num, int order_num) {
+		productDao.regisPresentPayment(payment_num, order_num);
+	}
+
 
 }
