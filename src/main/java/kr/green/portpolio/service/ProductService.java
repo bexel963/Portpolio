@@ -41,6 +41,8 @@ public interface ProductService {
 	ArrayList<OrderVo> getOrderInfos(UserVo user);	// 해당 유저에 대한 주문정보들 가져오기
 
 	OrderVo getOrderInfo(int product_num, UserVo user);	// 해당 제품에 대한 주문정보 가져오기
+	
+	OrderVo getOrderInfo2(Integer order_num);	// 해당 주문번호에 대한 주문정보 가져오기
 
 	OrderVo calTotal(ArrayList<OrderVo> orderList);	// 총 금액 계산
 
@@ -53,6 +55,10 @@ public interface ProductService {
 	void regisDelivery(int payment_num, DeliveryVo delivery);	// 배달정보 등록
 
 	void regisPresentPayment(int payment_num, int order_num);	// 결제번호-주문번호 보여주는 테이블에 정보 등록
+
+	void modifyPaymentCompletion(UserVo user, int order_num);	// 결제하면 주문내역에 결제 완료됨을 표시
+
+	
 
 
 	

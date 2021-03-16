@@ -76,7 +76,7 @@
 		}
 		.bottom .product-info{
 			box-sizing: border-box;
-			padding: 60px 0 0 10px;
+			padding: 30px 0 0 10px;
 			width: 50%;
 			float: left;
 		}
@@ -100,6 +100,7 @@
 			height: 80px;
 			font-size: 16px;
 			font-weight: bold;
+			margin-top: 30px;
 		}
 		.product-info .sum{
 			color: blue;
@@ -252,6 +253,9 @@
 			line-height: 1.6;
 			margin-left: 25px;
 		}
+		.product-info .amount{
+			line-height: 12px;
+		}
     </style>
 </head>
 <body>
@@ -275,6 +279,7 @@
 					<div>판매국가</div>
 					<div>배송구분</div>
 					<div class="row4">카드혜택</div>
+					<div class="amount">수량선택</div>
 				</div>
 				<div class="right">
 					<div>${product.product_category}</div>
@@ -286,15 +291,22 @@
 						<div class="view-img-box">
 							<img src="<%=request.getContextPath()%>/resources/img/card-view.jpg" alt="">
 						</div>
-					<div class="sum-box">
-						<pre>원</pre>
-						<pre class="sum">${product.product_cost}</pre>
-						<pre class="sum-text">선택상품 합계금액 : </pre>
 					</div>
-					<form action="">
+					<form action="<%=request.getContextPath()%>/buyItNow" id="formSubmit" method="POST">
+						<select name="amount" style="width:45px">
+							<c:forEach begin="1" end="99" var="index">
+								<option>${index}</option>
+							</c:forEach>
+						</select>
+						<div class="sum-box">
+							<pre>원</pre>
+							<pre class="sum">${product.product_cost}</pre>
+							<pre class="sum-text">상품금액 : </pre>
+						</div>
+					
 						<input type="hidden" name="product_num" value="${product.product_num}">
 						<div class="btn-box">
-							<a href="#"><img src="<%=request.getContextPath() %>/resources/img/btn_buy.gif" alt=""></a>
+							<a class="buy-btn" href="#"><img src="<%=request.getContextPath() %>/resources/img/btn_buy.gif" alt=""></a>
 							<a class="myBox-btn" href="<%=request.getContextPath()%>/myBoxRegis?user_id=${user.user_id}&product_num=${product.product_num}"><img src="<%=request.getContextPath() %>/resources/img/btn_cart.gif" alt=""></a>
 							<a href="#"><img src="<%=request.getContextPath() %>/resources/img/btn_wishlist.gif" alt=""></a>
 						</div>
@@ -483,7 +495,6 @@
 		</div>
 	</div>
 	
-	</div>
 	<script type="text/javascript">
 	
 		$('.view-img-box').click(function(e){
@@ -511,7 +522,7 @@
 				data : data,
 				success : function(data){
 					console.log(data);
-					if(data == 'fail'){
+					if(data == 'false'){
 						alert('이미 등록된 제품 입니다.');
 					}
 					else if(data == 'success'){
@@ -523,6 +534,11 @@
 				}
 			})
         })
+        $('.buy-btn').click(function(e){
+        	e.preventDefault();	//buy-btn에 지정한 url로 못가게 막고
+        	$('#formSubmit').submit();	// formsubmit을 실행
+        })
+        
 	</script>
 
 </body>

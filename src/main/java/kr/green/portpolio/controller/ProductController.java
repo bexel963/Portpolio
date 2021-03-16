@@ -131,18 +131,42 @@ public class ProductController {
 		ArrayList<FileVo> fileList = new ArrayList<FileVo>();
 		UserVo user = userService.getUser(request);
 		ArrayList<MyBoxVo> myBoxList = productService.getMyBox(user.getUser_id());
-		for(MyBoxVo myBox : myBoxList) {
-			productList.add(productService.getProduct(myBox.getProduct_num()));
-			fileList.add(productService.getMainFile(myBox.getProduct_num()));
+		if(myBoxList != null) {
+			for(MyBoxVo myBox : myBoxList) {
+				productList.add(productService.getProduct(myBox.getProduct_num()));
+				fileList.add(productService.getMainFile(myBox.getProduct_num()));
+			}
 		}
 		ArrayList<OrderVo> orderInfoList = productService.getOrderInfos(user);
-		
+
 		mv.addObject("productList", productList);
 		mv.addObject("fileList", fileList);
 		mv.addObject("orderInfoList", orderInfoList);
 		mv.addObject("myBoxList", myBoxList);
 		mv.setViewName("/menu/myBox");
 	    return mv;
+	}
+	
+	/* 마이박스에 정보 있는지 확인 */
+	@RequestMapping(value="/myBoxExistence", method = RequestMethod.POST)
+	@ResponseBody
+	public ArrayList<MyBoxVo> myBoxExistence(String user, HttpServletRequest request){
+		
+		ArrayList<MyBoxVo> myBoxList = productService.getMyBox(user);
+	    return myBoxList;
+	}
+	
+	/* 바로구매 GET */
+	@RequestMapping(value= "/buyItNow", method = RequestMethod.POST)
+	public ModelAndView buyItNowPost(Locale locale, ModelAndView mv, Integer product_num, Integer amount, HttpServletRequest request){
+		
+		ProductVo product = productService.getProduct(product_num);
+		FileVo mainFile = productService.getMainFile(product_num);
+		
+		mv.addObject("mainFile", mainFile);
+		mv.addObject("product", product);
+	    mv.setViewName("/menu/productPayment");
+	    return mv; 
 	}
 	
 	/* 마이박스 등록 POST */
@@ -230,8 +254,19 @@ public class ProductController {
 		UserVo user = userService.getUser(request);
 		productService.regisPayment(user, payment);
 		productService.regisDelivery(payment.getPayment_num(), delivery);
+		
 		for(int num : order_num) {
 			productService.regisPresentPayment(payment.getPayment_num(), num);			
+			productService.modifyPaymentCompletion(user, num);			
+		}
+		
+		ArrayList<OrderVo> orderList = new ArrayList<OrderVo>();
+		for(int num : order_num) {
+			orderList.add(productService.getOrderInfo2(num));
+		}
+		
+		for(int i=0 ; i < orderList.size() ; i++) {
+			productService.deleteMyBox(user, orderList.get(i).getProduct_num());			
 		}
 		
 		mv.setViewName("/menu/productComplete");

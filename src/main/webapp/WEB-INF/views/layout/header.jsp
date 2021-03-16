@@ -206,7 +206,8 @@
                         <li class="menu"><a href="#">CATEGORY</a></li>
                         <li class="menu"><a href="#">HOT 10</a></li>
                         <c:if test="${user != null}">
-                        	<li class="menu"><a href="<%=request.getContextPath()%>/myBox">MY BOX</a></li>
+                        	<input type="hidden" name="user" value="${user.user_id}">
+                        	<li class="menu mybox"><a href="<%=request.getContextPath()%>/myBox">MY BOX</a></li>
                         </c:if>
                         <li class="menu"><a href="<%=request.getContextPath()%>/boardList">게시판</a></li>
                         <c:if test="${user.user_grade == 0}">
@@ -226,6 +227,30 @@
 	    $('.header .search-box .close-btn').click(function(e){
 	        e.preventDefault();
 	        $('.search-box').slideUp(500);
+	    })
+	    $('.mybox').click(function(e){
+	    	var user = $('input[name=user]').val();
+
+			
+	    	var data = { 'user' : user };	
+	    	$.ajax({
+	    		async: false,
+				url : '<%=request.getContextPath()%>/myBoxExistence ',
+				type : 'post',
+				data : data,
+				success : function(data){
+					console.log(data);
+					if(data.length == 0){
+						alert('mybox에 등록된 상품이 없습니다.');
+						e.preventDefault();
+						return false;
+					}
+				},
+				error : function(){
+					console.log('실패');
+				}
+			})
+	    	
 	    })
     </script>
 </body>

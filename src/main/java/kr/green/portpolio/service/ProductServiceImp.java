@@ -80,7 +80,6 @@ public class ProductServiceImp implements ProductService {
 
 	@Override
 	public void deleteProduct(Integer product_num) {
-		productDao.deleteFiles(product_num);
 		productDao.deleteProduct(product_num);
 	}
 	
@@ -165,6 +164,16 @@ public class ProductServiceImp implements ProductService {
 	@Override
 	public void regisPresentPayment(int payment_num, int order_num) {
 		productDao.regisPresentPayment(payment_num, order_num);
+	}
+
+	@Override
+	public void modifyPaymentCompletion(UserVo user, int order_num) {
+		productDao.modifyPaymentCompletion(user, order_num);
+	}
+
+	@Override
+	public OrderVo getOrderInfo2(Integer order_num) {
+		return productDao.getOrderInfo2(order_num);
 	}
 
 

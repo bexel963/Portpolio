@@ -34,7 +34,7 @@ public class ProductVo {
 		if(product_category.equals("건강")) return 1;
 		if(product_category.equals("생활")) return 2;
 		if(product_category.equals("뷰티")) return 3;
-		if(product_category.equals("컴퓨터")) return 4;
+		if(product_category.equals("컴퓨터관련")) return 4;
 		if(product_category.equals("기타")) return 5;
 		return 0;
 		

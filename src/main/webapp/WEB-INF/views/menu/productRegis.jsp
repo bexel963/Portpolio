@@ -117,8 +117,8 @@
 			<div class="right">
 				<div class="category">
 					<select name="product_category">
-						<option value="1">생활</option>       
-						<option value="2">주방</option>       
+						<option value="1">건강</option>       
+						<option value="2">생활</option>       
 						<option value="3">뷰티</option>
 						<option value="4">컴퓨터관련</option>
 						<option value="5">기타</option>

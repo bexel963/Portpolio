@@ -320,33 +320,32 @@
 		.hidden{
 			display: none;
 		}
-		.hidden-card{
+		.hidden-way{
 			width: 100%;
 			margin-top: 20px;
 			position: relative;
 		}
-		.hidden-card .select-box{
+		.hidden-way .select-box{
 			width: 100%;
 			height: 50px;
 			border-top: 1px solid #bbbbbb;
 			padding: 12px 0 0 70px;
 		}
-		.hidden-card .select-box:nth-of-type(2){
+		.hidden-way .select-box:nth-of-type(2){
 			border-top: 1px solid #bbbbbb;
 			border-bottom: 1px solid #bbbbbb;
 			margin-bottom: 40px;
 		}
-		.hidden-card .select-box span{
+		.hidden-way .select-box span{
 			margin-right: 50px;
 			color: #767676;
 		}
-		.hidden-card .select-box select{
+		.hidden-way .select-box select{
 			width: 200px;
 			height: 25px;
 		}
-		.hidden-card .agreement-all,
-		.hidden-card .agreement-detail{
-			
+		.hidden-way .agreement-all,
+		.hidden-way .agreement-detail{		
 			width: 100%;
 			height: 100px;
 			background-color: f6f6f6;
@@ -354,31 +353,31 @@
 			font-size: 15px;
 			padding: 20px 0 0 20px;
 		}
-		.hidden-card .check{
+		.hidden-way .check{
 			font-weight: bold;
 		}
-		.hidden-card .agreement-all .fa-angle-down,
-		.hidden-card .agreement-detail .fa-angle-up{
+		.hidden-way .agreement-all .fa-angle-down,
+		.hidden-way .agreement-detail .fa-angle-up{
 			position: absolute;
 			right: 40;
 			top: 290;
 			font-size: 40px;
 			cursor: pointer;
 		}
-		.hidden-card .agreement-all div{
+		.hidden-way .agreement-all div{
 			margin-bottom: 10px;
 			font-size: 15px;
 		}
-		.hidden-card .agreement-detail{
+		.hidden-way .agreement-detail{
 			height: 230px;
 		}
-		.hidden-card .agreement-detail div:nth-of-type(1){
+		.hidden-way .agreement-detail div:nth-of-type(1){
 			font-size: 15px;
 		}
-		.hidden-card .agreement-detail div:nth-of-type(2){
+		.hidden-way .agreement-detail div:nth-of-type(2){
 			margin-top: 20px;
 		}
-		.hidden-card .agreement-detail div{
+		.hidden-way .agreement-detail div{
 			margin-bottom: 10px;
 			font-size: 12px;
 		}
@@ -389,6 +388,22 @@
 		}
 		.choice input{
 			display: none;
+		}
+		.virtual-table{
+			font-size: 12px;
+			color: #767676;
+		}
+		.virtual-table th{
+			background-color: #f7f7f7;
+		}
+		.hidden-way.hidden-virtual-account .agreement-all{
+			margin-top: 30px;
+		}
+		.hidden-way.hidden-phone .agreement-all{
+			margin-top: 115px;
+		}
+		.hidden-way.hidden-account .agreement-all{
+			margin-top: 225px;
 		}
     </style>
 </head>
@@ -541,12 +556,12 @@
 								<li>- 현금영수증 발급시 세금계산서는 발급이 되지 않으니 사업자 고객분들께서는 유의하시기 바랍니다.</li>
 							</ul>
 							<div class="choice">
-								<div class="card"><input type="radio" id="card" name="payment_way" value="신용카드">신용카드</div>
-								<div class="phone"><input type="radio" id="phone" name="payment_way" value="휴대폰">휴대폰</div>
-								<div class="virtual-account"><input type="radio" id="virtual-account" name="payment_way" value="가상계좌">가상계좌</div>
-								<div class="account"><input type="radio" id="account" name="payment_way" value="실시간계좌이체">실시간계좌이체</div>
+								<div class="card"><input class="payment_way1" type="radio" id="card" name="payment_way" value="신용카드">신용카드</div>
+								<div class="phone"><input class="payment_way2" type="radio" id="phone" name="payment_way" value="휴대폰">휴대폰</div>
+								<div class="virtual-account"><input class="payment_way3" type="radio" id="virtual-account" name="payment_way" value="가상계좌">가상계좌</div>
+								<div class="account"><input class="payment_way4" type="radio" id="account" name="payment_way" value="실시간계좌이체">실시간계좌이체</div>
 							</div>
-							<div class="cpva hidden-card hidden">
+							<div class="cpva hidden-card hidden-way hidden">
 								<p>
 									신용카드 결제 신청시 승인 진행에 다소 시간이 소요될 수 있으므로 ‘중지’, ‘새로고침’을 누르지 마시고 결과 화면이 나타날때까지 기다려 주십시오.<br>
 									결제하기 버튼 클릭시 결제창이 나타나지 않는 경우나 ISP/안전결제 모듈이 설치 되지 않을 경우 수동으로 플러그인을 설치하십시요.
@@ -578,7 +593,7 @@
 								</div>
 								<div class="agreement-all">
 									<div>주문 상품정보 및 결제대행 서비스 이용약관에 모두 동의하십니까?</div>
-									<input class="check-all" type="checkbox"> <span class="check">모두동의</span>
+									<input class="check-all1" type="checkbox"> <span class="check">모두동의</span>
 									<i class="fas fa-angle-down"></i>
 								</div>
 								<div class="agreement-detail hidden">
@@ -591,9 +606,97 @@
 									<i class="fas fa-angle-up"></i>
 								</div>
 							</div>
-							<div class="cpva hidden-phone hidden">폰결제</div>
-							<div class="cpva hidden-virtual-account hidden">가상계좌</div>
-							<div class="cpva hidden-account hidden">실시간계좌이체</div>
+							<div class="cpva hidden-phone hidden-way hidden">
+								<p class="phone-text">
+									휴대폰으로 결제한 금액은 다음달 해당 휴대폰의 요금 결제시 통합 청구 됩니다.<br><br>									
+									미성년자 명의의 휴대폰 (단, KT와 LGT는 가입자가 성인인 경우 제외), 사업자 폰, 미납상태의 폰, 정액요금제 가입폰, 외국인 폰 등의 경우에는 휴대폰 결제를
+									사용할 수 없습니다. LGT의 경우 번호이동 및 신규 가입한 경우에는 가입일로부터 60일간 월 한도 5만원입니다.<br><br>
+									휴대폰 결제의 취소는 주문한 월의 말일까지만 가능합니다.
+									현금영수증은 휴대폰 요금을 현금 납부하는 경우에만 해당 이동통신사에서 발급합니다. 발급문의는 이동통신사의 고객센터로 문의 바랍니다.	
+								</p>
+								<div class="agreement-all">
+									<div>주문 상품정보 및 결제대행 서비스 이용약관에 모두 동의하십니까?</div>
+									<input class="check-all2" type="checkbox"> <span class="check">모두동의</span>
+									<i class="fas fa-angle-down"></i>
+								</div>
+								<div class="agreement-detail hidden">
+									<div>주문 상품정보 및 결제대행 서비스 이용약관에 모두 동의하십니까?</div>
+									<input class="check-all" type="checkbox"> <span class="check">모두동의</span>
+									<div><input class="check-detail" type="checkbox"> 주문 및 배송처리를 위한 개인정보 공유에 동의합니다.</div>
+									<div><input class="check-detail" type="checkbox"> 결제대행 서비스의 전자금융거래 기본약관에 동의합니다.</div>
+									<div><input class="check-detail" type="checkbox"> 결제대행 서비스의 개인정보 수집 및 이용에 동의합니다.</div>
+									<div><input class="check-detail" type="checkbox"> 결제대행 서비스의 개인정보 제공 및 위탁에 동의합니다.</div>
+									<i class="fas fa-angle-up"></i>
+								</div>
+							</div>
+							<div class="cpva hidden-virtual-account hidden-way hidden">
+								<h4>가상계좌 신청</h4>
+								<table class="virtual-table">
+									<tr>
+										<th style="width : 270">입금기한</th>
+										<td style="width : 720">2021-03-17</td>
+									</tr>
+									<tr>
+										<th>은행명</th>
+										<td>
+											<select name="card" >
+												<option>=== 카드 선택 ===</option>
+												<option>기업은행</option>
+												<option>국민은행</option>
+												<option>수협은행</option>
+												<option>농협은행</option>
+												<option>우리은행</option>
+												<option>신한은행</option>
+												<option>우체국은행</option>
+												<option>하나은행</option>
+											</select>
+										</td>
+									</tr>
+									<tr>
+										<th>입금자명</th>
+										<td>
+											<input type="text">
+										</td>
+									</tr>
+									<tr>
+										<th>계좌번호 안내 휴대폰 번호</th>
+										<td>
+											<input type="text">
+										</td>
+									</tr>										
+								</table>
+								<div class="agreement-all">
+									<div>주문 상품정보 및 결제대행 서비스 이용약관에 모두 동의하십니까?</div>
+									<input class="check-all3" type="checkbox"> <span class="check">모두동의</span>
+									<i class="fas fa-angle-down"></i>
+								</div>
+								<div class="agreement-detail hidden">
+									<div>주문 상품정보 및 결제대행 서비스 이용약관에 모두 동의하십니까?</div>
+									<input class="check-all" type="checkbox"> <span class="check">모두동의</span>
+									<div><input class="check-detail" type="checkbox"> 주문 및 배송처리를 위한 개인정보 공유에 동의합니다.</div>
+									<div><input class="check-detail" type="checkbox"> 결제대행 서비스의 전자금융거래 기본약관에 동의합니다.</div>
+									<div><input class="check-detail" type="checkbox"> 결제대행 서비스의 개인정보 수집 및 이용에 동의합니다.</div>
+									<div><input class="check-detail" type="checkbox"> 결제대행 서비스의 개인정보 제공 및 위탁에 동의합니다.</div>
+									<i class="fas fa-angle-up"></i>
+								</div>
+							</div>
+							<div class="cpva hidden-account hidden-way hidden">
+								실시간계좌이체
+								<div class="agreement-all">
+									<div>주문 상품정보 및 결제대행 서비스 이용약관에 모두 동의하십니까?</div>
+									<input class="check-all" type="checkbox"> <span class="check">모두동의</span>
+									<i class="fas fa-angle-down"></i>
+								</div>
+								<div class="agreement-detail hidden">
+									<div>주문 상품정보 및 결제대행 서비스 이용약관에 모두 동의하십니까?</div>
+									<input class="check-all4" type="checkbox"> <span class="check">모두동의</span>
+									<div><input class="check-detail" type="checkbox"> 주문 및 배송처리를 위한 개인정보 공유에 동의합니다.</div>
+									<div><input class="check-detail" type="checkbox"> 결제대행 서비스의 전자금융거래 기본약관에 동의합니다.</div>
+									<div><input class="check-detail" type="checkbox"> 결제대행 서비스의 개인정보 수집 및 이용에 동의합니다.</div>
+									<div><input class="check-detail" type="checkbox"> 결제대행 서비스의 개인정보 제공 및 위탁에 동의합니다.</div>
+									<i class="fas fa-angle-up"></i>
+								</div>
+							</div>
 						</div>
 					</div>
 					<div class="btn-box1">
@@ -658,23 +761,50 @@
 		})
 		
 		$('.payment-btn').click(function(){
+
 			var recipient = $('input[name=recipient]').val();
-			var address = $('input[delivery_address]').val();
-			var demand = $('input[demand]').val();
-			var payment_way = $('input[payment_way]').val();
-			var check_state = $('.check-all').prop('checked');
+			var address = $('input[name=delivery_address]').val();
+			var demand = $('input[name=demand]').val();
+			var payment_way;
 			
-			console.log(payment_way);
+			var check_way1 = $('.payment_way1').prop('checked');
+			var check_way2 = $('.payment_way2').prop('checked');
+			var check_way3 = $('.payment_way3').prop('checked');
+			var check_way4 = $('.payment_way4').prop('checked');
 			
-			if(recipient == '' || address == '' || demand == ''){
-				alert('배송 정보를 입력하세요.');
-				return false;
+			if(check_way1 == true){
+				payment_way = $('.payment_way1').val();	
+			}else if(check_way2 == true){
+				payment_way = $('.payment_way2').val();
+			}else if(check_way3 == true){
+				payment_way = $('.payment_way3').val();
+			}else if(check_way4 == true){
+				payment_way = $('.payment_way4').val();
+			}	
+		
+			var check_user = $('.check_user').prop('checked');
+			if(check_user == true){
+				if(recipient == '' || address == '' || demand == ''){
+					alert('배송 정보를 입력하세요.');
+					return false;
+				}				
+			}else if(check_user == false){
+				if(demand == ''){
+					alert('배송 정보를 입력하세요.');
+					return false;
+				}
 			}
-			if(payment_way == ''){
+			
+			if(check_way1 == false && check_way2 == false && check_way3 == false && check_way4 == false){
 				alert('결제수단을 선택하세요');
 				return false;
 			}
-			if(check_state == false){
+			
+			var check_state1 = $('.check-all1').prop('checked');
+			var check_state2 = $('.check-all2').prop('checked');
+			var check_state3 = $('.check-all3').prop('checked');
+			var check_state4 = $('.check-all4').prop('checked');
+			if(check_state1 == false && check_state2 == false && check_state3 == false && check_state4 == false){
 				alert('이용약관에 동의하세요');
 				return false;
 			}

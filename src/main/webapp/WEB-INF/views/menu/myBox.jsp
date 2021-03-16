@@ -262,6 +262,7 @@
 								</div>
 							
 						</c:forEach>
+		
 						<div class="bottom">
 							
 						</div>
@@ -276,7 +277,6 @@
 		</div>
 	</div>
 	
-	${orderInfoList.contains(productList.get(1)) }
 	<script>
 		$('.delete-btn').click(function(){
 	    	var product_num = $(this).siblings('input').val();

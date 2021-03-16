@@ -4,7 +4,7 @@
 
 	<insert id="regisProduct" parameterType="kr.green.portpolio.vo.ProductVo" useGeneratedKeys="true" keyProperty="product.product_num">
 		insert into portpolio.product(product_category, product_title, product_content, product_amount, product_cost, product_origin) 
-			values(#{product.product_category}, #{product.product_title}, #{product.product_content}, #{product.product_amount}, #{product.product_cost}, #{product.product_origin})
+			values(#{product.product_categoryNum}, #{product.product_title}, #{product.product_content}, #{product.product_amount}, #{product.product_cost}, #{product.product_origin})
 	</insert>
 	
 	<insert id="mainFileRegis" parameterType="kr.green.portpolio.vo.FileVo">
@@ -21,6 +21,9 @@
 		select * from portpolio.product where isDel = 'N'
 	</select>
 	
+	<update id="deleteProduct">
+		update portpolio.product set isDel = 'Y' where product_num = #{product_num}
+	</update>
 	<select id="getMainFile" resultType="kr.green.portpolio.vo.FileVo">
 		select * from portpolio.files where isDel = 'N' and main ='Y' and product_num = #{product_num}
 	</select>
@@ -77,6 +80,10 @@
 		select * from portpolio.order where product_num = #{product_num} and user_id = #{user.user_id} and isDel = 'N'
 	</select>
 	
+	<select id="getOrderInfo2" resultType="kr.green.portpolio.vo.OrderVo">
+		select * from portpolio.order where order_num = #{order_num}
+	</select>
+	
 	<insert id="regisPayment" useGeneratedKeys="true" keyProperty="payment.payment_num">
 		insert into portpolio.payment(payment_way, payment_cost, user_id) values(#{payment.payment_way}, #{payment.payment_cost}, #{user.user_id})
 	</insert>
@@ -88,4 +95,8 @@
 	<insert id="regisPresentPayment">
 		insert into portpolio.paymentpresent(payment_num, order_num) values(#{payment_num}, #{order_num})
 	</insert>
+	
+	<update id="modifyPaymentCompletion">
+		update portpolio.order set payment_completion = 'Y' where user_id = #{user.user_id} and order_num = #{order_num}
+	</update>
 </mapper>

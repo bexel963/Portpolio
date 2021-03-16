@@ -32,7 +32,7 @@ public interface ProductDao {
 
 	void modifyProduct(@Param("product")ProductVo product);
 
-	void deleteProduct(@Param("product")Integer product_num);
+	void deleteProduct(@Param("product_num")Integer product_num);
 
 	void regisMyBox(@Param("user_id")String user_id, @Param("product_num")Integer product_num);
 
@@ -58,6 +58,10 @@ public interface ProductDao {
 	void regisDelivery(@Param("payment_num")int payment_num, @Param("delivery")DeliveryVo delivery);
 
 	void regisPresentPayment(@Param("payment_num")int payment_num, @Param("order_num")int order_num);
+
+	void modifyPaymentCompletion(@Param("user")UserVo user, @Param("order_num")int order_num);
+
+	OrderVo getOrderInfo2(@Param("order_num")Integer order_num);
 
 	
 	

@@ -58,6 +58,22 @@
 			font-weight: 1000;
 			color: black;
 		}
+		.message-box{
+			margin-top: 50px;
+			width: 100%;
+			height: 300px;
+		    color: #555555;
+		    font-size: 30px;
+		    font-weight: bold;
+		    padding: 20px 0 0 0;
+		    text-align: center;
+		}
+		.fa-check-circle{
+			font-size: 200px;
+			color: rgb(81,104,238);
+			margin-bottom: 20px;
+			cursor: pointer;
+		}
     </style>
 </head>
 <body>
@@ -72,8 +88,9 @@
 					<li class="row3"><p>3.주문완료</p></li>
 				</ul>
 			</div>
-			<div class="message">
-				결제가 완료되었습니다.
+			<div class="message-box">
+				<a href="<%=request.getContextPath()%>/"><i class="far fa-check-circle"></i></a>
+				<p class="message">결제완료</p>
 			</div>
 		</div>
 	</div>
