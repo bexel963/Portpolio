@@ -48,7 +48,9 @@ public interface ProductService {
 
 	void deleteOrderInfo(UserVo user, Integer product_num);	// 주문정보의 isDel을 Y로 변경
 
-	void deleteOrder(UserVo user, Integer product_num);	// 주문정보 삭제
+	void deleteOrder(UserVo user, Integer product_num);	// 해당 유저와 제품번호의 주문정보 삭제
+	
+	void deleteOrder(Integer order_num);	// 해당 주문번호의 주문정보 삭제
 
 	void regisPayment(UserVo user, PaymentVo payment);	// 결제정보 등록
 
@@ -57,6 +59,12 @@ public interface ProductService {
 	void regisPresentPayment(int payment_num, int order_num);	// 결제번호-주문번호 보여주는 테이블에 정보 등록
 
 	void modifyPaymentCompletion(UserVo user, int order_num);	// 결제하면 주문내역에 결제 완료됨을 표시
+
+	void singleRegisOrderInfo(Integer order_cost, Integer orderAmount, ProductVo product, UserVo user);	// 바로구매시 주문정보 등록
+
+	
+
+	
 
 	
 

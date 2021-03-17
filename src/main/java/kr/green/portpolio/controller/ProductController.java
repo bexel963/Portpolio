@@ -156,19 +156,6 @@ public class ProductController {
 	    return myBoxList;
 	}
 	
-	/* 바로구매 GET */
-	@RequestMapping(value= "/buyItNow", method = RequestMethod.POST)
-	public ModelAndView buyItNowPost(Locale locale, ModelAndView mv, Integer product_num, Integer amount, HttpServletRequest request){
-		
-		ProductVo product = productService.getProduct(product_num);
-		FileVo mainFile = productService.getMainFile(product_num);
-		
-		mv.addObject("mainFile", mainFile);
-		mv.addObject("product", product);
-	    mv.setViewName("/menu/productPayment");
-	    return mv; 
-	}
-	
 	/* 마이박스 등록 POST */
 	@RequestMapping(value="/myBoxRegis", method = RequestMethod.POST)
 	@ResponseBody
@@ -221,6 +208,51 @@ public class ProductController {
 	    return "success";
 	}
 	
+	/* 바로구매 후 결제창 POST */
+	@RequestMapping(value= "/buyItNow", method = RequestMethod.POST)
+	public ModelAndView buyItNowPost(Locale locale, ModelAndView mv, ProductVo productInfo, Integer order_amount, HttpServletRequest request){
+		
+
+		ProductVo product = productService.getProduct(productInfo.getProduct_num());	
+		FileVo file = productService.getMainFile(productInfo.getProduct_num());
+
+		request.getSession().setAttribute("orderProduct", product);
+		request.getSession().setAttribute("orderAmount", order_amount);
+		request.getSession().setAttribute("orderCost", order_amount * product.getProduct_cost());
+		
+		mv.addObject("product", product);
+		mv.addObject("file", file);
+		mv.setViewName("/menu/productPaymentSingle");
+	    return mv;
+	}
+	
+	/* 바로구매 후 결제실행 POST */
+	@RequestMapping(value= "/directPayment", method = RequestMethod.POST)
+	public ModelAndView directPaymentPost(ModelAndView mv, HttpServletRequest request, PaymentVo payment, DeliveryVo delivery){
+	
+		UserVo user = userService.getUser(request);
+		productService.regisPayment(user, payment);
+		productService.regisDelivery(payment.getPayment_num(), delivery);
+		
+		int order_cost = (Integer)request.getSession().getAttribute("orderCost");
+		int orderAmount = (Integer)request.getSession().getAttribute("orderAmount");
+		ProductVo product = (ProductVo)request.getSession().getAttribute("orderProduct");
+		
+		productService.singleRegisOrderInfo(order_cost, orderAmount, product, user);
+		
+		OrderVo order = productService.getOrderInfo(product.getProduct_num(), user);
+		
+		productService.regisPresentPayment(payment.getPayment_num(), order.getOrder_num());			
+		productService.modifyPaymentCompletion(user, order.getOrder_num());			
+	
+		request.getSession().removeAttribute("orderProduct");
+		request.getSession().removeAttribute("orderAmount");
+		request.getSession().removeAttribute("orderCost");
+		
+	
+		mv.setViewName("/menu/productComplete");
+	    return mv;
+	}
 	
 	/* 결제창 GET */
 	@RequestMapping(value= "/productPayment", method = RequestMethod.GET)
@@ -238,7 +270,7 @@ public class ProductController {
 		}
 
 		OrderVo order = productService.calTotal(orderList);
-		
+		request.getSession().removeAttribute("order");
 		mv.addObject("order", order);
 		mv.addObject("productList", productList);
 		mv.addObject("fileList", fileList);
@@ -247,7 +279,7 @@ public class ProductController {
 	    return mv;
 	}
 	
-	/* 결제 POST */
+	/* 결제실행 POST */
 	@RequestMapping(value= "/payment", method = RequestMethod.POST)
 	public ModelAndView paymentGet(Locale locale, ModelAndView mv, HttpServletRequest request, PaymentVo payment, DeliveryVo delivery, Integer[] order_num){
 	

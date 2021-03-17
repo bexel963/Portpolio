@@ -63,6 +63,8 @@ public interface ProductDao {
 
 	OrderVo getOrderInfo2(@Param("order_num")Integer order_num);
 
+	void deleteOrder2(@Param("order_num")Integer order_num);
+
 	
 	
 

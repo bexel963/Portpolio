@@ -27,7 +27,7 @@
 		box-sizing: border-box;
 		float: left;
 		width: calc(1000px * 0.2);
-		background-color: #e9ecef;
+		background-color: #f8f8f8;
 	  }
 	  .productRegis.container2 .left>div, .productRegis.container2 .right>div{
 		box-sizing: border-box;

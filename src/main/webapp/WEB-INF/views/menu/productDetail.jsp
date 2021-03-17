@@ -1,10 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="UTF-8"%>
-<script src="//code.jquery.com/jquery-3.4.1.js"></script>
-<script src="https://kit.fontawesome.com/022cf171a0.js" crossorigin="anonymous"></script>
+
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<% 
+response.setHeader("Pragma", "no-cache"); 
+response.setHeader("Cache-Control", "no-cache"); 
+response.setHeader("Cache-Control", "no-store"); 
+response.setDateHeader("Expires", 0L); %>
+
 <!DOCTYPE html>
 <html>
 <head>
+<script src="//code.jquery.com/jquery-3.4.1.js"></script>
+<script src="https://kit.fontawesome.com/022cf171a0.js" crossorigin="anonymous"></script>
 <meta charset="UTF-8">
 	<style>
 		a{
@@ -293,7 +300,7 @@
 						</div>
 					</div>
 					<form action="<%=request.getContextPath()%>/buyItNow" id="formSubmit" method="POST">
-						<select name="amount" style="width:45px">
+						<select name="order_amount" style="width:45px">
 							<c:forEach begin="1" end="99" var="index">
 								<option>${index}</option>
 							</c:forEach>
@@ -308,7 +315,7 @@
 						<div class="btn-box">
 							<a class="buy-btn" href="#"><img src="<%=request.getContextPath() %>/resources/img/btn_buy.gif" alt=""></a>
 							<a class="myBox-btn" href="<%=request.getContextPath()%>/myBoxRegis?user_id=${user.user_id}&product_num=${product.product_num}"><img src="<%=request.getContextPath() %>/resources/img/btn_cart.gif" alt=""></a>
-							<a href="#"><img src="<%=request.getContextPath() %>/resources/img/btn_wishlist.gif" alt=""></a>
+							<a href="<%=request.getContextPath()%>/"><img src="<%=request.getContextPath()%>/resources/img/btn_shopping (1).gif" style="height: 48.11px"></a>
 						</div>
 					</form>
 					<c:if test="${user.user_grade == 0}">

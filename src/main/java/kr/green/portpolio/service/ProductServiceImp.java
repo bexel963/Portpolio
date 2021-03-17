@@ -114,6 +114,11 @@ public class ProductServiceImp implements ProductService {
 		int order_cost = order_amount * product.getProduct_cost();
 		productDao.regisOrderInfo(order_amount, product, order_cost, user);
 	}
+	
+	@Override
+	public void singleRegisOrderInfo(Integer order_cost, Integer orderAmount, ProductVo product, UserVo user) {
+		productDao.regisOrderInfo(orderAmount, product, order_cost, user);
+	}
 
 	@Override
 	public ArrayList<OrderVo> getOrderInfos(UserVo user) {
@@ -176,5 +181,9 @@ public class ProductServiceImp implements ProductService {
 		return productDao.getOrderInfo2(order_num);
 	}
 
+	@Override
+	public void deleteOrder(Integer order_num) {
+		productDao.deleteOrder2(order_num);
+	}
 
 }
