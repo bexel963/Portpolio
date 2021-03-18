@@ -542,6 +542,11 @@ response.setDateHeader("Expires", 0L); %>
 			})
         })
         $('.buy-btn').click(function(e){
+        	var id = '${user.user_id}';
+			if(id == ''){
+				alert('로그인하세요.');
+				return;
+			}
         	e.preventDefault();	//buy-btn에 지정한 url로 못가게 막고
         	$('#formSubmit').submit();	// formsubmit을 실행
         })
