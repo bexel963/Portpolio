@@ -65,6 +65,10 @@ public interface ProductDao {
 
 	void deleteOrder2(@Param("order_num")Integer order_num);
 
+	ArrayList<ProductVo> getProductList2(@Param("product_category")Integer product_category);
+
+	ArrayList<ProductVo> getProductSaleRankList();
+
 	
 	
 

@@ -122,6 +122,7 @@
 	            width: 100%;
 	            text-align: center;
 	            position: relative;
+	            box-shadow:0px 0px 0px 4px #eee;
 	        }
 	        .header .navbar .container2{
 	            width: 1170px;
@@ -198,13 +199,13 @@
         <div class="navbar">
             <div class="container2">
                 <div class="left">
-                    <a href="#"><img src="//file3.funshop.co.kr/funtenna/logo@2x.png" width="250" height="50"alt=""></a>
+                    <a href="<%=request.getContextPath()%>/"><img src="//file3.funshop.co.kr/funtenna/logo@2x.png" width="250" height="50"alt=""></a>
                 </div>
                 <div class="right">
                     <ul>
                         <li class="menu"><a href="<%=request.getContextPath()%>/">HOME</a></li>
-                        <li class="menu"><a href="#">CATEGORY</a></li>
-                        <li class="menu"><a href="#">HOT 10</a></li>
+                        <li class="menu"><a href="<%=request.getContextPath()%>/category">CATEGORY</a></li>
+                        <li class="menu"><a href="<%=request.getContextPath()%>/hot10">HOT 10</a></li>
                         <c:if test="${user != null}">
                         	<input type="hidden" name="user" value="${user.user_id}">
                         	<li class="menu mybox"><a href="<%=request.getContextPath()%>/myBox">MY BOX</a></li>

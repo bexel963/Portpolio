@@ -14,7 +14,14 @@ public class ProductVo {
 	private int product_cost;
 	private Date product_registerDate;
 	private String product_origin;
+	private int product_sale;
 	
+	public int getProduct_sale() {
+		return product_sale;
+	}
+	public void setProduct_sale(int product_sale) {
+		this.product_sale = product_sale;
+	}
 	public String getProduct_origin() {
 		return product_origin;
 	}
@@ -95,12 +102,13 @@ public class ProductVo {
 		Date date2 = simpleFormat2.parse(registerDate);
 		this.product_registerDate = date2;
 	}
+	
 	@Override
 	public String toString() {
 		return "ProductVo [product_num=" + product_num + ", product_category=" + product_category + ", product_title="
 				+ product_title + ", product_content=" + product_content + ", product_amount=" + product_amount
 				+ ", product_cost=" + product_cost + ", product_registerDate=" + product_registerDate
-				+ ", product_origin=" + product_origin + "]";
+				+ ", product_origin=" + product_origin + ", product_sale=" + product_sale + "]";
 	}
 	@Override
 	public int hashCode() {

@@ -269,7 +269,7 @@
 					</div>
 				</div>
 				<div class="btn-area">
-					<img src="<%=request.getContextPath()%>/resources/img/btn_order (1).gif" alt="">
+					<img src="<%=request.getContextPath()%>/resources/img/btn_order(1).gif" alt="">
 					<button type="submit" class="account-btn"><img src="<%=request.getContextPath()%>/resources/img/btn_select_order (1).gif" alt=""></button>
 					<a href="#"><img src="<%=request.getContextPath()%>/resources/img/btn_shopping (1).gif" alt=""></a>			
 				</div>

@@ -51,6 +51,39 @@ public class HomeController {
 	    return mv;
 	}
 	
+	/* 카테고리 */
+	@RequestMapping(value= "/category", method = RequestMethod.GET)
+	public ModelAndView categoryGet(Locale locale, ModelAndView mv){
+		
+	    mv.setViewName("/main/category");
+	    return mv;
+	}
+	
+	/* 카테고리 상세 */
+	@RequestMapping(value= "/categoryDetail", method = RequestMethod.GET)
+	public ModelAndView categoryDetailGet(Locale locale, ModelAndView mv, Integer product_category){
+		ArrayList<ProductVo> productList = productService.getProductList(product_category);
+		ArrayList<FileVo> fileList = productService.getMainFileList();
+		
+		mv.addObject("fileList", fileList);
+		mv.addObject("productList", productList);
+	    mv.setViewName("/main/categoryDetail");
+	    return mv;
+	}
+	
+	/* HOT */
+	@RequestMapping(value= "/hot10", method = RequestMethod.GET)
+	public ModelAndView hotGet(Locale locale, ModelAndView mv){
+		
+		ArrayList<ProductVo> productList = productService.getProductSaleRankList();
+		ArrayList<FileVo> fileList = productService.getMainFileList();
+	
+		mv.addObject("fileList", fileList);
+		mv.addObject("productList", productList);
+	    mv.setViewName("/main/hot10");
+	    return mv;
+	}
+	
 	/* 로그인 GET */
 	@RequestMapping(value= "/login", method = RequestMethod.GET)
 	public ModelAndView loginGet(Locale locale, ModelAndView mv){

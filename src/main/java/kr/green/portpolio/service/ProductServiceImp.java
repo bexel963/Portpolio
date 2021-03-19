@@ -186,4 +186,14 @@ public class ProductServiceImp implements ProductService {
 		productDao.deleteOrder2(order_num);
 	}
 
+	@Override
+	public ArrayList<ProductVo> getProductList(Integer product_category) {
+		return productDao.getProductList2(product_category);
+	}
+
+	@Override
+	public ArrayList<ProductVo> getProductSaleRankList() {
+		return productDao.getProductSaleRankList();
+	}
+
 }
