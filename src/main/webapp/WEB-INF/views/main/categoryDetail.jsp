@@ -37,7 +37,7 @@
 			display:-webkit-box;
 			overflow: hidden;
 			text-overflow: ellipsis;
-			-webkit-line-clamp: 6;
+			-webkit-line-clamp: 4;
 			-webkit-box-orient: vertical;
         }
         .list a{

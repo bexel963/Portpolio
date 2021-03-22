@@ -196,4 +196,9 @@ public class ProductServiceImp implements ProductService {
 		return productDao.getProductSaleRankList();
 	}
 
+	@Override
+	public ArrayList<ProductVo> getProductList(String search) {
+		return productDao.getProductList3(search);
+	}
+
 }

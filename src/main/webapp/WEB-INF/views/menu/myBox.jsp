@@ -1,13 +1,26 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="UTF-8"%>
-<script src="//code.jquery.com/jquery-3.4.1.js"></script>
-<script src="https://kit.fontawesome.com/022cf171a0.js" crossorigin="anonymous"></script>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
+	<script src="//code.jquery.com/jquery-3.4.1.js"></script>
+	<script src="https://kit.fontawesome.com/022cf171a0.js" crossorigin="anonymous"></script>
 	<meta charset="EUC-KR">
 	<title>Insert title here</title>
 	<style>
+		.category-title{
+			width: 100%;
+			height: 60px;
+			background: #f7f7f7;
+	    	border-bottom: 1px solid #eee;
+	    	padding-top: 7px;
+		}
+		.category-title .text{
+			width: 1170px;
+			font-size: 30px;
+			color: #555555;
+			margin: 0 auto;
+		}
 		.order-box{
 			width: 1000px;
 			margin: 0 auto;
@@ -168,6 +181,9 @@
     </style>
 </head>
 <body>
+	<div class="category-title">
+		<div class="text">MY BOX</div>
+	</div>
 	<div class="order-box">
 		<img src="<%=request.getContextPath()%>/resources/img/h2_order.gif" alt="">
 		<div class="container">

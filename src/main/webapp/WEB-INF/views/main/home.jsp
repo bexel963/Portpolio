@@ -78,12 +78,12 @@
         	margin: 5px 0;
             color: #6e6e6e;
             font-size: 16px;
-            line-height: 25px;
+            line-height: 26px;
             height: 150px;
 			display:-webkit-box;
 			overflow: hidden;
 			text-overflow: ellipsis;
-			-webkit-line-clamp: 6;
+			-webkit-line-clamp: 4;
 			-webkit-box-orient: vertical;
         }
         .list a{

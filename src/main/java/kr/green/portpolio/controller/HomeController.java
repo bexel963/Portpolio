@@ -84,6 +84,37 @@ public class HomeController {
 	    return mv;
 	}
 	
+	/* SEARCH */
+	@RequestMapping(value= "/search", method = RequestMethod.GET)
+	public ModelAndView searchGet(Locale locale, ModelAndView mv, String search){
+		
+		ArrayList<ProductVo> productList = productService.getProductList(search);
+		ArrayList<FileVo> fileList = productService.getMainFileList();
+		
+		if( productList.size() == 0) {
+			mv.setViewName("/main/searchAbsence");
+			return mv;
+		}
+		mv.addObject("fileList", fileList);
+		mv.addObject("productList", productList);
+	    mv.setViewName("/main/search");
+	    return mv;
+	}
+	
+	/* SEARCHAJAX */
+	@RequestMapping(value= "/searchAjax", method = RequestMethod.POST)
+	@ResponseBody
+	public ArrayList<ProductVo> searchAjaxPost(Locale locale, ModelAndView mv, String search){
+		
+		ArrayList<ProductVo> productList = productService.getProductList(search);
+		ArrayList<FileVo> fileList = productService.getMainFileList();
+		
+		mv.addObject("fileList", fileList);
+		mv.addObject("productList", productList);
+	    mv.setViewName("/main/search");
+	    return productList;
+	}
+	
 	/* 로그인 GET */
 	@RequestMapping(value= "/login", method = RequestMethod.GET)
 	public ModelAndView loginGet(Locale locale, ModelAndView mv){

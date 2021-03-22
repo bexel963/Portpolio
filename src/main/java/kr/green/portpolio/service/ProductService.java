@@ -20,6 +20,7 @@ public interface ProductService {
 	ProductVo getProduct(Integer product_num);						// 해당번호 제품 가져오기
 	ArrayList<ProductVo> getProductList();							// 제품 전부 가져오기
 	ArrayList<ProductVo> getProductList(Integer product_category);	// 해당 카테고리에 대한 제품 가져오기 
+	ArrayList<ProductVo> getProductList(String search);		// 해당 검색에 대한 제품 가져오기
 	
 	FileVo getMainFile(Integer product_num);				// 해당번호 제품에 대한 메인사진 가져오기
 	ArrayList<FileVo> getMainFileList();					// 제품 메인사진들 모두 가져오기
@@ -64,6 +65,8 @@ public interface ProductService {
 	void singleRegisOrderInfo(Integer order_cost, Integer orderAmount, ProductVo product, UserVo user);	// 바로구매시 주문정보 등록
 
 	ArrayList<ProductVo> getProductSaleRankList();		// 판매순위 높은거 순으로 제품 10개 가져오기
+
+	
 
 
 

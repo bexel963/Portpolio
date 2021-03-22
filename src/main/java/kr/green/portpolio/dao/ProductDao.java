@@ -69,6 +69,8 @@ public interface ProductDao {
 
 	ArrayList<ProductVo> getProductSaleRankList();
 
+	ArrayList<ProductVo> getProductList3(@Param("search")String search);
+
 	
 	
 

@@ -160,9 +160,12 @@
 	<div class="header">
         <div class="search-box">
             <div class="container2">
-                <div class="left">
-                    <input type="text" placeholder="search" size="105">
-                </div>
+            	<form action="<%=request.getContextPath()%>/search" method="get" id="submit">
+	                <div class="left">
+	                    <input type="text" placeholder="search" name="search" style="width:1000px" size="105">
+	                    <button class="success-btn" type="submit" style="display:none">Go</button>
+	                </div>
+                </form>
                 <div class="right">
                     <div class="close-btn">
                         <i class="far fa-times-circle"></i>
@@ -229,13 +232,13 @@
 	        e.preventDefault();
 	        $('.search-box').slideUp(500);
 	    })
+	   
 	    $('.mybox').click(function(e){
 	    	var user = $('input[name=user]').val();
-
-			
+	
 	    	var data = { 'user' : user };	
 	    	$.ajax({
-	    		async: false,
+	    		async: false,	// ajax 비동기 : ajax의 내용이 전부 실행 되기 전까지 다른 내용은 대기
 				url : '<%=request.getContextPath()%>/myBoxExistence ',
 				type : 'post',
 				data : data,
@@ -252,6 +255,14 @@
 				}
 			})
 	    	
+	    })
+	    $('#submit').submit(function(){
+	    	var search = $('input[name=search]').val();
+			
+	    	if( search.length < 2 ){
+	    		alert('한글자는 검색 안됩니다.');
+		    	return false;
+	    	}
 	    })
     </script>
 </body>

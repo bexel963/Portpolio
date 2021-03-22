@@ -26,6 +26,10 @@
 	<select id="getProductSaleRankList" resultType="kr.green.portpolio.vo.ProductVo">
 		select * from portpolio.product where isDel = 'N' order by product_sale desc limit 0,10
 	</select>
+	<select id="getProductList3" resultType="kr.green.portpolio.vo.ProductVo">
+		select * from portpolio.product where isDel = 'N' 
+		and (product_title like concat('%', #{search}, '%') or product_content like concat('%', #{search}, '%'))
+	</select>
 	
 	<update id="deleteProduct">
 		update portpolio.product set isDel = 'Y' where product_num = #{product_num}
