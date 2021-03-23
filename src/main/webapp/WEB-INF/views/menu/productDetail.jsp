@@ -121,7 +121,7 @@ response.setDateHeader("Expires", 0L); %>
 			width: 1002px;
 			border-top: 1px solid black;
 			height: 60px;
-			padding: 17px 0 0 360px;
+			padding: 0 0 0 360px;
 		}
 		.detail-box .detail-tab div{
 			float: left;
@@ -263,6 +263,23 @@ response.setDateHeader("Expires", 0L); %>
 		.product-info .amount{
 			line-height: 12px;
 		}
+		.hidden{
+			display: none;
+		}
+		.product-info .right .btn{
+			float: right;
+			margin-right: 1px;
+		}
+		.select{
+			border-top: 2px solid #EA2C4F;
+		}
+		.detail-box .tab{
+			padding-top: 17px;
+			height: 60px;
+		}
+		.detail-box .tab1{
+		
+		}
     </style>
 </head>
 <body>
@@ -319,8 +336,8 @@ response.setDateHeader("Expires", 0L); %>
 						</div>
 					</form>
 					<c:if test="${user.user_grade == 0}">
-					  	<a href="<%=request.getContextPath()%>/productModify?product_num=${product.product_num}"><button type="submit" class="btn btn-secondary">수정</button></a>
-					  	<a href="<%=request.getContextPath()%>/productDelete?product_num=${product.product_num}"><button type="submit" class="btn btn-secondary">삭제</button></a>
+					  	<a href="<%=request.getContextPath()%>/productModify?product_num=${product.product_num}"><button type="submit" class="btn btn-success">수정</button></a>
+					  	<a href="<%=request.getContextPath()%>/productDelete?product_num=${product.product_num}"><button type="submit" class="btn btn-success">삭제</button></a>
 				  	</c:if>
 				</div>
 			</div>
@@ -329,7 +346,7 @@ response.setDateHeader("Expires", 0L); %>
 		<div class="detail-box">
 			<div class="detail-tab">
 				<div class="tab tab1"><a href="#">상품설명</a></div>
-				<div class="tab tab2"><a href="#">댓글&사진후기</a></div>
+				<div class="tab tab2 select"><a href="#">댓글&사진후기</a></div>
 				<div class="tab tab3"><a href="#">상품 Q & A</a></div>
 			</div>
 		</div>
@@ -389,119 +406,121 @@ response.setDateHeader("Expires", 0L); %>
 		</div>
 	
 		<div class="overlay">
-		<div class="hidden-box">
-			<div class="title">
-				<div class="text-box">21년 2월 신용카드 무이자 할부</div>
-				<div class="img-box">
-					<img src="<%=request.getContextPath() %>/resources/img/X.png" alt="">
+			<div class="hidden-box">
+				<div class="title">
+					<div class="text-box">21년 2월 신용카드 무이자 할부</div>
+					<div class="img-box">
+						<img src="<%=request.getContextPath() %>/resources/img/X.png" alt="">
+					</div>
 				</div>
-			</div>
-			<table border="1" bordercolor="black" width="95%"  style="border-collapse:collapse">
-				<tr>                          
-					<th>적용기간</th>                 
-					<th>카드사명</th>
-					<th>대상 금액</th>
-					<th>대상 개월수</th>	
-					<th>고객 부담</th>
-					<th width="170px"></th>
-				</tr>
-				<tr>
-				   <th rowspan="8">2.1 ~ 2.28</th>
-				   <th>BC카드</th>
-				   <th>5만원이상</th>
-				   <th>2~6개월</th>
-				   <th>없음</th>
-				   <th></th>
-			    </tr>
-			    <tr>
-					<th>하나비자</th>
-					<th>5만원이상</th>
-					<th>2~6개월</th>
-					<th>없음</th>
-					<th></th>
-				</tr>
-				<tr>
-					<th>삼성비자</th>
-					<th>5만원이상</th>
-					<th>2~6개월</th>
-					<th>없음</th>
-					<th></th>
-				</tr>
-				<tr>
-					<th>신한비자</th>
-					<th>5만원이상</th>
-					<th>2~6개월</th>
-					<th>없음</th>
-					<th></th>
-				</tr>
-				<tr>
-					<th>현대비자</th>
-					<th>5만원이상</th>
-					<th>2~6개월</th>
-					<th>없음</th>
-					<th></th>
-				</tr>
-				<tr>
-					<th>롯데비자</th>
-					<th>5만원이상</th>
-					<th>2~6개월</th>
-					<th>없음</th>
-					<th></th>
-				</tr>
-				<tr>
-					<th>KB비자</th>
-					<th>5만원이상</th>
-					<th>2~6개월</th>
-					<th>없음</th>
-					<th></th>
-				</tr>
-				<tr>
-					<th>NH비자</th>
-					<th>5만원이상</th>
-					<th>2~6개월</th>
-					<th>없음</th>
-					<th></th>
-				</tr>
-			</table><br>
-			<table border="1" bordercolor="black" width="95%">
-				<tr>                          
-					<th>적용기간</th>                 
-					<th>카드사명</th>
-					<th>대상 금액</th>
-					<th>대상 개월수</th>	
-					<th>고객 부담</th>
-					<th width="170px"></th>
-				</tr>
-				<tr>
-				   <th rowspan="2">2.1 ~ 2.28</th>
-				   <th rowspan="2">BC카드</th>
-				   <th rowspan="2">5만원이상</th>
-				   <th>10개월</th>
-				   <th>1~3회차</th>
-				   <th rowspan="2">
-					   	사전 ARS신청 고객에 한함
-							(ARS : 1899-5772)
-							(하나BC카드 제외)
-					</th>
-			    </tr>
-				<tr>
-					<th>12개월</th>
-					<th>1~4회차</th>
-				 </tr>
-			</table>
-			<div class="note">
-				<div class="title">유의사항</div>
-				<ul class="content">
-					<li>법인(기업)/체크/선불/기프트/하이브리드/은행계열카드 (BC마크가 없는 NON BC카드) 대상 제외</li>
-					<li>카드사직계약 가맹점, 카드사특별제휴가맹점, 가맹점부담계약 가맹점, 오프라인 가맹점 등 일부 제외</li>
-					<li>무이자할부 결제 시 포인트, 마일리지 적립 제외</li>
-					<li>그외 제외 업종 : 의약품, 제세공과금, 등록금, 도시가스, 상품권 등</li>
-					<li>본 행사는 카드사 사정에 따라 변경 또는 중단될 수 있음</li>
-				</ul>
-			</div>
+				<table border="1" bordercolor="black" width="95%"  style="border-collapse:collapse">
+					<tr>                          
+						<th>적용기간</th>                 
+						<th>카드사명</th>
+						<th>대상 금액</th>
+						<th>대상 개월수</th>	
+						<th>고객 부담</th>
+						<th width="170px"></th>
+					</tr>
+					<tr>
+					   <th rowspan="8">2.1 ~ 2.28</th>
+					   <th>BC카드</th>
+					   <th>5만원이상</th>
+					   <th>2~6개월</th>
+					   <th>없음</th>
+					   <th></th>
+				    </tr>
+				    <tr>
+						<th>하나비자</th>
+						<th>5만원이상</th>
+						<th>2~6개월</th>
+						<th>없음</th>
+						<th></th>
+					</tr>
+					<tr>
+						<th>삼성비자</th>
+						<th>5만원이상</th>
+						<th>2~6개월</th>
+						<th>없음</th>
+						<th></th>
+					</tr>
+					<tr>
+						<th>신한비자</th>
+						<th>5만원이상</th>
+						<th>2~6개월</th>
+						<th>없음</th>
+						<th></th>
+					</tr>
+					<tr>
+						<th>현대비자</th>
+						<th>5만원이상</th>
+						<th>2~6개월</th>
+						<th>없음</th>
+						<th></th>
+					</tr>
+					<tr>
+						<th>롯데비자</th>
+						<th>5만원이상</th>
+						<th>2~6개월</th>
+						<th>없음</th>
+						<th></th>
+					</tr>
+					<tr>
+						<th>KB비자</th>
+						<th>5만원이상</th>
+						<th>2~6개월</th>
+						<th>없음</th>
+						<th></th>
+					</tr>
+					<tr>
+						<th>NH비자</th>
+						<th>5만원이상</th>
+						<th>2~6개월</th>
+						<th>없음</th>
+						<th></th>
+					</tr>
+				</table><br>
+				<table border="1" bordercolor="black" width="95%">
+					<tr>                          
+						<th>적용기간</th>                 
+						<th>카드사명</th>
+						<th>대상 금액</th>
+						<th>대상 개월수</th>	
+						<th>고객 부담</th>
+						<th width="170px"></th>
+					</tr>
+					<tr>
+					   <th rowspan="2">2.1 ~ 2.28</th>
+					   <th rowspan="2">BC카드</th>
+					   <th rowspan="2">5만원이상</th>
+					   <th>10개월</th>
+					   <th>1~3회차</th>
+					   <th rowspan="2">
+						   	사전 ARS신청 고객에 한함
+								(ARS : 1899-5772)
+								(하나BC카드 제외)
+						</th>
+				    </tr>
+					<tr>
+						<th>12개월</th>
+						<th>1~4회차</th>
+					 </tr>
+				</table>
+				<div class="note">
+					<div class="title">유의사항</div>
+					<ul class="content">
+						<li>법인(기업)/체크/선불/기프트/하이브리드/은행계열카드 (BC마크가 없는 NON BC카드) 대상 제외</li>
+						<li>카드사직계약 가맹점, 카드사특별제휴가맹점, 가맹점부담계약 가맹점, 오프라인 가맹점 등 일부 제외</li>
+						<li>무이자할부 결제 시 포인트, 마일리지 적립 제외</li>
+						<li>그외 제외 업종 : 의약품, 제세공과금, 등록금, 도시가스, 상품권 등</li>
+						<li>본 행사는 카드사 사정에 따라 변경 또는 중단될 수 있음</li>
+					</ul>
+				</div>
 		</div>
 	</div>
-	
+		<div class="product-info hidden">댓글&사진후기</div>
+		<div class="qa hidden">상품 Q & A</div>	
+		
 	<script type="text/javascript">
 	
 		$('.view-img-box').click(function(e){

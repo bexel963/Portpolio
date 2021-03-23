@@ -45,6 +45,9 @@ public class HomeController {
 		ArrayList<ProductVo> productList = productService.getProductList();
 		ArrayList<FileVo> MainfileList = productService.getMainFileList();
 		
+		ArrayList<FileVo> suffleList = productService.suffle(MainfileList);
+		
+		mv.addObject("suffleList", suffleList);
 		mv.addObject("productList", productList);
 		mv.addObject("fileList", MainfileList);
 	    mv.setViewName("/main/home");

@@ -31,6 +31,7 @@
 			color: black;
 		}
         .container{
+        	width: 1170px;
             padding: 50px 50px;  
         }
         .table{
@@ -48,6 +49,10 @@
     		float: right;
     		margin-right: 70px;
     	}
+    	.search-box{
+    		padding-left: 70px;
+    		margin-bottom: 30px;
+    	}
     </style>
 </head>
 <body>
@@ -55,6 +60,22 @@
 		<div class="text">게시판</div>
 	</div>
 	<div class="container">
+		<div class="search-box"><br>
+			<form class="input-group mb-3">
+				<div class="input-group-append">
+					<select class="form-control" name="type">
+						<option value="1" <c:if test="${pm.criteria.type == 1}">selected</c:if>>전체</option>
+						<option value="2" <c:if test="${pm.criteria.type == 2}">selected</c:if>>제목</option>
+						<option value="3" <c:if test="${pm.criteria.type == 3}">selected</c:if>>내용</option>
+						<option value="4" <c:if test="${pm.criteria.type == 4}">selected</c:if>>작성자</option>
+					</select>
+				</div>
+				<input type="text" class="form-control" name="search" placeholder="Search" value = ${pm.criteria.search}>
+				<div class="input-group-append">
+	      			<button class="btn btn-success" type="submit">Go</button>  
+	     		</div>
+			</form>
+		</div>
 	    <table class="table">
 	      <thead>
 	        <tr>
@@ -95,7 +116,17 @@
 		    	<li class="page-item"><a class="page-link" href="<%=request.getContextPath()%>/boardList?page=${pm.endPage+1}&search=${pm.criteria.search}&type=${pm.criteria.type}">다음</a></li>
 		    </c:if>
 		</ul>
-	    <a href="<%=request.getContextPath()%>/boardRegis"><button type="button" class="btn btn-secondary">글쓰기</button></a>
+	    <a href="<%=request.getContextPath()%>/boardRegis"><button type="button" class="write-btn btn btn-success">글쓰기</button></a>
+	    <input type="hidden" name="user" value="${user.user_id}">
 	</div>
+	<script>
+		$('.write-btn').click(function(){
+			var user = $('input[name=user]').val();
+			if(user == ''){
+				alert('로그인 후 이용하세요.');
+				return false;
+			}
+		})
+	</script>
 </body>
 </html>

@@ -66,6 +66,8 @@ public interface ProductService {
 
 	ArrayList<ProductVo> getProductSaleRankList();		// 판매순위 높은거 순으로 제품 10개 가져오기
 
+	ArrayList<FileVo> suffle(ArrayList<FileVo> mainfileList);	// 롤링박스에 들어갈 제품 사진 섞기
+
 	
 
 

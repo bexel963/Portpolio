@@ -1,6 +1,8 @@
 package kr.green.portpolio.service;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -199,6 +201,14 @@ public class ProductServiceImp implements ProductService {
 	@Override
 	public ArrayList<ProductVo> getProductList(String search) {
 		return productDao.getProductList3(search);
+	}
+
+	@Override
+	public ArrayList<FileVo> suffle(ArrayList<FileVo> mainfileList) {
+		
+		Collections.shuffle(mainfileList, new Random()); 
+		
+		return mainfileList;
 	}
 
 }

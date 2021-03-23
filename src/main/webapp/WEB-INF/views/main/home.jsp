@@ -134,45 +134,11 @@
         <div class="rolling-box">
             <div class="contents-box">
                 <div class="contents-box-view">
-                    <a href="#" class="product n1">  
-                        <img src="https://funshop.akamaized.net/abroad/035/17733/Kohler%20Stillness%202_0.jpg" height="400" width="100%" class="img" alt="">
-                    </a>
-                    <a href="#" class="product n2">
-                        <img src="https://funshop.akamaized.net/abroad/035/17738/Anycall%20Retro%20Case%202_1.jpg" height="400" width="100%" class="img" alt="">
-                    </a>
-                    <a href="#" class="product n3">
-                        <img src="https://funshop.akamaized.net/abroad/035/17714/Hasbro%20Star%20Wars%20Galaxy%20Edge%20Captain%20Cardinal%20Helmet%201_0.png" height="400" width="100%" class="img" alt="">
-                    </a>
-                    <a href="#" class="product n4">
-                        <img src="https://funshop.akamaized.net/abroad/035/17714/Hasbro%20Star%20Wars%20Galaxy%20Edge%20Captain%20Cardinal%20Helmet%201_0.png" height="400" width="100%" class="img" alt="">
-                    </a>
-                    <a href="#" class="product n5">
-                        <img src="https://funshop.akamaized.net/abroad/035/17714/Hasbro%20Star%20Wars%20Galaxy%20Edge%20Captain%20Cardinal%20Helmet%201_0.png" height="400" width="100%" class="img" alt="">
-                    </a>
-                    <a href="#" class="product n6">
-                        <img src="https://funshop.akamaized.net/abroad/035/17714/Hasbro%20Star%20Wars%20Galaxy%20Edge%20Captain%20Cardinal%20Helmet%201_0.png" height="400" width="100%" class="img" alt="">
-                    </a>
-                    <a href="#" class="product n7">
-                        <img src="https://funshop.akamaized.net/abroad/035/17714/Hasbro%20Star%20Wars%20Galaxy%20Edge%20Captain%20Cardinal%20Helmet%201_0.png" height="400" width="100%" class="img" alt="">
-                    </a>
-                    <a href="#" class="product n8">  
-                        <img src="https://funshop.akamaized.net/abroad/035/17733/Kohler%20Stillness%202_0.jpg" height="400" width="100%" class="img" alt="">
-                    </a>
-                    <a href="#" class="product n9">
-                        <img src="https://funshop.akamaized.net/abroad/035/17738/Anycall%20Retro%20Case%202_1.jpg" height="400" width="100%" class="img" alt="">
-                    </a>
-                    <a href="#" class="product n10">  
-                        <img src="https://funshop.akamaized.net/abroad/035/17733/Kohler%20Stillness%202_0.jpg" height="400" width="100%" class="img" alt="">
-                    </a>
-                    <a href="#" class="product n8">  
-                        <img src="https://funshop.akamaized.net/abroad/035/17733/Kohler%20Stillness%202_0.jpg" height="400" width="100%" class="img" alt="">
-                    </a>
-                    <a href="#" class="product n9">
-                        <img src="https://funshop.akamaized.net/abroad/035/17738/Anycall%20Retro%20Case%202_1.jpg" height="400" width="100%" class="img" alt="">
-                    </a>
-                    <a href="#" class="product n10">  
-                        <img src="https://funshop.akamaized.net/abroad/035/17733/Kohler%20Stillness%202_0.jpg" height="400" width="100%" class="img" alt="">
-                    </a>
+                	<c:forEach items="${suffleList}" var="suffle">
+                		<a href="#" class="product">  
+                        	<img src="<%=request.getContextPath() %>/resources/img${suffle.file_name}" height="400" width="100%" class="img" alt="">
+                    	</a>
+                	</c:forEach>
                 </div>
                 <div class="pointer-box">
                     <i class="fas fa-chevron-left"></i>

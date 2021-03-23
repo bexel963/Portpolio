@@ -7,7 +7,20 @@
 	</insert>
 	
 	<select id="getBoardList" resultType="kr.green.portpolio.vo.BoardVo">
-		select * from portpolio.board where isDel='N' order by num desc limit #{cri.pageStart}, #{cri.perPageNum}
+		select * from portpolio.board where isDel='N' 
+		<if test="cri.type == 1">
+			and (title like concat('%', #{cri.search}, '%') or content like concat('%', #{cri.search}, '%') or writer like concat('%', #{cri.search}, '%'))
+		</if>
+		<if test="cri.type == 2">
+			and title like concat('%', #{cri.search}, '%')
+		</if>
+		<if test="cri.type == 3">
+			and content like concat('%', #{cri.search}, '%')
+		</if>
+		<if test="cri.type == 4">
+			and writer like concat('%', #{cri.search}, '%')
+		</if>
+		order by num desc limit #{cri.pageStart}, #{cri.perPageNum}
 	</select>
 	
 	<select id="getBoardDetail" resultType="kr.green.portpolio.vo.BoardVo">
@@ -20,6 +33,18 @@
 	
 	<select id="getTotalCount" resultType="int">
 		select count(*) from portpolio.board where isDel = 'N'
+		<if test="cri.type == 1">
+			and (title like concat('%', #{cri.search}, '%') or content like concat('%', #{cri.search}, '%') or writer like concat('%', #{cri.search}, '%'))
+		</if>
+		<if test="cri.type == 2">
+			and title like concat('%', #{cri.search}, '%')
+		</if>
+		<if test="cri.type == 3">
+			and content like concat('%', #{cri.search}, '%')
+		</if>
+		<if test="cri.type == 4">
+			and writer like concat('%', #{cri.search}, '%')
+		</if> 
 	</select>
 	
 	<update id="updateViews">

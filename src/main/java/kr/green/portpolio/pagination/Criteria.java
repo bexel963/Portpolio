@@ -7,18 +7,18 @@ public class Criteria {
 		private int perPageNum;		// 한 페이지 당 컨텐츠 갯수
 		private String search;		// 검색
 		private int type;			// 1:전체 2:제목 3:내용 4:작성자
+		
 		public Criteria() {			// Criteria 디폴트 생성자 : 현재 페이지를 1페이지로, 한 페이지에 5개의 컨텐츠
 			this.page = 1;
 			this.perPageNum = 5;
 			this.type = 0;
 			this.search = "";
 		}
-		//getter and setter
+	
 		public int getPage() {
 			return page;
 		}
 		public void setPage(int page) {
-			//현재 페이지 번호를 음수로 설정하려 할 때
 			if(page <= 0) {
 				this.page = 1;
 			}

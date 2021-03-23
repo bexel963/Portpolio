@@ -12,16 +12,39 @@
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
  	<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
 	<style>
+		.category-title{
+			width: 100%;
+			height: 60px;
+			background: #f7f7f7;
+	    	border-bottom: 1px solid #eee;
+	    	padding-top: 7px;
+	    	margin-bottom: 20px;
+		}
+		.category-title .text{
+			width: 1170px;
+			font-size: 30px;
+			color: #555555;
+			margin: 0 auto;
+		}
         .btn{
             float: right;
             margin-left: 10px;
-            
         }
+        .btn{
+        	margin: 20px 1px 20px 0;
+        }
+        .after::after{
+			clear: both;
+			content: '';
+			display: block;
+		}
     </style>
 </head>
 <body>
-	<div class="container">
-	  <br><h2>게시글 등록</h2><br>
+	<div class="category-title">
+		<div class="text">게시글 등록</div>
+	</div>
+	<div class="container after">
 	  <form action="<%=request.getContextPath()%>/boardRegis" method="post">	
 	    <div class="form-group">
 	      <label for="title">제목</label>
@@ -35,11 +58,11 @@
 	      <label for="content">내용</label>
 	      <textarea style="display:none; class="form-control"  id="content" name="content"></textarea>
 	    </div>
-	    <div id="summernote"></div>
-	    <button type="submit" class="btn btn-secondary">등록</button>
+	    <div id="summernote" class="content-box"></div>
+	    <button type="submit" class="btn btn-success">등록</button>
 	  </form>
 	  <a href="<%=request.getContextPath()%>/boardList">
-		<button type="button" class="btn btn-secondary">목록</button><br><br>
+		<button type="button" class="btn btn-success">목록</button><br><br>
 	  </a>
 	</div>
 	
