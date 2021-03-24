@@ -71,6 +71,9 @@
 	<delete id="deleteOrder2">
 		delete from portpolio.order where order_num = #{order_num}
 	</delete>
+	<delete id="deleteOrderInfo2">
+		delete from portpolio.order where payment_completion = 'Y'
+	</delete>
 	
 	<insert id="regisOrderInfo">
 		insert into portpolio.order(order_amount, product_num, order_cost, user_id) values(#{order_amount}, #{product.product_num}, #{order_cost}, #{user.user_id})

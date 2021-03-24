@@ -211,4 +211,10 @@ public class ProductServiceImp implements ProductService {
 		return mainfileList;
 	}
 
+	@Override
+	public void deleteOrderInfo() {
+		productDao.deleteOrderInfo2();
+		
+	}
+
 }

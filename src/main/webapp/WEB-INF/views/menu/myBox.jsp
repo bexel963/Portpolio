@@ -214,7 +214,7 @@
 					<div class="table">
 						<div class="top">				
 							<ul>
-								<li class="row2">상품명/옵션</li>
+								<li class="row2">상품명</li>
 								<li class="row3">판매가격</li>
 								<li class="row4">수량</li>
 								<li class="row5">주문금액</li>
@@ -224,8 +224,12 @@
 						</div>
 						<c:forEach items="${productList}" var="product">
 								<div class="middle">
-									<ul>									
-										<li class="row1"><input class="check-box" type="checkbox" name="num" value="${product.product_num}"></li>									
+									<ul>
+										<c:forEach items="${orderInfoList}" var="orderInfo">
+											<c:if test="${product.product_num == orderInfo.product_num}">									
+												<li class="row1"><input class="check-box" type="checkbox" name="num" value="${product.product_num}" <c:if test="${user.user_id == orderInfo.user_id && orderInfo.isDel == 'N'}">checked</c:if>></li>
+											</c:if>									
+										</c:forEach>
 										<li class="row2">
 											<c:forEach items="${fileList}" var="file">
 												<c:if test="${product.product_num == file.product_num}">
@@ -236,7 +240,7 @@
 											</c:forEach>
 											<div class="title-box">${product.product_title}</div>						
 										</li>
-										<li class="row3">${product.product_cost} 원</li>
+										<li class="row3 row3-val">${product.product_cost} 원</li>
 										<li class="row4">
 											<input type="hidden" name="product_cost" value="${product.product_cost}">
 											<input type="hidden" name="product_num" value="${product.product_num}">
@@ -244,7 +248,7 @@
 												<c:forEach begin="1" end="99" var="index">
 													<c:if test="${orderInfoList.size() != 0 }">
 														<c:forEach items="${orderInfoList}" var="orderInfo">
-															<option class="option" value="${index}" <c:if test="${orderInfo.order_amount == index && orderInfo.product_num == product.product_num}">selected</c:if>>${index}</option>
+															<option class="option" value="${index}" <c:if test="${orderInfo.order_amount == index && orderInfo.product_num == product.product_num && orderInfo.isDel == 'N'}">selected</c:if>>${index}</option>
 														</c:forEach>
 													</c:if>
 													<c:if test="${orderInfoList.size() == 0 }">												
@@ -285,9 +289,8 @@
 					</div>
 				</div>
 				<div class="btn-area">
-					<img src="<%=request.getContextPath()%>/resources/img/btn_order(1).gif" alt="">
 					<button type="submit" class="account-btn"><img src="<%=request.getContextPath()%>/resources/img/btn_select_order (1).gif" alt=""></button>
-					<a href="#"><img src="<%=request.getContextPath()%>/resources/img/btn_shopping (1).gif" alt=""></a>			
+					<a href="<%=request.getContextPath()%>/"><img src="<%=request.getContextPath()%>/resources/img/btn_shopping (1).gif" alt=""></a>			
 				</div>
 			</form>
 		</div>
@@ -340,9 +343,11 @@
 	    $('.check-box').click(function(){
 	    	var check_state = $(this).prop("checked");
 	    	var product_num = $(this).parent().siblings('.row4').find('input[name=product_num]').val();
+	    	var product_cost = $('.row3-val').html();
 	    	var order_amount = $(this).parent().siblings('.row4').find('select[name=order_amount]').val();
-	    	 
+	    	var obj = $(this);
     		if(check_state == true){
+    			console.log('빈 박스 클릭');
     			var data = {'order_amount' : order_amount, 'product_num' : product_num, 'isDel':'N'};
     	    	$.ajax({
     				url : '<%=request.getContextPath()%>/orderInfo',
@@ -356,6 +361,10 @@
     				}
     			})
     		}else{
+    			console.log('체크 되어있는 박스 클릭');
+    			obj.parent().siblings('.row4').find('.select-btn').val(1)
+    			console.log(product_cost);
+    			obj.parent().siblings('.row5').html(product_cost);
     			var data2 = {'product_num' : product_num, 'isDel':'Y'};
     	    	$.ajax({
     				url : '<%=request.getContextPath()%>/deleteOrderInfo',

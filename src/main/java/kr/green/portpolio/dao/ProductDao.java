@@ -71,6 +71,8 @@ public interface ProductDao {
 
 	ArrayList<ProductVo> getProductList3(@Param("search")String search);
 
+	void deleteOrderInfo2();
+
 	
 	
 

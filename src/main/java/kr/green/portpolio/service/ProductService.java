@@ -68,6 +68,9 @@ public interface ProductService {
 
 	ArrayList<FileVo> suffle(ArrayList<FileVo> mainfileList);	// 롤링박스에 들어갈 제품 사진 섞기
 
+	void deleteOrderInfo();	// 결제완료된 주문내역 주문 테이블에서 삭제
+
+
 	
 
 

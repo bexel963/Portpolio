@@ -121,8 +121,9 @@ response.setDateHeader("Expires", 0L); %>
 			width: 1002px;
 			border-top: 1px solid black;
 			height: 60px;
-			padding: 0 0 0 360px;
+			padding: 0 0 0 290px;
 		}
+	
 		.detail-box .detail-tab div{
 			float: left;
 		}
@@ -134,7 +135,7 @@ response.setDateHeader("Expires", 0L); %>
 			height: 11px;
 			background-color: #bec8d8;
 			vertical-align: -1px;
-			margin: 0 20px 0 20px;
+			margin: 0 0 0 40px;
 		}
 		.detail-box a:hover{
 			color: red;
@@ -142,35 +143,35 @@ response.setDateHeader("Expires", 0L); %>
 		.btn-box img{
 			width: 128px;
 		}
-		.description-box{
+		.container-box{
 			margin: 0 auto;
 			margin-bottom: 10px;
 			padding-top: 50px;
 			width: 1002px;
 			border: 1px solid #e7e7e7;
 		}
-		.description-box .title-img-box{
+		.container-box .title-img-box{
 			width: 900px;
 			margin: 0 auto;
 			margin-bottom: 30px;
 		}
-		.description-box .title img{
+		.container-box .title img{
 			width: 100%;
 			height: 100%;
 		}
-		.description-box .product-container{
+		.container-box .product-container{
 			width: 900px;
 			margin: 0 auto;
 		}
-		.description-box .product-container .img-box{ 
+		.container-box .product-container .img-box{ 
 			width: 700px;
 			margin: 0 auto;
 			margin-bottom: 20px;
 		}
-		.description-box .product-container .img-box:last-child{
+		.container-box .product-container .img-box:last-child{
 			margin-bottom: 100px;
 		}
-		.description-box .product-container .img-box img{
+		.container-box .product-container .img-box img{
 			width: 100%;
 		}
 		.policy-box{
@@ -271,20 +272,32 @@ response.setDateHeader("Expires", 0L); %>
 			margin-right: 1px;
 		}
 		.select{
-			border-top: 2px solid #EA2C4F;
+			border-top: 3px solid #EA2C4F;
 		}
 		.detail-box .tab{
 			padding-top: 17px;
+			width: 150px;
 			height: 60px;
-		}
+			box-sizing: border-box;
+			text-align: center;
+			cursor: pointer;
+		} 
 		.detail-box .tab1{
-		
+			padding-left: 35px;
+		}
+		.detail-box .tab2{
+			width: 190px;
+			padding-left: 40px;
+		}
+		.detail-box .tab1:hover,
+		.detail-box .tab2:hover,
+		.detail-box .tab3:hover{
+			color: red;
 		}
     </style>
 </head>
 <body>
 	<div class="main-box">
-	
 		<div class="top">
 			<div class="left">${product.product_title}</div>
 			<div class="right">제품 번호 : ${product.product_num}</div>
@@ -343,14 +356,15 @@ response.setDateHeader("Expires", 0L); %>
 			</div>
 		</div>
 	</div>
-		<div class="detail-box">
-			<div class="detail-tab">
-				<div class="tab tab1"><a href="#">상품설명</a></div>
-				<div class="tab tab2 select"><a href="#">댓글&사진후기</a></div>
-				<div class="tab tab3"><a href="#">상품 Q & A</a></div>
-			</div>
+	<div class="detail-box">
+		<div class="detail-tab">
+			<div class="tab tab1 select">상품설명</div>
+			<div class="tab tab2 ">댓글&사진후기</div>
+			<div class="tab tab3 ">상품 Q & A</div>
 		</div>
-		<div class="description-box">
+	</div>
+	<div class="container-box">
+		<div class="discription-box">
 			<div class="title-img-box">
 				<img src="<%=request.getContextPath() %>/resources/img/description.png" alt="">
 			</div>
@@ -403,126 +417,145 @@ response.setDateHeader("Expires", 0L); %>
 					
 				</div>
 			</div>
-		</div>
-	
-		<div class="overlay">
-			<div class="hidden-box">
-				<div class="title">
-					<div class="text-box">21년 2월 신용카드 무이자 할부</div>
-					<div class="img-box">
-						<img src="<%=request.getContextPath() %>/resources/img/X.png" alt="">
+			<div class="overlay">
+				<div class="hidden-box">
+					<div class="title">
+						<div class="text-box">21년 2월 신용카드 무이자 할부</div>
+						<div class="img-box">
+							<img src="<%=request.getContextPath() %>/resources/img/X.png" alt="">
+						</div>
+					</div>
+					<table border="1" bordercolor="black" width="95%"  style="border-collapse:collapse">
+						<tr>                          
+							<th>적용기간</th>                 
+							<th>카드사명</th>
+							<th>대상 금액</th>
+							<th>대상 개월수</th>	
+							<th>고객 부담</th>
+							<th width="170px"></th>
+						</tr>
+						<tr>
+						   <th rowspan="8">2.1 ~ 2.28</th>
+						   <th>BC카드</th>
+						   <th>5만원이상</th>
+						   <th>2~6개월</th>
+						   <th>없음</th>
+						   <th></th>
+					    </tr>
+					    <tr>
+							<th>하나비자</th>
+							<th>5만원이상</th>
+							<th>2~6개월</th>
+							<th>없음</th>
+							<th></th>
+						</tr>
+						<tr>
+							<th>삼성비자</th>
+							<th>5만원이상</th>
+							<th>2~6개월</th>
+							<th>없음</th>
+							<th></th>
+						</tr>
+						<tr>
+							<th>신한비자</th>
+							<th>5만원이상</th>
+							<th>2~6개월</th>
+							<th>없음</th>
+							<th></th>
+						</tr>
+						<tr>
+							<th>현대비자</th>
+							<th>5만원이상</th>
+							<th>2~6개월</th>
+							<th>없음</th>
+							<th></th>
+						</tr>
+						<tr>
+							<th>롯데비자</th>
+							<th>5만원이상</th>
+							<th>2~6개월</th>
+							<th>없음</th>
+							<th></th>
+						</tr>
+						<tr>
+							<th>KB비자</th>
+							<th>5만원이상</th>
+							<th>2~6개월</th>
+							<th>없음</th>
+							<th></th>
+						</tr>
+						<tr>
+							<th>NH비자</th>
+							<th>5만원이상</th>
+							<th>2~6개월</th>
+							<th>없음</th>
+							<th></th>
+						</tr>
+					</table><br>
+					<table border="1" bordercolor="black" width="95%">
+						<tr>                          
+							<th>적용기간</th>                 
+							<th>카드사명</th>
+							<th>대상 금액</th>
+							<th>대상 개월수</th>	
+							<th>고객 부담</th>
+							<th width="170px"></th>
+						</tr>
+						<tr>
+						   <th rowspan="2">2.1 ~ 2.28</th>
+						   <th rowspan="2">BC카드</th>
+						   <th rowspan="2">5만원이상</th>
+						   <th>10개월</th>
+						   <th>1~3회차</th>
+						   <th rowspan="2">
+							   	사전 ARS신청 고객에 한함
+									(ARS : 1899-5772)
+									(하나BC카드 제외)
+							</th>
+					    </tr>
+						<tr>
+							<th>12개월</th>
+							<th>1~4회차</th>
+						 </tr>
+					</table>
+					<div class="note">
+						<div class="title">유의사항</div>
+						<ul class="content">
+							<li>법인(기업)/체크/선불/기프트/하이브리드/은행계열카드 (BC마크가 없는 NON BC카드) 대상 제외</li>
+							<li>카드사직계약 가맹점, 카드사특별제휴가맹점, 가맹점부담계약 가맹점, 오프라인 가맹점 등 일부 제외</li>
+							<li>무이자할부 결제 시 포인트, 마일리지 적립 제외</li>
+							<li>그외 제외 업종 : 의약품, 제세공과금, 등록금, 도시가스, 상품권 등</li>
+							<li>본 행사는 카드사 사정에 따라 변경 또는 중단될 수 있음</li>
+						</ul>
 					</div>
 				</div>
-				<table border="1" bordercolor="black" width="95%"  style="border-collapse:collapse">
-					<tr>                          
-						<th>적용기간</th>                 
-						<th>카드사명</th>
-						<th>대상 금액</th>
-						<th>대상 개월수</th>	
-						<th>고객 부담</th>
-						<th width="170px"></th>
-					</tr>
-					<tr>
-					   <th rowspan="8">2.1 ~ 2.28</th>
-					   <th>BC카드</th>
-					   <th>5만원이상</th>
-					   <th>2~6개월</th>
-					   <th>없음</th>
-					   <th></th>
-				    </tr>
-				    <tr>
-						<th>하나비자</th>
-						<th>5만원이상</th>
-						<th>2~6개월</th>
-						<th>없음</th>
-						<th></th>
-					</tr>
-					<tr>
-						<th>삼성비자</th>
-						<th>5만원이상</th>
-						<th>2~6개월</th>
-						<th>없음</th>
-						<th></th>
-					</tr>
-					<tr>
-						<th>신한비자</th>
-						<th>5만원이상</th>
-						<th>2~6개월</th>
-						<th>없음</th>
-						<th></th>
-					</tr>
-					<tr>
-						<th>현대비자</th>
-						<th>5만원이상</th>
-						<th>2~6개월</th>
-						<th>없음</th>
-						<th></th>
-					</tr>
-					<tr>
-						<th>롯데비자</th>
-						<th>5만원이상</th>
-						<th>2~6개월</th>
-						<th>없음</th>
-						<th></th>
-					</tr>
-					<tr>
-						<th>KB비자</th>
-						<th>5만원이상</th>
-						<th>2~6개월</th>
-						<th>없음</th>
-						<th></th>
-					</tr>
-					<tr>
-						<th>NH비자</th>
-						<th>5만원이상</th>
-						<th>2~6개월</th>
-						<th>없음</th>
-						<th></th>
-					</tr>
-				</table><br>
-				<table border="1" bordercolor="black" width="95%">
-					<tr>                          
-						<th>적용기간</th>                 
-						<th>카드사명</th>
-						<th>대상 금액</th>
-						<th>대상 개월수</th>	
-						<th>고객 부담</th>
-						<th width="170px"></th>
-					</tr>
-					<tr>
-					   <th rowspan="2">2.1 ~ 2.28</th>
-					   <th rowspan="2">BC카드</th>
-					   <th rowspan="2">5만원이상</th>
-					   <th>10개월</th>
-					   <th>1~3회차</th>
-					   <th rowspan="2">
-						   	사전 ARS신청 고객에 한함
-								(ARS : 1899-5772)
-								(하나BC카드 제외)
-						</th>
-				    </tr>
-					<tr>
-						<th>12개월</th>
-						<th>1~4회차</th>
-					 </tr>
-				</table>
-				<div class="note">
-					<div class="title">유의사항</div>
-					<ul class="content">
-						<li>법인(기업)/체크/선불/기프트/하이브리드/은행계열카드 (BC마크가 없는 NON BC카드) 대상 제외</li>
-						<li>카드사직계약 가맹점, 카드사특별제휴가맹점, 가맹점부담계약 가맹점, 오프라인 가맹점 등 일부 제외</li>
-						<li>무이자할부 결제 시 포인트, 마일리지 적립 제외</li>
-						<li>그외 제외 업종 : 의약품, 제세공과금, 등록금, 도시가스, 상품권 등</li>
-						<li>본 행사는 카드사 사정에 따라 변경 또는 중단될 수 있음</li>
-					</ul>
-				</div>
+			</div>
 		</div>
+		<div class="comment-box hidden">댓글&사진후기</div>
+		<div class="qa-box hidden">상품 Q & A</div>	
 	</div>
-		<div class="product-info hidden">댓글&사진후기</div>
-		<div class="qa hidden">상품 Q & A</div>	
+		
 		
 	<script type="text/javascript">
-	
+		$('.tab').click(function(){
+			if($(this).hasClass('tab2')){
+				$('.tab').removeClass('select');
+				$('.tab2').addClass('select');
+				$('.container-box').children().addClass('hidden');
+				$('.comment-box').removeClass('hidden');
+			}
+			else if($(this).hasClass('tab1')){
+				$('.tab').removeClass('select');
+				$('.tab1').addClass('select');
+				$('.container-box').children().addClass('hidden');
+				$('.discription-box').removeClass('hidden');
+			}else if($(this).hasClass('tab3')){
+				$('.tab').removeClass('select');
+				$('.tab3').addClass('select');
+				$('.container-box').children().addClass('hidden');
+				$('.qa-box').removeClass('hidden');
+			}	
+		})
 		$('.view-img-box').click(function(e){
             e.preventDefault();
 			$('.overlay').show();
