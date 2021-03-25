@@ -106,6 +106,7 @@
 		.product-box .table .middle .row2
 		{
 			padding-top: 15px;
+			width: 553px;
 		}
 		.product-box .table .middle .row2 .title-box{
 			padding-left: 30px;
@@ -257,7 +258,7 @@
 												</c:forEach>
 											</select>
 										</li>
-										<c:if test="${orderInfoList.contains(product)}">
+										<c:if test="${orderInfoList.contains(product)}">	<!-- 화면에 가격 나타내는거 ( 주문 내역에 해당 제품이 있으면 ) -->
 											<c:forEach items="${orderInfoList}" var="orderInfo">
 												<c:if test="${orderInfo.product_num == product.product_num}">
 													<li class="row5">
@@ -267,7 +268,7 @@
 												</c:if>
 											</c:forEach>
 										</c:if>
-										<c:if test="${!orderInfoList.contains(product)}">
+										<c:if test="${!orderInfoList.contains(product)}">	<!-- 화면에 가격 나타내는거 ( 주문 내역에 해당 제품이 없으면 ) -->
 											<li class="row5">
 												<input type="hidden" name="order_cost" value="${orderInfo.order_cost}">
 												<span>${product.product_cost} 원</span>

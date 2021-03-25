@@ -135,7 +135,7 @@
 					<input type="file"  onchange="readURL(this);" name="fileList" style="width:200px;" />
 				</div>
 				<div class="photo">
-					<input type="file"  name="fileList" style="width:200px;" />
+					<input type="file"  name="fileList" style="width:200px;"/>
 					<input type="file"  name="fileList" style="width:200px;"/>
 					<input type="file"  name="fileList" style="width:200px;"/>
 					<input type="file"  name="fileList" style="width:200px;" />

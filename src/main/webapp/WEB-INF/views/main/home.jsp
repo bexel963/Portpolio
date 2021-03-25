@@ -130,7 +130,7 @@
 </head>
 
 <body>
-    <div class="body">
+    <div class="body after">
         <div class="rolling-box">
             <div class="contents-box">
                 <div class="contents-box-view">

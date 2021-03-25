@@ -154,6 +154,18 @@
 	        .header .logbar .container2 .right .search-btn:hover{
 	            color: red;
 	        }
+	        .manager{
+	        	position: relative;
+	        }
+	        .manager-list{
+	        	position: absolute;
+	        	right: 0;
+	        	top: 64;
+	        	border: 1px solid black;
+	        	width: 110px;
+	        	height: 300px;
+	        	z-index: 1000;
+	        }
 	</style>
 </head>
 <body>
@@ -215,7 +227,10 @@
                         </c:if>
                         <li class="menu"><a href="<%=request.getContextPath()%>/boardList">게시판</a></li>
                         <c:if test="${user.user_grade == 0}">
-                        	<li class="menu"><a href="<%=request.getContextPath()%>/productRegis">상품등록</a></li>
+                        	<li class="menu manager">
+                        		<a href="<%=request.getContextPath()%>/productRegis">상품등록</a>
+                        		<div class="manager-list"></div>
+                        	</li>
                         </c:if>
                     </ul>
                 </div>
