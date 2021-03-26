@@ -11,6 +11,7 @@ response.setDateHeader("Expires", 0L); %>
 <html>
 <head>
 <script src="//code.jquery.com/jquery-3.4.1.js"></script>
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 <script src="https://kit.fontawesome.com/022cf171a0.js" crossorigin="anonymous"></script>
 <meta charset="UTF-8">
 	<style>
@@ -294,6 +295,312 @@ response.setDateHeader("Expires", 0L); %>
 		.detail-box .tab3:hover{
 			color: red;
 		}
+		.after::after{
+			clear: both;
+			content: '';
+			display: block;
+		}
+		.comment-box{
+			padding: 0 36px 85px 36px;
+		}
+		.container-box .comment-box .title-box{
+			margin-bottom: 10px;
+		}
+		.container-box .comment-box .title-box .left{
+			float: left;
+			color: #000000;
+			font-size: 20px;
+			font-weight: bold;
+		}
+		.container-box .comment-box .title-box .right{
+			float: right;
+		}
+		.container-box .comment-box .title-box .right img{
+			line-height: 1px;
+		}
+		.container-box .comment-box .title-box .write-btn{
+			padding: 2px 30px;
+		    border: 1px solid #212121;
+		    background-color: #212121;
+		    color: #fff;
+		    height: 30px;
+		}
+		.container-box .write-box{
+			width: 930px;
+			padding: 15px 20px 20px;
+    		background-color: #f7f7f7;
+    		border-top: 1px solid black;
+    		margin-bottom: 10px;
+		}
+		.container-box .write-box .explain-area ul{
+			color: #767676;
+			font-size: 13px;
+			list-style: none;
+			line-height: 19px;
+		}
+		.strong{
+			margin-top: 15px;
+			color: #212121;
+		}
+		.strong a{
+			cursor: pointer;
+		}
+		.inquiry:hover{
+			color: #EA2C4F;
+		}
+		.container-box .write-box .write-area .content{
+			width: 100%;
+			height: 200px;
+			padding: 10px 0 0 10px;	
+			border: 1px solid #e7e7e7;
+			cursor: pointer;
+			margin-bottom: 10px;
+		}
+		textarea:focus{
+			outline: none;
+		}
+		.container-box .write-box .write-area .photo-tab{
+			float: left;
+		}
+		.container-box .write-box .write-area .btn-tab{
+			float: right;
+		}
+		.container-box .write-box .write-area .btn-tab .cancel,
+		.container-box .write-box .write-area .btn-tab .regis{
+			width: 90px;
+			height: 38px;
+			float: left;
+			text-align: center;
+			padding-top: 8px;
+			font-size: 14px;
+			cursor: pointer;
+		}
+		.container-box .write-box .write-area .btn-tab .cancel{		
+			background-color: #ffffff;
+    		border: 1px solid #e7e7e7;
+		}
+		.container-box .write-box .write-area .btn-tab .regis{
+			background-color: #2a4e73;
+			color: #ffffff;
+			margin-left: 5px;
+		}
+		.score{
+			margin-bottom: 10px;
+		}
+		.score .text{
+			font-size: 14px;
+			font-weight: Bold;
+		}
+		.comment-box .list-box{
+			border-top: 1px solid #d1d1d1;
+		}
+		.comment-box .list-box .comment{
+			margin-top: 15px;
+		}
+		.comment-box .list-box .comment .comment-num{
+			float: left;
+			width: 10%;
+			height: 200px;
+			color: #464646;
+			font-size: 12px;
+			padding: 40px 0 0 30px;
+		}
+		.comment-box .list-box .comment .content{
+			float: left;
+			min-height: 200px;
+			width: 90%;
+			border-bottom: 2px dotted #d1d1d1;
+			color: #464646;
+			font-size: 12px;
+			padding: 40px 0 10px 10px;
+		}
+		.comment-box .list-box .comment .content .left{
+			float: left;
+			width: 90%;
+		}
+		.comment-box .list-box .comment .content .left .top{
+			margin-bottom: 10px;
+		}
+		.comment-box .list-box .comment .content .left .mid{
+			line-height: 20px;
+			margin-bottom: 20px;
+		}
+		.comment-box .list-box .comment .content .right{
+			float: right;
+			width: 10%;
+		}
+		.comment-box .expand-btn{
+			width: 60px;
+			height: 20px;
+			background-color: #212121;
+			color: #ffffff;
+			text-align: center;
+			padding-top: 1px;
+			cursor: pointer;
+			margin-top: 20px;
+		}
+		.comment-box .comment .photo{
+			width: 100px;
+			height: 100px;
+			float: right;
+			border: 1px solid #d1d1d1;
+		}
+		.comment .top,
+		.comment .mid{
+			width: 80%;	
+		}
+		.comment-box .list-box .comment .content .left .top .id::after,
+		.comment-box .list-box .comment .content .left .top .date::after{
+			content: '';
+			display: inline-block;
+			width: 2px;
+			height: 11px;
+			background-color: #bec8d8;
+			vertical-align: -1px;
+			margin: 0 10px 0 10px;
+		}
+		.expand-photo{
+			width: 800px;
+			height: 800px;
+			border: 1px solid #d1d1d1;
+		}
+		.qa-box{
+			padding: 0 30px 0 30px;
+		}
+		.qa-box .row2{
+			margin: 10px 0 30px 0;
+			width: 928px;
+			border-top: 1px solid #e7e7e7;
+			padding-top: 15px;
+		}
+		.qa-box .btn-area img{
+			cursor: pointer;
+		}
+		.qa-box .btn-area .left{
+			float: left;
+		}
+		.qa-box .btn-area .right{
+			float: right;
+		}
+		.qa-box .btn-area .right .search-btn{
+			margin-right: 20px;
+		}
+		.qa-box .btn-area{
+			margin-bottom: 10px;
+		}
+		.qa-box .table{
+			font-size: 12px;
+			font-weight: normal;
+			margin-bottom: 60px;
+		}
+		.qa-box .table tr{
+			height: 32px;
+			text-align: center;
+		}
+		.qa-box .table .line1{
+		    border-top: 1px solid #e2e2e2;
+		    border-bottom: 1px solid #e2e2e2;
+		    background: #f4f4f4;
+		    color: #464646;
+		}
+		.qa-box .table .line2{
+		   border-bottom: 1px solid #e2e2e2;
+		}
+		.qa-box .question-box{
+			border: 1px solid #e2e2e2;
+			margin-bottom: 20px;
+			font-size: 12px;
+		}
+		.qa-box .question-box .left{
+			float: left;
+			width: 90%;
+		}
+		.qa-box .question-box .right{
+			float: right;
+			width: 10%;
+		}
+		.qa-box .question-box .left .title-box{
+			padding: 4px 0 0 20px;
+			height: 35px;
+			border-bottom: 1px solid #e2e2e2;
+		}
+		.qa-box .question-box .left .title-box div{
+			float: left;
+			padding-top: 3px;
+			margin-right: 20px;
+		}
+		.qa-box .question-box .left .content-box div{
+			float: left;
+			padding-top: 30px;
+			margin-right: 20px;
+		}
+		.qa-box .question-box .left .content-box{
+			padding: 4px 0 0 20px;
+			height: 92px;
+		}
+		.qa-box .question-box .question-btn{
+			width: 93px;
+    		height: 129px;
+    		color: #ffffff;
+    		text-align: center;
+    		padding-top: 55px;
+    		font-size: 14px;
+    		background-color: #787878;
+    		cursor: pointer;
+		}
+		.line2 .title{
+			cursor: pointer;
+		}
+		.qa-box .table .question{
+			
+		}
+		.qa-box .table .answer{
+			border-top: 2px dotted #e2e2e2;
+			padding-top: 5px;
+			border-bottom: 1px solid #e2e2e2;
+			background-color: #f3f5fb;
+		}
+		.qa-box .table .question .left,
+		.qa-box .table .answer .left{
+			width: 10%;
+			float: left;
+		}
+		.qa-box .table .question .right,
+		.qa-box .table .answer .right{
+			width: 90%;
+			float: right;
+			text-align: left;
+		}
+		.qa-box .table .question .right{
+			padding: 3px 0 12px 80px;
+		}
+		.qa-box .table .answer .right{
+			padding: 12px 0 12px 80px;	
+		}
+		.qa-box .table .question .left{
+			padding-top: 1px;
+		}
+		.qa-box .table .answer .left{
+			padding-top: 12px;
+		}
+		.qa-box .table .question .tab{
+			background-color: #49AEE7;
+			width: 40px;
+			height: 20px;
+			margin: 0 auto;
+			border-radius: 2px;
+			color: #ffffff;
+			padding-top: 2px;
+		}
+		.qa-box .table .answer .tab{
+			background-color: #DC46BC;
+			width: 40px;
+			height: 20px;
+			margin: 0 auto;
+			border-radius: 2px;
+			color: #ffffff;
+			padding-top: 2px;
+		}
     </style>
 </head>
 <body>
@@ -302,8 +609,7 @@ response.setDateHeader("Expires", 0L); %>
 			<div class="left">${product.product_title}</div>
 			<div class="right">제품 번호 : ${product.product_num}</div>
 		</div>
-		<div class="bottom">
-			
+		<div class="bottom">			
 			<div class="product-img">
 				<a href="#">
 					<img style="width: 90%" src="<%=request.getContextPath() %>/resources/img${mainFile.file_name}" alt="">
@@ -363,7 +669,7 @@ response.setDateHeader("Expires", 0L); %>
 			<div class="tab tab3 ">상품 Q & A</div>
 		</div>
 	</div>
-	<div class="container-box">
+	<div class="container-box after">
 		<div class="discription-box">
 			<div class="title-img-box">
 				<img src="<%=request.getContextPath() %>/resources/img/description.png" alt="">
@@ -531,12 +837,193 @@ response.setDateHeader("Expires", 0L); %>
 				</div>
 			</div>
 		</div>
-		<div class="comment-box hidden">댓글&사진후기</div>
-		<div class="qa-box hidden">상품 Q & A</div>	
+		<div class="comment-box after hidden">
+			<div class="title-box after">
+				<div class="left">댓글 & 사진후기</div>
+				<div class="right">
+					<img src="<%=request.getContextPath()%>/resources/img/talk_notice.png" alt="">
+					<input type="button" value="작성하기" class="write-btn">
+				</div>
+			</div>
+			<div class="write-box after hidden">
+				<div class="explain-area">
+					<ul>
+						<li>광고, 비방, 제품과 관계없는 내용, 타 사이트 및 가격비교, 기타 통신 예절에 어긋나거나 펀샵의 취지와 맞지 않은 글은 예고 없이</li>
+						<li>삭제 및 수정될 수 있습니다.</li>
+						<li>운영자가 모든 글에 답글을 달 수는 없음을 양해 바랍니다.</li>
+						<li>별점과 사진 후기는 상품 구매자에 한해 등록 가능합니다. 별점과 사진 후기는 같이 1회 등록 가능합니다. </li>
+						<li>본 댓글 & 사진후기란을 통한 취소나 환불, 반품 등은 처리되지 않습니다</li>
+						<li>구매평은 3일 이내에 삭제가 가능 합니다. </li>
+						<li class="strong"><strong>교환 및 A/S요청은 빠른 확인과 원활한 처리를 위해 <a href="" class="inquiry"><ins>1:1 상담으로 문의</ins></a>해 주세요.</strong></li>
+					</ul>
+				</div>
+				<div class="write-area">
+					<div class="score">
+						<i class="far fa-star"></i>
+						<i class="fas fa-star"></i>
+						<i class="far fa-star"></i>
+						<i class="far fa-star"></i>
+						<i class="far fa-star"></i>
+						<span class="text">별점은 상품구매 후 가능합니다.</span>
+					</div>
+					<textarea class="content" name="comment-content" cols="30" rows="10"></textarea>
+					<div class="tab">
+						<div class="photo-tab">
+							<label class="btn btn-danger btn-file">
+						        사진등록 <input type="file" name="photo" class="photo-add" value="사진등록" style="display:none"/>
+						    </label>
+						</div>
+						<div class="btn-tab">
+							<div class="cancel">취소</div>
+							<div class="regis">등록</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="list-box after">
+				<div class="comment after">
+					<div class="comment-num after">
+						<span>번호</span>
+					</div>
+					<div class="content after">
+						<div class="left">						
+							<div class="top">
+								<span class="id">아이디</span>
+								<span class="date">작성일</span>
+								<span class="star">
+									<i class="fas fa-star"></i>
+									<i class="fas fa-star"></i>
+									<i class="fas fa-star"></i>
+									<i class="fas fa-star"></i>
+									<i class="fas fa-star"></i>
+								</span>
+							</div>
+							<div class="mid">
+								<div class="text">
+									가나다라마가나다라마가나다라마가나다라마가나다라마가나다라마가나다라마가나다라마
+									가나다라마가나다라마가나다라마가나다라마가나다라마가나다라마
+									가나다라마가나다라마가나다라마가나다라마가나다라마가나다라마가나다라마
+								</div>
+							</div>	
+							<div class="expand-btn">사진확대</div>
+							<div class="expand-photo hidden"></div>
+						</div>
+						<div class="right">
+							<div class="photo"></div>						
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="qa-box after hidden">
+			<div class="title2 after">
+				<div class="row1"><img src="<%=request.getContextPath()%>/resources/img/question.gif"></div>
+				<div class="row2"><img src="<%=request.getContextPath()%>/resources/img/txt_secret.gif"></div>
+			</div>
+			<div class="btn-area after">
+				<div class="left">
+					<img class="question-tab" src="<%=request.getContextPath()%>/resources/img/question1.gif">
+				</div>
+				<div class="right">
+					<input type="text" style="width:250px; height: 24px; border: 1px solid #e7e7e7;">
+					<img class="search-btn" src="<%=request.getContextPath()%>/resources/img/search1.gif">
+					<img src="<%=request.getContextPath()%>/resources/img/myquestion.gif">
+					<img src="<%=request.getContextPath()%>/resources/img/seeall_question.gif">
+				</div>
+			</div>
+			<div class="question-box after hidden">
+				<div class="left">
+					<div class="title-box">
+						<div>제 목</div>
+						<input type="text" class="title" style="width: 630px; height: 25px; border: 1px solid #e2e2e2; padding-left: 3px;">
+					</div>
+					<div class="content-box">
+						<div>내 용</div>
+						<textarea class="content" style="width: 735px; height: 85px; border: 1px solid #e2e2e2;" cols="30" rows="10">
+							
+						</textarea>
+					</div>
+				</div>
+				<div class="right">
+					<div class="question-btn">문의하기</div>
+				</div>
+			</div>
+			<table class="table">
+				<tr class="line1">
+					<th style="width: 90px;">번호</th>
+					<th style="width: 495px;">제목</th>
+					<th style="width: 100px;">아이디</th>
+					<th style="width: 100px;">답변상태</th>
+					<th style="width: 100px;">작성일</th>
+				</tr>
+				<tr class="line2">
+					<th>1</th>
+					<td><a class="title">/S정책은 어떻게 되나요?(제목)</a></td>
+					<th>aa</th>
+					<th><img src="<%=request.getContextPath()%>/resources/img/icon_answer_complete.gif"></th>
+					<th>2021-03-26</th>
+				</tr>
+				<tr class="hidden-table-box hidden">
+					<td colspan="5">
+						<div class="answer-box">
+							<div class="question after">
+								<div class="left"><div class="tab">질문</div></div>
+								<div class="right">가나다라마바사<br>가나다라마바사</div>	
+							</div>
+							<div class="answer after">
+								<div class="left"><div class="tab">답변</div></div>
+								<div class="right">가나다라마바사<br><br>가나다라마바사가<br><br>나다라마바사<br>가나다라마바사</div>
+							</div>	
+						</div>
+					</td>
+				</tr>
+				<tr class="line2">
+					<th>1</th>
+					<td><a class="title">/S정책은 어떻게 되나요?(제목)</a></td>
+					<th>aa</th>
+					<th>대기중</th>
+					<th>2021-03-26</th>
+				</tr>
+			</table>
+		</div>	
 	</div>
-		
-		
+	
 	<script type="text/javascript">
+		$('.line2 .title').click(function(){
+			if($('.hidden-table-box').hasClass('hidden')){
+				$('.hidden-table-box').removeClass('hidden');
+			}else{
+				$('.hidden-table-box').addClass('hidden');
+			}
+		})
+		$('.question-tab').click(function(){
+			if($('.question-box').hasClass('hidden')){
+				$('.question-box').removeClass('hidden');
+			}else{
+				$('.question-box').addClass('hidden');
+			}
+		})
+		$('.expand-btn').click(function(){
+			$('.expand-btn').addClass('hidden');
+			$('.expand-photo').removeClass('hidden');
+			$('.expand-photo').click(function(){
+				$('.expand-photo').addClass('hidden');	
+				$('.expand-btn').removeClass('hidden');
+			})
+		});
+		$('.write-btn').click(function(){
+			var id = '${user.user_id}';
+        	
+        	if(id == ''){
+        		alert('로그인하세요.');
+        		return;
+        	}
+			if($('.write-box').hasClass('hidden')){
+				$('.write-box').removeClass('hidden');				
+			}else{
+				$('.write-box').addClass('hidden');
+			}
+		})
 		$('.tab').click(function(){
 			if($(this).hasClass('tab2')){
 				$('.tab').removeClass('select');

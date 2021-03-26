@@ -19,6 +19,9 @@
 	        ul,ol{
 	            list-style: none;
 	        }
+	        .header{
+	        	position: relative;
+	        }
 	        .header .search-box{
 	            height: 50px;
 	            width: 100%;
@@ -154,6 +157,15 @@
 	        .header .logbar .container2 .right .search-btn:hover{
 	            color: red;
 	        }
+	        .manager-list{
+	        	position: absolute;
+	        	right: calc(50% - 1170px / 2);
+	        	top: 140;
+	        	border: 1px solid black;
+	        	width: 104px;
+	        	height: 300px;
+	        	z-index: 1000;
+	        }
 	</style>
 </head>
 <body>
@@ -215,14 +227,18 @@
                         </c:if>
                         <li class="menu"><a href="<%=request.getContextPath()%>/boardList">게시판</a></li>
                         <c:if test="${user.user_grade == 0}">
-                        	<li class="menu"><a href="<%=request.getContextPath()%>/productRegis">상품등록</a></li>
+                        	<li class="menu manager">
+                        		<a href="<%=request.getContextPath()%>/productRegis">상품등록</a>
+                        		
+                        	</li>
                         </c:if>
                     </ul>
                 </div>
+                
             </div>
         </div>
     </div>
-    
+    <div class="manager-list"></div>
     <script>
 	    $('.header .logbar .search-btn').click(function(e){
 	        e.preventDefault();

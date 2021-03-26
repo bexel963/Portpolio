@@ -67,7 +67,7 @@
 	</div>
 	<script type="text/javascript">
 		$('.btn.up, .btn.down').click(function(){
-	
+			var obj = $(this);
 			var userId = '${user.user_id}';
 			if(userId == ''){
 				alert('회원이 아닙니다.')
@@ -76,12 +76,20 @@
 			var boardNum = $('input[name=num]').val();
 			var up = 0;
 			if($(this).hasClass('up')){
-				up = 1;
+				if($(this).hasClass('btn-success')){
+					up = 0;
+				}else{
+					up = 1;				
+				}
 			}
 			else{
-				up = -1;
+				if($(this).hasClass('btn-success')){
+					up = 0;
+				}else{
+					up = -1;				
+				}
 			}
-		
+			
 			var sendData = {'userId' : userId, 'boardNum' : boardNum, 'up' : up}	
 			$.ajax({
 				url : '<%=request.getContextPath()%>/boardLike',
@@ -90,11 +98,22 @@
 				dataType:"json",
 		        contentType:"application/json; charset=UTF-8",
 				success : function(data){	
+					if(up == 0){
+						if(obj.hasClass('up')){
+							alert('추천을 취소했습니다.')
+						}else{
+							alert('비추천을 취소했습니다.')
+						}
+						obj.removeClass('btn-success').addClass('btn-outline-success');
+					}
 					if(up == 1){
-						alert('추천했습니다.')
-						
+						alert('추천했습니다.');
+						$('.btn.up, .btn.down').removeClass('btn-success').addClass('btn-outline-success');
+						obj.removeClass('btn-outline-success').addClass('btn-success');	
 					}else if(up == -1){
 						alert('비추천했습니다.');
+						$('.btn.up, .btn.down').removeClass('btn-success').addClass('btn-outline-success');
+						obj.removeClass('btn-outline-success').addClass('btn-success');
 					}
 				},
 				error : function(){
