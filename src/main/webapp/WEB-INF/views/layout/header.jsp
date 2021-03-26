@@ -157,12 +157,24 @@
 	        .header .logbar .container2 .right .search-btn:hover{
 	            color: red;
 	        }
+<<<<<<< HEAD
 	        .manager-list{
 	        	position: absolute;
 	        	right: calc(50% - 1170px / 2);
 	        	top: 140;
 	        	border: 1px solid black;
 	        	width: 104px;
+=======
+	        .manager{
+	        	position: relative;
+	        }
+	        .manager-list{
+	        	position: absolute;
+	        	right: 0;
+	        	top: 64;
+	        	border: 1px solid black;
+	        	width: 110px;
+>>>>>>> master
 	        	height: 300px;
 	        	z-index: 1000;
 	        }
@@ -229,7 +241,11 @@
                         <c:if test="${user.user_grade == 0}">
                         	<li class="menu manager">
                         		<a href="<%=request.getContextPath()%>/productRegis">상품등록</a>
+<<<<<<< HEAD
                         		
+=======
+                        		<div class="manager-list"></div>
+>>>>>>> master
                         	</li>
                         </c:if>
                     </ul>
