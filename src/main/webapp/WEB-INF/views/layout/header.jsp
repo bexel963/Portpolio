@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<script src="//code.jquery.com/jquery-3.4.1.js"></script>
-<script src="https://kit.fontawesome.com/022cf171a0.js" crossorigin="anonymous"></script>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
+<script src="//code.jquery.com/jquery-3.4.1.js"></script>
+<script src="https://kit.fontawesome.com/022cf171a0.js" crossorigin="anonymous"></script>
 <meta charset="UTF-8">
 <title>header</title>
 	<style>
@@ -157,24 +157,12 @@
 	        .header .logbar .container2 .right .search-btn:hover{
 	            color: red;
 	        }
-<<<<<<< HEAD
 	        .manager-list{
 	        	position: absolute;
 	        	right: calc(50% - 1170px / 2);
 	        	top: 140;
 	        	border: 1px solid black;
 	        	width: 104px;
-=======
-	        .manager{
-	        	position: relative;
-	        }
-	        .manager-list{
-	        	position: absolute;
-	        	right: 0;
-	        	top: 64;
-	        	border: 1px solid black;
-	        	width: 110px;
->>>>>>> master
 	        	height: 300px;
 	        	z-index: 1000;
 	        }
@@ -241,11 +229,6 @@
                         <c:if test="${user.user_grade == 0}">
                         	<li class="menu manager">
                         		<a href="<%=request.getContextPath()%>/productRegis">상품등록</a>
-<<<<<<< HEAD
-                        		
-=======
-                        		<div class="manager-list"></div>
->>>>>>> master
                         	</li>
                         </c:if>
                     </ul>

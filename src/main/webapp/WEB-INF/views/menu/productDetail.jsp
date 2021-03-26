@@ -464,7 +464,6 @@ response.setDateHeader("Expires", 0L); %>
 			height: 800px;
 			border: 1px solid #d1d1d1;
 		}
-<<<<<<< HEAD
 		.qa-box{
 			padding: 0 30px 0 30px;
 		}
@@ -602,9 +601,6 @@ response.setDateHeader("Expires", 0L); %>
 			color: #ffffff;
 			padding-top: 2px;
 		}
-=======
-		
->>>>>>> master
     </style>
 </head>
 <body>
@@ -919,7 +915,6 @@ response.setDateHeader("Expires", 0L); %>
 				</div>
 			</div>
 		</div>
-<<<<<<< HEAD
 		<div class="qa-box after hidden">
 			<div class="title2 after">
 				<div class="row1"><img src="<%=request.getContextPath()%>/resources/img/question.gif"></div>
@@ -1008,12 +1003,6 @@ response.setDateHeader("Expires", 0L); %>
 				$('.question-box').addClass('hidden');
 			}
 		})
-=======
-		<div class="qa-box hidden">상품 Q & A</div>	
-	</div>
-	
-	<script type="text/javascript">
->>>>>>> master
 		$('.expand-btn').click(function(){
 			$('.expand-btn').addClass('hidden');
 			$('.expand-photo').removeClass('hidden');
