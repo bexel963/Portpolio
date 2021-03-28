@@ -106,7 +106,7 @@
 		.product-box .table .middle .row2
 		{
 			padding-top: 15px;
-			width: 553px;
+			width: 500px;
 		}
 		.product-box .table .middle .row2 .title-box{
 			padding-left: 30px;

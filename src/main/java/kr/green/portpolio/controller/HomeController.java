@@ -54,6 +54,15 @@ public class HomeController {
 	    return mv;
 	}
 	
+	/* 내정보 */
+	@RequestMapping(value= "/myInfo", method = RequestMethod.GET)
+	public ModelAndView myInfo(Locale locale, ModelAndView mv){
+		
+		
+	    mv.setViewName("/main/myInfo");
+	    return mv;
+	}
+	
 	/* 카테고리 */
 	@RequestMapping(value= "/category", method = RequestMethod.GET)
 	public ModelAndView categoryGet(Locale locale, ModelAndView mv){

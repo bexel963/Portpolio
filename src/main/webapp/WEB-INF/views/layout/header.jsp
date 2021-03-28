@@ -95,7 +95,7 @@
 	        .header .logbar .container2 .right .login,
 	        .header .logbar .container2 .right .logout,
 	        .header .logbar .container2 .right .signup,
-	        .header .logbar .container2 .right .userInfo{
+	        .header .logbar .container2 .right .myInfo{
 	            font-size: 12px;
 	            color: #eee;
 	            float: left;
@@ -161,10 +161,36 @@
 	        	position: absolute;
 	        	right: calc(50% - 1170px / 2);
 	        	top: 140;
-	        	border: 1px solid black;
-	        	width: 104px;
+	        	width: 120px;
 	        	height: 300px;
 	        	z-index: 1000;
+	        	background-color: white;
+	        	border: 1px solid #dee2e6;
+	        }
+	        .manager-list li{
+	        	margin: 0 auto;
+	        	width: 90%;
+	        	border-bottom: 1px solid #dee2e6;
+	        	height: calc(300px / 4 );
+	        	text-align: center;
+	        	padding-top: 25px;
+	        	cursor: pointer;
+	        	font-size: 16px;
+	        	font-weight: bold;
+	        	color: black;
+	        }
+	        .manager-list li:hover,
+	        .menu.manager:hover{
+	        	color: red;
+	        }
+	        .manager-list li:last-child{
+	        	border-bottom: none;
+	        }
+	        .hidden{
+	        	display: none;
+	        }
+	        .menu.manager{
+	        	cursor: pointer; 	
 	        }
 	</style>
 </head>
@@ -200,11 +226,8 @@
                     </c:if>
                     <c:if test="${user != null}">
                     	<a href="<%=request.getContextPath()%>/logout" class="logout">로그아웃</a>
-                    	<c:if test="${user.user_grade == 0}">
-                    		<a href="<%=request.getContextPath()%>/userInfo" class="userInfo">회원정보</a>
-                    	</c:if>
                     	<c:if test="${user != null && user.user_grade != 0}">
-                    		<a href="<%=request.getContextPath()%>/userInfo" class="userInfo">내정보</a>
+                    		<a href="<%=request.getContextPath()%>/myInfo" class="myInfo">내정보</a>
                     	</c:if>
                     </c:if>
                     <div class="search-btn"><i class="fas fa-search"></i></div>
@@ -227,9 +250,7 @@
                         </c:if>
                         <li class="menu"><a href="<%=request.getContextPath()%>/boardList">게시판</a></li>
                         <c:if test="${user.user_grade == 0}">
-                        	<li class="menu manager">
-                        		<a href="<%=request.getContextPath()%>/productRegis">상품등록</a>
-                        	</li>
+                        	<li class="menu manager">관리자</li>
                         </c:if>
                     </ul>
                 </div>
@@ -237,8 +258,22 @@
             </div>
         </div>
     </div>
-    <div class="manager-list"></div>
+    <div class="manager-list hidden">
+    	<ul>
+    		<li><a href="<%=request.getContextPath()%>/productRegis">상품등록</a></li>
+    		<li>상품등록 현황</li>
+    		<li><a href="<%=request.getContextPath()%>/userInfo" class="userInfo">회원관리</a></li>
+    		<li>직원관리</li>
+    	</ul>
+    </div>
     <script>
+    	$('.menu.manager').click(function(){
+    		if($('.manager-list').hasClass('hidden')){
+	    		$('.manager-list').removeClass('hidden');			
+    		}else{
+    			$('.manager-list').addClass('hidden');
+    		}
+    	})
 	    $('.header .logbar .search-btn').click(function(e){
 	        e.preventDefault();
 	        $('.search-box').slideToggle(500);
