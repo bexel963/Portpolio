@@ -30,12 +30,13 @@ public class CommentController {
 	@Autowired
 	CommentService commentService;
 	
-	private String uploadPath = "D:\\digit\\a\\digital\\Portpolio\\src\\main\\webapp\\resources\\img";
+	//private String uploadPath = "D:\\digit\\a\\digital\\Portpolio\\src\\main\\webapp\\resources\\img";
+	private String uploadPath = "C:\\users\\PC\\Desktop\\Git\\digital\\Portpolio\\src\\main\\webapp\\resources\\img";
 	
 	/* 후기 등록 POST */
 	@RequestMapping(value="/commentRegis", method = RequestMethod.POST)
 	@ResponseBody
-	public String myBoxPost(@RequestBody @RequestParam String comment, @RequestParam MultipartFile oriFileName, @RequestParam Integer product_num, @RequestParam Integer star, HttpServletRequest request) throws Exception{
+	public CommentVo commentRegisPost(@RequestBody @RequestParam String comment, @RequestParam MultipartFile oriFileName, @RequestParam Integer product_num, @RequestParam Integer star, HttpServletRequest request) throws Exception{
 		
 		UserVo user = userService.getUser(request);
 		
@@ -46,10 +47,7 @@ public class CommentController {
 			String fileName = UploadFileUtils.uploadFile(uploadPath, oriFileName.getOriginalFilename(), oriFileName.getBytes());		
 			commentService.commentFileRegis(getComment.getComment_num(), oriFileName.getOriginalFilename(), fileName);
 		}
-		
-		
-		
-		
-	    return "success";
+	
+	    return getComment;
 	}
 }

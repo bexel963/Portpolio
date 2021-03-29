@@ -7,7 +7,7 @@
 	</insert>
 	
 	<insert id="commentFileRegis">
-		insert into portpolio.comment_files(comment_num, oriFileName, fileName) values(#{comment_num}, #{oriFileName}, #{fileName})
+		insert into portpolio.comment_files(comment_num, file_oriName, file_name) values(#{comment_num}, #{oriFileName}, #{fileName})
 	</insert>
 	
 	<select id="commentGet" resultType="kr.green.portpolio.vo.CommentVo">
