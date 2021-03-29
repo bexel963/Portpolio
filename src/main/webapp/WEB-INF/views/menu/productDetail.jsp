@@ -601,9 +601,17 @@ response.setDateHeader("Expires", 0L); %>
 			color: #ffffff;
 			padding-top: 2px;
 		}
+		.score i{
+			cursor: pointer;
+		}
+		.score .text{
+			color: #767676;
+			font-size: 12px;
+		}
     </style>
 </head>
 <body>
+
 	<div class="main-box">
 		<div class="top">
 			<div class="left">${product.product_title}</div>
@@ -844,7 +852,7 @@ response.setDateHeader("Expires", 0L); %>
 					<img src="<%=request.getContextPath()%>/resources/img/talk_notice.png" alt="">
 					<input type="button" value="작성하기" class="write-btn">
 				</div>
-			</div>
+			</div>			
 			<div class="write-box after hidden">
 				<div class="explain-area">
 					<ul>
@@ -857,63 +865,67 @@ response.setDateHeader("Expires", 0L); %>
 						<li class="strong"><strong>교환 및 A/S요청은 빠른 확인과 원활한 처리를 위해 <a href="" class="inquiry"><ins>1:1 상담으로 문의</ins></a>해 주세요.</strong></li>
 					</ul>
 				</div>
-				<div class="write-area">
-					<div class="score">
-						<i class="far fa-star"></i>
-						<i class="fas fa-star"></i>
-						<i class="far fa-star"></i>
-						<i class="far fa-star"></i>
-						<i class="far fa-star"></i>
-						<span class="text">별점은 상품구매 후 가능합니다.</span>
-					</div>
-					<textarea class="content" name="comment-content" cols="30" rows="10"></textarea>
-					<div class="tab">
-						<div class="photo-tab">
-							<label class="btn btn-danger btn-file">
-						        사진등록 <input type="file" name="photo" class="photo-add" value="사진등록" style="display:none"/>
-						    </label>
+				<form enctype="multipart/form-data" id="form">
+					<div class="write-area">
+						<div class="score">
+							<i class="far fa-star star1"></i>
+							<i class="far fa-star star2"></i>
+							<i class="far fa-star star3"></i>
+							<i class="far fa-star star4"></i>
+							<i class="far fa-star star5"></i>
+							<span class="text">별점은 상품구매 후 가능합니다.</span>
+							<input type="hidden" id="star" name="star">
 						</div>
-						<div class="btn-tab">
-							<div class="cancel">취소</div>
-							<div class="regis">등록</div>
+						<textarea class="content comment-content" name="comment" cols="30" rows="10"></textarea>
+						<div class="tab">
+							<div class="photo-tab">
+								<label class="btn btn-danger btn-file">
+							        사진등록 <input type="file" name="oriFileName" class="photo-add" value="사진등록" style="display:none"/>
+							    </label>
+							</div>
+							<div class="btn-tab">
+								<div class="cancel">취소</div>
+								<div class="regis">등록</div>
+								<input type="hidden" name = "product_num" value="${product.product_num}">
+							</div>
 						</div>
 					</div>
-				</div>
+				</form>	
 			</div>
 			<div class="list-box after">
-				<div class="comment after">
-					<div class="comment-num after">
-						<span>번호</span>
-					</div>
-					<div class="content after">
-						<div class="left">						
-							<div class="top">
-								<span class="id">아이디</span>
-								<span class="date">작성일</span>
-								<span class="star">
-									<i class="fas fa-star"></i>
-									<i class="fas fa-star"></i>
-									<i class="fas fa-star"></i>
-									<i class="fas fa-star"></i>
-									<i class="fas fa-star"></i>
-								</span>
-							</div>
-							<div class="mid">
-								<div class="text">
-									가나다라마가나다라마가나다라마가나다라마가나다라마가나다라마가나다라마가나다라마
-									가나다라마가나다라마가나다라마가나다라마가나다라마가나다라마
-									가나다라마가나다라마가나다라마가나다라마가나다라마가나다라마가나다라마
-								</div>
-							</div>	
-							<div class="expand-btn">사진확대</div>
-							<div class="expand-photo hidden"></div>
+					<div class="comment after">
+						<div class="comment-num after">
+							<span>번호</span>
 						</div>
-						<div class="right">
-							<div class="photo"></div>						
+						<div class="content after">
+							<div class="left">						
+								<div class="top">
+									<span class="id">아이디</span>
+									<span class="date">작성일</span>
+									<span class="star">
+										<i class="fas fa-star"></i>
+										<i class="fas fa-star"></i>
+										<i class="fas fa-star"></i>
+										<i class="fas fa-star"></i>
+										<i class="fas fa-star"></i>
+									</span>
+								</div>
+								<div class="mid">
+									<div class="text">
+										가나다라마가나다라마가나다라마가나다라마가나다라마가나다라마가나다라마가나다라마
+										가나다라마가나다라마가나다라마가나다라마가나다라마가나다라마
+										가나다라마가나다라마가나다라마가나다라마가나다라마가나다라마가나다라마
+									</div>
+								</div>	
+								<div class="expand-btn">사진확대</div>
+								<div class="expand-photo hidden"></div>
+							</div>
+							<div class="right">
+								<div class="photo"></div>						
+							</div>
 						</div>
 					</div>
 				</div>
-			</div>
 		</div>
 		<div class="qa-box after hidden">
 			<div class="title2 after">
@@ -987,8 +999,76 @@ response.setDateHeader("Expires", 0L); %>
 			</table>
 		</div>	
 	</div>
-	
+
 	<script type="text/javascript">
+		$('.btn-tab .regis').click(function(){
+			var product_num = $(this).siblings('input').val();
+			if($('.score .star5').hasClass('fas')){
+				var star = 5;
+			}
+			if(!$('.score .star5').hasClass('fas') && $('.score .star4').hasClass('fas')){
+				var star = 4;
+			}
+			if(!$('.score .star4').hasClass('fas') && $('.score .star3').hasClass('fas')){
+				var star = 3;
+			}
+			if(!$('.score .star3').hasClass('fas') && $('.score .star2').hasClass('fas')){
+				var star = 2;
+			}
+			if(!$('.score .star2').hasClass('fas') && $('.score .star1').hasClass('fas')){
+				var star = 1;
+			}
+			if(!$('.score .star1').hasClass('fas')){
+				var star = 0;
+			}
+			$('#star').val(star);
+			
+			var form = jQuery("ajaxFrom")[0];
+	        var formData = new FormData($("#form")[0]);
+        	$.ajax({
+				url : '<%=request.getContextPath()%>/commentRegis',
+				type : 'post',
+				data : formData,
+				processData : false,
+	            contentType : false,
+				success : function(data){
+					console.log(data);
+					
+				},
+				error : function(){
+					console.log('실패');
+				}
+			})
+		})
+		$('.fa-star').click(function(){
+			if($(this).hasClass('star1')){
+				$(this).siblings('.fa-star').removeClass('fas');
+				$('.star1').addClass('fas');
+			}
+			if($(this).hasClass('star2')){
+				$(this).siblings('.fa-star').removeClass('fas');
+				$('.star1').addClass('fas');
+				$('.star2').addClass('fas');
+			}
+			if($(this).hasClass('star3')){
+				$(this).siblings('.fa-star').removeClass('fas');
+				$('.star1').addClass('fas');
+				$('.star2').addClass('fas');
+				$('.star3').addClass('fas');
+			}
+			if($(this).hasClass('star4')){
+				$(this).siblings('.fa-star').removeClass('fas');
+				$('.star1').addClass('fas');
+				$('.star2').addClass('fas');
+				$('.star3').addClass('fas');
+				$('.star4').addClass('fas');
+			}
+			if($(this).hasClass('star5')){
+				$(this).siblings('.fa-star').removeClass('fas');
+				$('.fa-star').addClass('fas');
+			}
+			
+		})
 		$('.line2 .title').click(function(){
 			if($('.hidden-table-box').hasClass('hidden')){
 				$('.hidden-table-box').removeClass('hidden');

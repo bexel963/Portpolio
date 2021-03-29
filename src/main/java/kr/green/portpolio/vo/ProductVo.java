@@ -16,6 +16,9 @@ public class ProductVo {
 	private String product_origin;
 	private int product_sale;
 	
+	public void setProduct_category(String product_category) {
+		this.product_category = product_category;
+	}
 	public int getProduct_sale() {
 		return product_sale;
 	}
@@ -103,6 +106,7 @@ public class ProductVo {
 		this.product_registerDate = date2;
 	}
 	
+
 	@Override
 	public String toString() {
 		return "ProductVo [product_num=" + product_num + ", product_category=" + product_category + ", product_title="

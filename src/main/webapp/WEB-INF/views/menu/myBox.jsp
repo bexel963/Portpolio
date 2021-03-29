@@ -179,6 +179,9 @@
 			border: 0;
 			outline: 0;
 		}
+		.hidden{
+			display: none;
+		}
     </style>
 </head>
 <body>
@@ -225,12 +228,8 @@
 						</div>
 						<c:forEach items="${productList}" var="product">
 								<div class="middle">
-									<ul>
-										<c:forEach items="${orderInfoList}" var="orderInfo">
-											<c:if test="${product.product_num == orderInfo.product_num}">									
-												<li class="row1"><input class="check-box" type="checkbox" name="num" value="${product.product_num}" <c:if test="${user.user_id == orderInfo.user_id && orderInfo.isDel == 'N'}">checked</c:if>></li>
-											</c:if>									
-										</c:forEach>
+									<ul>														
+										<li class="row1"><input class="check-box" type="checkbox" name="num" value="${product.product_num}" <c:forEach items="${orderInfoList}" var="orderInfo"><c:if test="${product.product_num == orderInfo.product_num && user.user_id == orderInfo.user_id && orderInfo.isDel == 'N'}">checked</c:if></c:forEach>></li>																		
 										<li class="row2">
 											<c:forEach items="${fileList}" var="file">
 												<c:if test="${product.product_num == file.product_num}">
@@ -342,6 +341,10 @@
 	    
 		
 	    $('.check-box').click(function(){
+	    	var box = $('input[name=box').val();
+	    	if(box==1){
+	    		$('.empty-box').addClass('hidden');
+	    	}
 	    	var check_state = $(this).prop("checked");
 	    	var product_num = $(this).parent().siblings('.row4').find('input[name=product_num]').val();
 	    	var product_cost = $('.row3-val').html();

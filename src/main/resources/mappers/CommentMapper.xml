@@ -1,4 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="kr.green.portpolio.dao.BoardDao">
+<mapper namespace="kr.green.portpolio.dao.CommentDao">
+	
+	<insert id="commentRegis">
+		insert into portpolio.comment(product_num, comment_content, user_id, star_view) values(#{product_num}, #{comment}, #{user.user_id}, #{star})
+	</insert>
+	
+	<insert id="commentFileRegis">
+		insert into portpolio.comment_files(comment_num, oriFileName, fileName) values(#{comment_num}, #{oriFileName}, #{fileName})
+	</insert>
+	
+	<select id="commentGet" resultType="kr.green.portpolio.vo.CommentVo">
+		select * from portpolio.comment where product_num = #{product_num} and user_id = #{user.user_id}
+	</select>
 </mapper>
