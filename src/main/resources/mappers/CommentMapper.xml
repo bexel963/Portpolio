@@ -11,6 +11,14 @@
 	</insert>
 	
 	<select id="commentGet" resultType="kr.green.portpolio.vo.CommentVo">
-		select * from portpolio.comment where product_num = #{product_num} and user_id = #{user.user_id}
+		select * from portpolio.comment where product_num = #{product_num} and user_id = #{user.user_id} order by comment_registerDate desc limit 1
+	</select>
+	
+	<select id="getCommentFile" resultType="kr.green.portpolio.vo.CommentFileVo">
+		select * from portpolio.comment_files where comment_num = #{comment_num}
+	</select>
+	
+	<select id="getCommentList" resultType="kr.green.portpolio.vo.CommentVo">
+		select * from portpolio.comment where product_num = #{product_num}
 	</select>
 </mapper>

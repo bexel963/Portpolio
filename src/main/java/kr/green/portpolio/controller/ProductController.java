@@ -14,9 +14,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import kr.green.portpolio.service.CommentService;
 import kr.green.portpolio.service.ProductService;
 import kr.green.portpolio.service.UserService;
 import kr.green.portpolio.utils.UploadFileUtils;
+import kr.green.portpolio.vo.CommentFileVo;
+import kr.green.portpolio.vo.CommentVo;
 import kr.green.portpolio.vo.DeliveryVo;
 import kr.green.portpolio.vo.FileVo;
 import kr.green.portpolio.vo.MyBoxVo;
@@ -35,6 +38,9 @@ public class ProductController {
 	
 	@Autowired
 	UserService userService;
+	
+	@Autowired
+	CommentService commentService;
 	
 	private String uploadPath = "D:\\digit\\a\\digital\\Portpolio\\src\\main\\webapp\\resources\\img";
 	
@@ -74,6 +80,15 @@ public class ProductController {
 		ArrayList<FileVo> subfileList = productService.getSubFileList(product_num);
 		FileVo mainFile = productService.getMainFile(product_num);
 		
+		ArrayList<CommentVo> commentList = commentService.getCommentList(product_num);
+		ArrayList<CommentFileVo> commentFileList = new ArrayList<CommentFileVo>();
+		for(int i=0 ; i<commentList.size() ; i++) {
+			CommentFileVo commentFile= commentService.getCommentFile(commentList.get(i).getComment_num());
+			commentFileList.add(commentFile);
+		}
+		
+		mv.addObject("commentList", commentList);
+		mv.addObject("commentFileList", commentFileList);
 		mv.addObject("mainFile", mainFile);
 		mv.addObject("subFileList", subfileList);
 		mv.addObject("product", product);

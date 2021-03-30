@@ -443,7 +443,6 @@ response.setDateHeader("Expires", 0L); %>
 			width: 100px;
 			height: 100px;
 			float: right;
-			border: 1px solid #d1d1d1;
 		}
 		.comment .top,
 		.comment .mid{
@@ -462,7 +461,6 @@ response.setDateHeader("Expires", 0L); %>
 		.expand-photo{
 			width: 800px;
 			height: 800px;
-			border: 1px solid #d1d1d1;
 		}
 		.qa-box{
 			padding: 0 30px 0 30px;
@@ -893,39 +891,54 @@ response.setDateHeader("Expires", 0L); %>
 				</form>	
 			</div>
 			<div class="list-box after">
+				<c:forEach items="${commentList}" var="comment">
 					<div class="comment after">
 						<div class="comment-num after">
-							<span>번호</span>
+							<span>${comment.comment_num}</span>
 						</div>
 						<div class="content after">
 							<div class="left">						
 								<div class="top">
-									<span class="id">아이디</span>
-									<span class="date">작성일</span>
+									<span class="id">${comment.user_id}</span>
+									<span class="date">${comment.comment_registerDate}</span>
 									<span class="star">
-										<i class="fas fa-star"></i>
-										<i class="fas fa-star"></i>
-										<i class="fas fa-star"></i>
-										<i class="fas fa-star"></i>
-										<i class="fas fa-star"></i>
+										<c:forEach begin="1" end="${comment.star_view}" var="i">
+											<i class="fas fa-star"></i>
+										</c:forEach>
+										<c:forEach begin="1" end="${5-comment.star_view}" var="i">
+											<i class="far fa-star"></i>
+										</c:forEach>
 									</span>
 								</div>
 								<div class="mid">
-									<div class="text">
-										가나다라마가나다라마가나다라마가나다라마가나다라마가나다라마가나다라마가나다라마
-										가나다라마가나다라마가나다라마가나다라마가나다라마가나다라마
-										가나다라마가나다라마가나다라마가나다라마가나다라마가나다라마가나다라마
-									</div>
+									<div class="text">${comment.comment_content}</div>
 								</div>	
+								<c:forEach items="${commentFileList}" var="commentFile">
+										<c:if test="${commentFile.comment_num == comment.comment_num}">
 								<div class="expand-btn">사진확대</div>
-								<div class="expand-photo hidden"></div>
+										</c:if>
+									</c:forEach>
+								<div class="expand-photo hidden">
+									<c:forEach items="${commentFileList}" var="commentFile">
+										<c:if test="${commentFile.comment_num == comment.comment_num}">
+											<img style="width:100%; height:100%;" src="<%=request.getContextPath()%>/resources/img/${commentFile.file_name}">
+										</c:if>
+									</c:forEach>	
+								</div>
 							</div>
 							<div class="right">
-								<div class="photo"></div>						
+								<c:forEach items="${commentFileList}" var="commentFile">
+									<c:if test="${commentFile.comment_num == comment.comment_num}">
+										<div class="photo">
+											<img style="width:100%; height:100%;" src="<%=request.getContextPath()%>/resources/img${commentFile.file_name}">
+										</div>
+									</c:if>
+								</c:forEach>						
 							</div>
 						</div>
 					</div>
-				</div>
+				</c:forEach>
+			</div>
 		</div>
 		<div class="qa-box after hidden">
 			<div class="title2 after">
@@ -1031,9 +1044,47 @@ response.setDateHeader("Expires", 0L); %>
 				data : formData,
 				processData : false,
 	            contentType : false,
+	            dataType:"json",
 				success : function(data){
-					console.log(data);
-					
+					var str = '';
+					str += '<div class="comment after">'
+					str += 	   '<div class="comment-num after">'
+					str += 			'<span>' + data.comment.comment_num + '</span>'
+					str += 	   '</div>'
+					str +=	   '<div class="content after">'
+					str +=			'<div class="left">'					
+					str +=				'<div class="top">'
+					str +=					'<span class="id">' + data.comment.user_id + '</span>'
+					str +=					'<span class="date">' + data.comment.comment_registerDate + '</span>'
+					str +=					'<span class="star">'
+											for(var i=0 ; i<data.comment.star_view ; i++){
+					str +=							'<i class="fas fa-star"></i>'	
+											}
+											for(var i=0 ; i<5-data.comment.star_view ; i++){
+					str +=							'<i class="far fa-star"></i>'
+											}
+					str +=					'</span>'
+					str +=			    '</div>'
+					str +=			    '<div class="mid">'
+					str +=					'<div class="text">' + data.comment.comment_content + '</div>'		
+					str +=			    '</div>'	
+					str +=				'<div class="expand-btn">사진확대</div>'
+					str +=				'<div class="expand-photo hidden">'
+										if(data.file != null)
+					str +=					'<img style="width:100%; height:100%;" src="<%=request.getContextPath()%>/resources/img/' + data.file.file_name + ' ">'
+					str +=				'</div>'
+					str +=		    '</div>'
+					str +=			'<div class="right">'
+					str +=				'<div class="photo">'
+										if(data.file != null)
+					str +=					'<img style="width:100%; height:100%;" src="<%=request.getContextPath()%>/resources/img/' + data.file.file_name + ' ">'
+					str +=				'</div>'						
+					str +=	        '</div>'
+					str +=	   '</div>'
+					str +=	'</div>'
+					$('.list-box').prepend(str);
+					expandBtnClick($('.list-box .comment').first().find('.expand-btn'));
+					alert("등록 되었습니다.");
 				},
 				error : function(){
 					console.log('실패');
@@ -1083,14 +1134,19 @@ response.setDateHeader("Expires", 0L); %>
 				$('.question-box').addClass('hidden');
 			}
 		})
-		$('.expand-btn').click(function(){
-			$('.expand-btn').addClass('hidden');
-			$('.expand-photo').removeClass('hidden');
-			$('.expand-photo').click(function(){
-				$('.expand-photo').addClass('hidden');	
-				$('.expand-btn').removeClass('hidden');
-			})
-		});
+		function expandBtnClick(obj){
+			obj.click(function(){
+				$('.expand-btn').addClass('hidden');
+				$('.right .photo').addClass('hidden');
+				$('.expand-photo').removeClass('hidden');
+				$('.expand-photo').click(function(){
+					$('.expand-photo').addClass('hidden');	
+					$('.expand-btn').removeClass('hidden');
+				})
+			});
+		}
+		expandBtnClick($('.expand-btn'))
+		
 		$('.write-btn').click(function(){
 			var id = '${user.user_id}';
         	
