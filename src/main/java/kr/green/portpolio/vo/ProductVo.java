@@ -14,11 +14,8 @@ public class ProductVo {
 	private int product_cost;
 	private Date product_registerDate;
 	private String product_origin;
-	private int product_sale;
+	private int product_sale;	// 판매량
 	
-	public void setProduct_category(String product_category) {
-		this.product_category = product_category;
-	}
 	public int getProduct_sale() {
 		return product_sale;
 	}

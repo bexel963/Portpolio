@@ -31,6 +31,8 @@ public interface ProductDao {
 	void deleteFiles(@Param("product_num")Integer product_num);
 
 	void modifyProduct(@Param("product")ProductVo product);
+	
+	void modifyProduct2(@Param("product_num")int product_num, @Param("product_amount")int product_amount, @Param("product_sale")int product_sale);
 
 	void deleteProduct(@Param("product_num")Integer product_num);
 
@@ -47,7 +49,8 @@ public interface ProductDao {
 	void modifyOrderInfo(@Param("order_amount")Integer order_amount, @Param("product")ProductVo product, @Param("order_cost")Integer order_cost, @Param("user_id")String user_id, @Param("isDel") String isDel);
 
 	OrderVo getOrderInfo(@Param("product_num")int product_num, @Param("user")UserVo user);
-
+	OrderVo getOrderInfo2(@Param("order_num")Integer order_num);
+	
 	void deleteOrderInfo(@Param("user")UserVo user, @Param("product_num")Integer product_num);
 
 
@@ -61,7 +64,6 @@ public interface ProductDao {
 
 	void modifyPaymentCompletion(@Param("user")UserVo user, @Param("order_num")int order_num);
 
-	OrderVo getOrderInfo2(@Param("order_num")Integer order_num);
 
 	void deleteOrder2(@Param("order_num")Integer order_num);
 
@@ -72,8 +74,5 @@ public interface ProductDao {
 	ArrayList<ProductVo> getProductList3(@Param("search")String search);
 
 	void deleteOrderInfo2();
-
-	
-	
 
 }

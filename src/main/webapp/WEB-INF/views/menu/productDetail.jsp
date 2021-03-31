@@ -1068,8 +1068,8 @@ response.setDateHeader("Expires", 0L); %>
 					str +=			    '<div class="mid">'
 					str +=					'<div class="text">' + data.comment.comment_content + '</div>'		
 					str +=			    '</div>'	
-					str +=				'<div class="expand-btn">사진확대</div>'
-					str +=				'<div class="expand-photo hidden">'
+					str +=				'<div class="expand-btn">사진확대</div>' 
+					str +=				'<div class="expand-photo hidden">'	
 										if(data.file != null)
 					str +=					'<img style="width:100%; height:100%;" src="<%=request.getContextPath()%>/resources/img/' + data.file.file_name + ' ">'
 					str +=				'</div>'
@@ -1084,6 +1084,7 @@ response.setDateHeader("Expires", 0L); %>
 					str +=	'</div>'
 					$('.list-box').prepend(str);
 					expandBtnClick($('.list-box .comment').first().find('.expand-btn'));
+					photoBtnClick($('.list-box .comment').first().find('.expand-photo'));
 					alert("등록 되었습니다.");
 				},
 				error : function(){
@@ -1134,19 +1135,26 @@ response.setDateHeader("Expires", 0L); %>
 				$('.question-box').addClass('hidden');
 			}
 		})
+
 		function expandBtnClick(obj){
 			obj.click(function(){
-				$('.expand-btn').addClass('hidden');
-				$('.right .photo').addClass('hidden');
-				$('.expand-photo').removeClass('hidden');
-				$('.expand-photo').click(function(){
-					$('.expand-photo').addClass('hidden');	
-					$('.expand-btn').removeClass('hidden');
-				})
+				console.log('클릭1');
+				$(this).addClass('hidden');
+				$(this).parent().siblings('.right').find('.photo').addClass('hidden');
+				$(this).siblings('.expand-photo').removeClass('hidden');
 			});
 		}
 		expandBtnClick($('.expand-btn'))
-		
+		photoBtnClick($('.expand-photo'))
+		function photoBtnClick(obj){
+			obj.click(function(){
+				console.log('클릭2');
+				$(this).addClass('hidden');	
+				$(this).siblings('.expand-btn').removeClass('hidden');
+				$(this).parent().siblings('.right').find('.photo').removeClass('hidden');
+			})
+		}
+			
 		$('.write-btn').click(function(){
 			var id = '${user.user_id}';
         	

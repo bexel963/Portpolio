@@ -12,16 +12,29 @@
  	<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
 <title>Insert title here</title>
 	<style>
-	  a{
+      a{
 	    text-decoration: none;
 	    color: black;
+      }
+  	  .category-title{
+		width: 100%;
+		height: 60px;
+		background: #f7f7f7;
+    	border-bottom: 1px solid #eee;
+    	padding-top: 7px;
 	  }
-	        
+	  .category-title .text{
+		width: 1170px;
+		font-size: 30px;
+		color: #555555;
+		margin: 0 auto;
+	  }
       .productRegis.container2{
 		width: 1000px;
 		height: 1275px;
 		margin: 0 auto;
 		border-bottom: 1px solid #ced4da;
+		margin-top: 50px;
 	  }
 	  .productRegis.container2 .left{
 		box-sizing: border-box;
@@ -33,6 +46,9 @@
 		box-sizing: border-box;
 		border: 1px solid #ced4da;
 		border-bottom: none;
+	  }
+	  .productRegis.container2 .left>div:last-child{
+	  	border-bottom: 1px solid #ced4da;
 	  }
 	  .productRegis.container2 .right>div{
 		border-left: none;
@@ -100,8 +116,9 @@
     </style>
 </head>
 <body>
-	<br><br>
-	
+	<div class="category-title">
+		<div class="text">MY BOX</div>
+	</div>
 	<form action="<%=request.getContextPath()%>/productRegis" method="post" enctype="multipart/form-data">
 		<div class="container2 productRegis">
 			<div class="left" >

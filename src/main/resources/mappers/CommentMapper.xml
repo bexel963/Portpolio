@@ -19,6 +19,6 @@
 	</select>
 	
 	<select id="getCommentList" resultType="kr.green.portpolio.vo.CommentVo">
-		select * from portpolio.comment where product_num = #{product_num}
+		select * from portpolio.comment where product_num = #{product_num} order by comment_registerDate desc
 	</select>
 </mapper>

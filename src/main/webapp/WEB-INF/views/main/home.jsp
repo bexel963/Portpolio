@@ -8,7 +8,6 @@
 	
 	<style>
 		a{
-            
             color: black;
          }
         .rolling-box{
@@ -119,6 +118,7 @@
         .list li{
             float: left;
             margin: 30px 19px 0 21px;
+            position: relative;
         }
         .list .title:hover{
             color: #6e6e6e;
@@ -126,9 +126,19 @@
         .list li:hover{
             transform: scale(1.05);
         }
+        .sold-out{
+        	width: 45px;
+        	height: 25px;
+        	background-color: #EA2C4F;
+        	color: white;
+        	text-align: center;
+        	position: absolute;
+        	right: 0;
+        	top: 0;
+        	padding-top: 1px;
+        }
 	</style>
 </head>
-
 <body>
     <div class="body after">
         <div class="rolling-box">
@@ -151,10 +161,13 @@
                 <ul class="row1">
                 	<c:forEach items="${productList}" var="product">
 	                    <li>
+	                    	<c:if test="${product.product_amount == 0}">
+	                    		<div class="sold-out">품절</div>
+	                    	</c:if>
 	                    	<c:forEach items="${fileList}" var="file">
                    		      	<a href="<%=request.getContextPath()%>/productDetail?product_num=${product.product_num}" class="img-box">
 			                        <c:if test="${file.product_num == product.product_num}">			                        	
-			                            <img src="<%=request.getContextPath() %>/resources/img${file.file_name}" alt="" width="100%" height="248">			                           
+			                            <img src="<%=request.getContextPath() %>/resources/img${file.file_name}" alt="" width="100%" height="248px">			                           
 			                        </c:if>
 			                    </a>
 	                        </c:forEach>
@@ -170,7 +183,7 @@
             </div>
         </div>
     </div>
-    
+    	
     <script>
         $('.rolling-box .fa-chevron-left').click(function(e){
              e.preventDefault();

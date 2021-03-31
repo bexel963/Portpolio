@@ -34,6 +34,7 @@
 			width: 1170px;
 			margin: 0 auto;
 			padding: 15px 0 0 0;  
+			margin-bottom: 130px;
 		}
 		.user-hi{
 			width: 100%;
@@ -94,10 +95,13 @@
 				<li>캐쉬</li>
 				<li>댓글관리</li>
 			</ul>
+			<div><img src="<%=request.getContextPath()%>/resources/img/banner_cs_center.gif"></div>
 		</div>
 		<div class="right">
 			<div class="my-amend">
-				<img src="<%=request.getContextPath()%>/resources/img/amand.gif">
+				<a href="<%=request.getContextPath()%>/myInfoAmend">
+					<img src="<%=request.getContextPath()%>/resources/img/amand.gif">
+				</a>
 				<img src="<%=request.getContextPath()%>/resources/img/txt_go.gif">
 			</div>
 			<div class="address">

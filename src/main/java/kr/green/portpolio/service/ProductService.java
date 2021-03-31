@@ -29,6 +29,8 @@ public interface ProductService {
 	void deleteFiles(Integer product_num);		// 해당번호 제품의 사진들 삭제
 
 	void modifyProduct(ProductVo product);		// 제품 수정
+	
+	void modifyProduct(int product_num, int product_sale);	// 제품 재고량 수정
 
 	void deleteProduct(Integer product_num);	// 해당번호 제품 삭제
 
@@ -69,6 +71,8 @@ public interface ProductService {
 	ArrayList<FileVo> suffle(ArrayList<FileVo> mainfileList);	// 롤링박스에 들어갈 제품 사진 섞기
 
 	void deleteOrderInfo();	// 결제완료된 주문내역 주문 테이블에서 삭제
+
+	
 
 
 	

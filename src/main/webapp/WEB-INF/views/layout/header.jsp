@@ -171,9 +171,9 @@
 	        	margin: 0 auto;
 	        	width: 90%;
 	        	border-bottom: 1px solid #dee2e6;
-	        	height: calc(300px / 4 );
+	        	height: calc(300px / 3 );
 	        	text-align: center;
-	        	padding-top: 25px;
+	        	padding-top: 36px;
 	        	cursor: pointer;
 	        	font-size: 16px;
 	        	font-weight: bold;
@@ -261,9 +261,8 @@
     <div class="manager-list hidden">
     	<ul>
     		<li><a href="<%=request.getContextPath()%>/productRegis">상품등록</a></li>
-    		<li>상품등록 현황</li>
+    		<li><a href="<%=request.getContextPath()%>/productPresent">상품등록 현황</a></li>
     		<li><a href="<%=request.getContextPath()%>/userInfo" class="userInfo">회원관리</a></li>
-    		<li>직원관리</li>
     	</ul>
     </div>
     <script>

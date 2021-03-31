@@ -217,4 +217,13 @@ public class ProductServiceImp implements ProductService {
 		
 	}
 
+	@Override
+	public void modifyProduct(int product_num, int product_sale) {
+		ProductVo product = productDao.getProduct(product_num);
+		int product_amount = product.getProduct_amount();
+		product_amount = product_amount - product_sale;
+		productDao.modifyProduct2(product_num, product_amount, product_sale);
+		
+	}
+
 }

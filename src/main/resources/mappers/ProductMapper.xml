@@ -54,6 +54,10 @@
 		where product_num = #{product.product_num}
 	</update>
 	
+	<update id="modifyProduct2">
+		update portpolio.product set product_amount=#{product_amount}, product_sale=#{product_sale} where product_num = #{product_num}
+	</update>
+	
 	<insert id="regisMyBox">
 		insert into portpolio.myBox(product_num, user_id) values(#{product_num}, #{user_id})
 	</insert>
@@ -83,17 +87,16 @@
 		update portpolio.order set isDel='Y' where user_id = #{user.user_id} and product_num = #{product_num}
 	</update>
 	
-	
-	<select id="getOrderInfos" resultType="kr.green.portpolio.vo.OrderVo">
-		select * from portpolio.order where user_id = #{user.user_id}
-	</select>
-	
 	<update id="modifyOrderInfo">
 		update portpolio.order set order_amount=#{order_amount}, order_cost=#{order_cost}, isDel = #{isDel} where product_num = #{product.product_num} and user_id = #{user_id}
 	</update>
 	
+	<select id="getOrderInfos" resultType="kr.green.portpolio.vo.OrderVo">
+		select * from portpolio.order where user_id = #{user.user_id} and payment_completion = 'N'
+	</select>
+	
 	<select id="getOrderInfo" resultType="kr.green.portpolio.vo.OrderVo">
-		select * from portpolio.order where product_num = #{product_num} and user_id = #{user.user_id} and isDel = 'N'
+		select * from portpolio.order where product_num = #{product_num} and user_id = #{user.user_id} and isDel = 'N' and payment_completion = 'N'
 	</select>
 	
 	<select id="getOrderInfo2" resultType="kr.green.portpolio.vo.OrderVo">

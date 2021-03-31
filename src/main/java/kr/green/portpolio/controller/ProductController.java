@@ -51,6 +51,19 @@ public class ProductController {
 	    mv.setViewName("/menu/productRegis");
 	    return mv;
 	}
+	
+	/* 상품현황 GET */
+	@RequestMapping(value= "/productPresent", method = RequestMethod.GET)
+	public ModelAndView productPresentGet(Locale locale, ModelAndView mv){
+		
+		ArrayList<ProductVo> productList = new ArrayList<ProductVo>();
+		productList = productService.getProductList();
+		
+		mv.addObject("productList", productList);
+	    mv.setViewName("/menu/productPresent");
+	    return mv;
+	}
+	
 	/* 상품등록 POST */
 	@RequestMapping(value= "/productRegis", method = RequestMethod.POST)
 	public ModelAndView productRegisPost(Locale locale, ModelAndView mv, ProductVo product, MultipartFile[] fileList) throws IOException, Exception{
@@ -264,6 +277,7 @@ public class ProductController {
 		request.getSession().removeAttribute("orderAmount");
 		request.getSession().removeAttribute("orderCost");
 		
+		productService.modifyProduct(product.getProduct_num(), 1);
 	
 		mv.setViewName("/menu/productComplete");
 	    return mv;
@@ -280,10 +294,13 @@ public class ProductController {
 		ArrayList<OrderVo> orderList = new ArrayList<OrderVo>();
 		for(int product_num : num) {
 			orderList.add(productService.getOrderInfo(product_num, user));
+			
+			System.out.println(productService.getOrderInfo(product_num, user));
+			
 			productList.add(productService.getProduct(product_num));
 			fileList.add(productService.getMainFile(product_num));
 		}
-
+		
 		OrderVo order = productService.calTotal(orderList);
 		request.getSession().removeAttribute("order");
 		mv.addObject("order", order);
@@ -302,6 +319,7 @@ public class ProductController {
 		productService.regisPayment(user, payment);
 		productService.regisDelivery(payment.getPayment_num(), delivery);
 		
+		
 		for(int num : order_num) {
 			productService.regisPresentPayment(payment.getPayment_num(), num);			
 			productService.modifyPaymentCompletion(user, num);			
@@ -310,6 +328,18 @@ public class ProductController {
 		ArrayList<OrderVo> orderList = new ArrayList<OrderVo>();
 		for(int num : order_num) {
 			orderList.add(productService.getOrderInfo2(num));
+		}
+
+		int[] product_num = new int[orderList.size()];
+		int[] product_sale = new int[orderList.size()];
+ 
+		for(int i=0 ; i<orderList.size(); i++) {
+			product_num[i] = orderList.get(i).getProduct_num();
+			product_sale[i] = orderList.get(i).getOrder_amount(); 
+		}
+
+		for(int i=0 ; i<product_num.length ; i++) {
+			productService.modifyProduct(product_num[i], product_sale[i]);
 		}
 		
 		for(int i=0 ; i < orderList.size() ; i++) {
