@@ -1,5 +1,3 @@
-CREATE DATABASE  IF NOT EXISTS `portpolio` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
-USE `portpolio`;
 -- MySQL dump 10.13  Distrib 8.0.22, for Win64 (x86_64)
 --
 -- Host: localhost    Database: portpolio
@@ -18,32 +16,33 @@ USE `portpolio`;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `mybox`
+-- Table structure for table `likes`
 --
 
-DROP TABLE IF EXISTS `mybox`;
+DROP TABLE IF EXISTS `likes`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `mybox` (
-  `myBox_num` int NOT NULL AUTO_INCREMENT,
-  `product_num` int NOT NULL,
-  `user_id` varchar(20) NOT NULL,
-  PRIMARY KEY (`myBox_num`),
-  KEY `product_num_idx` (`product_num`),
-  KEY `user_id_idx` (`user_id`),
-  CONSTRAINT `product_num2` FOREIGN KEY (`product_num`) REFERENCES `product` (`product_num`),
-  CONSTRAINT `user_id2` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=76 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+CREATE TABLE `likes` (
+  `num` int NOT NULL AUTO_INCREMENT,
+  `boardNum` int NOT NULL,
+  `userId` varchar(45) NOT NULL,
+  `up` int NOT NULL,
+  PRIMARY KEY (`num`),
+  KEY `boardNum_idx` (`boardNum`),
+  KEY `userId_idx` (`userId`),
+  CONSTRAINT `boardNum` FOREIGN KEY (`boardNum`) REFERENCES `board` (`num`),
+  CONSTRAINT `userId` FOREIGN KEY (`userId`) REFERENCES `user` (`user_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `mybox`
+-- Dumping data for table `likes`
 --
 
-LOCK TABLES `mybox` WRITE;
-/*!40000 ALTER TABLE `mybox` DISABLE KEYS */;
-INSERT INTO `mybox` VALUES (39,18,'cc'),(40,15,'cc'),(41,17,'cc'),(48,16,'cc'),(50,15,'ee'),(51,6,'bb'),(52,15,'bb'),(53,18,'bb'),(55,16,'bb'),(71,21,'cc'),(72,7,'cc'),(73,21,'aa'),(74,7,'zz'),(75,7,'ee');
-/*!40000 ALTER TABLE `mybox` ENABLE KEYS */;
+LOCK TABLES `likes` WRITE;
+/*!40000 ALTER TABLE `likes` DISABLE KEYS */;
+INSERT INTO `likes` VALUES (3,40,'cc',-1),(4,37,'cc',1),(5,38,'cc',1),(6,39,'cc',-1),(7,45,'aa',1);
+/*!40000 ALTER TABLE `likes` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -55,4 +54,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-03-22 17:44:47
+-- Dump completed on 2021-03-31 17:46:04

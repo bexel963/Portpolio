@@ -1,5 +1,3 @@
-CREATE DATABASE  IF NOT EXISTS `portpolio` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
-USE `portpolio`;
 -- MySQL dump 10.13  Distrib 8.0.22, for Win64 (x86_64)
 --
 -- Host: localhost    Database: portpolio
@@ -38,7 +36,7 @@ CREATE TABLE `order` (
   KEY `user_id3_idx` (`user_id`),
   CONSTRAINT `product_num3` FOREIGN KEY (`product_num`) REFERENCES `product` (`product_num`),
   CONSTRAINT `user_id3` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=103 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=130 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -47,7 +45,7 @@ CREATE TABLE `order` (
 
 LOCK TABLES `order` WRITE;
 /*!40000 ALTER TABLE `order` DISABLE KEYS */;
-INSERT INTO `order` VALUES (8,1,12000,18,'2021-03-02 15:08:05','cc','N','N'),(9,1,25000,15,'2021-03-02 15:10:24','cc','N','N'),(11,1,190000,17,'2021-03-02 16:44:53','cc','N','N'),(22,2,200000,7,'2021-03-05 15:40:34','ee','Y','N'),(23,1,190000,16,'2021-03-05 15:44:30','cc','N','N'),(24,2,140000,13,'2021-03-05 15:45:54','ee','Y','N'),(25,1,190000,16,'2021-03-08 09:33:50','ee','Y','N'),(26,1,25000,15,'2021-03-08 14:20:13','ee','N','N'),(27,1,25000,15,'2021-03-08 14:31:28','bb','N','N'),(28,1,12000,18,'2021-03-08 14:31:51','bb','N','N'),(29,1,190000,16,'2021-03-08 14:32:20','bb','N','N'),(30,3,300000,6,'2021-03-08 16:07:19','bb','N','N'),(48,5,500000,6,'2021-03-09 15:47:09','aa','Y','N'),(49,3,300000,7,'2021-03-09 15:47:10','aa','Y','N'),(50,2,0,13,'2021-03-09 15:47:11','aa','Y','N'),(51,1,30000,21,'2021-03-16 16:31:26','cc','N','N'),(52,10,300000,21,'2021-03-16 17:24:45','aa','N','N'),(53,3,0,14,'2021-03-17 12:50:13','aa','N','N'),(54,3,0,16,'2021-03-17 13:05:47','aa','N','N'),(55,3,0,15,'2021-03-17 13:06:09','aa','N','N'),(56,3,0,6,'2021-03-17 14:11:01','ee','N','N'),(57,4,0,6,'2021-03-17 14:11:26','ee','N','N'),(58,3,0,6,'2021-03-17 14:11:37','ee','N','N'),(59,5,0,7,'2021-03-17 14:11:42','ee','N','N'),(60,1,0,7,'2021-03-17 14:12:31','aa','N','N'),(61,1,0,18,'2021-03-17 14:13:16','aa','N','N'),(62,2,0,18,'2021-03-17 14:13:32','aa','N','N'),(100,6,420000,13,'2021-03-17 17:20:53','zz','Y','N'),(101,5,150000,21,'2021-03-17 17:38:10','zz','Y','N'),(102,2,50000,15,'2021-03-17 17:38:40','zz','Y','N');
+INSERT INTO `order` VALUES (123,3,75000,15,'2021-03-31 14:21:45','dd','Y','N'),(124,4,760000,16,'2021-03-31 14:21:47','dd','Y','N'),(125,5,950000,17,'2021-03-31 14:21:48','dd','Y','N'),(126,2,50000,15,'2021-03-31 14:34:32','dd','Y','N'),(127,3,570000,16,'2021-03-31 14:34:33','dd','Y','N'),(128,4,760000,17,'2021-03-31 14:34:35','dd','Y','N'),(129,1,100000,7,'2021-03-31 15:05:18','aa','Y','N');
 /*!40000 ALTER TABLE `order` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -60,4 +58,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-03-22 17:44:47
+-- Dump completed on 2021-03-31 17:46:05
