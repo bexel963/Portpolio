@@ -20,4 +20,8 @@ public interface UserService {
 
 	public UserVo getUser(HttpServletRequest request);
 
+	public UserVo getUser2(String user_nickName);
+
+	public void modifyUser(UserVo user, String user_pw);
+
 }

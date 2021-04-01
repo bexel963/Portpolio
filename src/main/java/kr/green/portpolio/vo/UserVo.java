@@ -1,17 +1,34 @@
 package kr.green.portpolio.vo;
 
+import java.util.Arrays;
+
 public class UserVo {
 	
 	private String user_id;
 	private String user_pw;
 	private String user_name;
-	private int user_age;
+	private String user_age;
 	private String user_phone;
 	private String user_email;
 	private String user_address;
-	private int user_grade = 1;
+	private String user_homeCall;
+	private String user_nickName;
+	private String user_gender;
+	private int user_grade = 2;
 	
-	
+	public String getUser_nickName() {
+		return user_nickName;
+	}
+	public void setUser_nickName(String user_nickName) {
+		this.user_nickName = user_nickName;
+	}
+	public String getUser_gender() {
+		return user_gender;
+	}
+	public void setUser_gender(String user_gender) {
+		this.user_gender = user_gender;
+	}
+
 	public String getUser_address() {
 		return user_address;
 	}
@@ -36,10 +53,17 @@ public class UserVo {
 	public void setUser_name(String user_name) {
 		this.user_name = user_name;
 	}
-	public int getUser_age() {
+	
+	public int getUser_grade() {
+		return user_grade;
+	}
+	public void setUser_grade(int user_grade) {
+		this.user_grade = user_grade;
+	}
+	public String getUser_age() {
 		return user_age;
 	}
-	public void setUser_age(int user_age) {
+	public void setUser_age(String user_age) {
 		this.user_age = user_age;
 	}
 	public String getUser_phone() {
@@ -54,30 +78,20 @@ public class UserVo {
 	public void setUser_email(String user_email) {
 		this.user_email = user_email;
 	}
-	public int getUser_grade() {
-		return user_grade;
+	public String getUser_homeCall() {
+		return user_homeCall;
 	}
-	public void setUser_grade(int user_grade) {
-		this.user_grade = user_grade;
-	}
-	public String getNum1() {
-		String arr[] = user_phone.split("-");
-		return arr[0];
-	}
-	public String getNum2() {
-		String arr[] = user_phone.split("-");
-		return arr[1];
-	}
-	public String getNum3() {
-		String arr[] = user_phone.split("-");
-		return arr[2];
+	public void setUser_homeCall(String user_homeCall) {
+		this.user_homeCall = user_homeCall;
 	}
 	@Override
 	public String toString() {
 		return "UserVo [user_id=" + user_id + ", user_pw=" + user_pw + ", user_name=" + user_name + ", user_age="
 				+ user_age + ", user_phone=" + user_phone + ", user_email=" + user_email + ", user_address="
-				+ user_address + ", user_grade=" + user_grade + "]";
+				+ user_address + ", user_homeCall=" + user_homeCall + ", user_nickName=" + user_nickName
+				+ ", user_gender=" + user_gender + ", user_grade=" + user_grade + "]";
 	}
+	
 	
 
 }

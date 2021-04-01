@@ -67,7 +67,7 @@
 			padding: 20px 0 0 20px;
 			cursor: pointer;
 		}
-		.myInfo-container .right div img:nth-of-type(2){
+		.myInfo-container .right .text_go{
 			position: absolute;
 			right: 10px;
 			bottom: 10px;
@@ -102,27 +102,27 @@
 				<a href="<%=request.getContextPath()%>/myInfoAmend">
 					<img src="<%=request.getContextPath()%>/resources/img/amand.gif">
 				</a>
-				<img src="<%=request.getContextPath()%>/resources/img/txt_go.gif">
+				<img class="text_go" src="<%=request.getContextPath()%>/resources/img/txt_go.gif">
 			</div>
 			<div class="address">
 				<img src="<%=request.getContextPath()%>/resources/img/address.gif">
-				<img src="<%=request.getContextPath()%>/resources/img/txt_go.gif">
+				<img class="text_go" src="<%=request.getContextPath()%>/resources/img/txt_go.gif">
 			</div>
 			<div class="counsel">
 				<img src="<%=request.getContextPath()%>/resources/img/counsel.gif">
-				<img src="<%=request.getContextPath()%>/resources/img/txt_go.gif">
+				<img class="text_go" src="<%=request.getContextPath()%>/resources/img/txt_go.gif">
 			</div>
 			<div class="order-history">
 				<img src="<%=request.getContextPath()%>/resources/img/order_history.gif">
-				<img src="<%=request.getContextPath()%>/resources/img/txt_go.gif">
+				<img class="text_go" src="<%=request.getContextPath()%>/resources/img/txt_go.gif">
 			</div>
 			<div class="cash">
 				<img src="<%=request.getContextPath()%>/resources/img/cash.gif">
-				<img src="<%=request.getContextPath()%>/resources/img/txt_go.gif">
+				<img class="text_go" src="<%=request.getContextPath()%>/resources/img/txt_go.gif">
 			</div>
 			<div class="my-comment">
 				<img src="<%=request.getContextPath()%>/resources/img/my_comment.gif">
-				<img src="<%=request.getContextPath()%>/resources/img/txt_go.gif">
+				<img class="text_go" src="<%=request.getContextPath()%>/resources/img/txt_go.gif">
 			</div>
 		</div>
 	</div>

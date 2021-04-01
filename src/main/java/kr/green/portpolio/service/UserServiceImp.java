@@ -70,5 +70,19 @@ public class UserServiceImp implements UserService {
 	public UserVo getUser(HttpServletRequest request) {
 		return (UserVo)request.getSession().getAttribute("user");		// 세션에서 user정보 가져오는 코드
 	}
+
+	@Override
+	public UserVo getUser2(String user_nickName) {
+		return userDao.getUser2(user_nickName);
+	}
+
+	@Override
+	public void modifyUser(UserVo user, String user_pw) {
+	
+		String encPw = passwordEncoder.encode(user_pw);
+		user.setUser_pw(encPw);
+		
+		userDao.modifyUser(user);
+	}
 	
 }

@@ -13,6 +13,10 @@
 			content: '';
 			display: block;
 		}
+		input:focus{
+			border: none;
+    		outline:none;
+		}
 		.container-title{
 			border-bottom: 2px solid #000000;
 			width: 1170px;
@@ -128,7 +132,8 @@
 			color: #000000;
 			padding-left: 20px;
 		}
-		.pw-btn{
+		.pw-btn,
+		.dup-check{
 			height: 25px;
 			color: white;
 			text-align: center;
@@ -148,6 +153,27 @@
 			color: #9C9C9C;
 			font-weight: 900;
 			font-size: 14px;
+		}
+		.right .bot .btn-area{
+			margin-top: 40px;
+			padding-left: 280px;
+		}
+		.right .bot .conrfirm-btn{
+			float: left;
+			margin-right: 30px;
+			cursor: pointer;
+		}
+		.right .bot .cancel-btn{
+			float: left;
+			cursor: pointer;
+		}
+		.text{
+			color: #AEAEAE;
+			font-size: 14px;
+			margin: 0 5px 0 5px;
+		}
+		.hidden{
+			display: none;
 		}
 	</style>
 </head>
@@ -184,84 +210,173 @@
 					</div>
 				</div>
 			</div>
-			<div class="mid">
-				<div class="table-title">기본정보</div>
-				<table class="table">
-					<tr>
-						<th>이 름</th>
-						<td>임재형</td>
-					</tr>
-					<tr>
-						<th>아이디</th>
-						<td>임재형</td>
-					</tr>
-					<tr>
-						<th>비밀번호</th>
-						<td><div class="pw-btn" style="width: 90px;">비밀번호 변경</div></td>
-					</tr>
-					<tr>
-						<th>이메일</th>
-						<td><input class="text-input" type="email" name="user_email" value=""></td>
-					</tr>
-					<tr>
-						<th>휴대폰번호</th>
-						<td><input class="text-input" type="text" name="user_phone" value=""></td>
-					</tr>
-					<tr>
-						<th>전화번호</th>
-						<td><input class="text-input" type="text" name="user_phone" value=""></td>
-					</tr>
-					<tr>
-						<th>닉네임</th>
-						<td>
-							<input class="text-input" type="text" name="user_nickname" value="" style="float: left; margin-right: 10px">
-							<div class="pw-btn" style="width: 130px; float: left;"><i class="fas fa-check" style="margin-right: 5px"></i>닉네임 중복체크</div>
-						</td>
-					</tr>
-					<tr>
-						<th>생년월일</th>
-						<td>
-							<select class="year" name="year" id="" style="width: 100px">
-								<option value="">선택해주세요</option>
-								<c:forEach begin="1920" end="2006" var="index">
-									<option class="option" value="${index}">${index}</option>
-								</c:forEach>
-							</select>
-							<span class="year-text">년</span>
-							<select class="month" name="month" id="" style="width: 100px">
-								<option value="">선택해주세요</option>
-								<c:forEach begin="0" end="12" var="index">
-									<option class="option" value="${index}">${index}</option>
-								</c:forEach>
-							</select>
-							<span class="year-text">월</span>
-							<select class="date" name="date" id="" style="width: 100px">
-								<option value="">선택해주세요</option>
-								<c:forEach begin="0" end="31" var="index">
-									<option class="option" value="${index}">${index}</option>
-								</c:forEach>
-							</select>
-							<span class="year-text">일</span>
-							
-						</td>
-					</tr>
-					<tr>
-						<th>성별</th>
-						<td>
-							<input type="radio" name="sex" value="남성"> 남성
-							<input type="radio" name="sex" value="여성" style="margin-left: 10px;"> 여성
-						</td>
-					</tr>
-					<tr>
-						<th>주소</th>
-						<td>
-							<input class="text-input" type="text" name="user_address" value="" style="width: 500px;">
-						</td>
-					</tr>
-				</table>
-			</div>
-			<div class="bot"></div>
+			<form action="<%=request.getContextPath()%>/myInfoAmend" method="post" id="myInfoModi">
+				<div class="mid">
+					<input type="hidden" name="user_id" value="${user.user_id}">
+					<div class="table-title">기본정보</div>
+					<table class="table">
+						<tr>
+							<th>이 름</th>
+							<td>${user.user_name}</td>
+						</tr>
+						<tr>
+							<th>아이디</th>
+							<td>${user.user_id}</td>
+						</tr>
+						<tr>
+							<th style="padding-top:15px;">비밀번호</th>
+							<td>
+								<input type="password" name="user_pw" value="" class="text-input" style="width:300px;">
+							</td>
+						</tr>
+						<tr>
+							<th style="padding-top:15px;">비밀번호 확인</th>
+							<td>
+								<input type="password" name="user_pw_confirm" value="" class="text-input" style="width:300px;">
+							</td>
+						</tr>
+						<tr>
+							<th style="padding-top:17px">이메일</th>
+							<td style="padding-top:10px">
+								<input type="text" name="user_email1" value="" class="text-input">
+								<span class="text" style="font-size: 20px;">@</span>
+								<input type="text" name="user_email2" value="" class="text-input">
+								<input type="hidden" name="user_email">
+							</td>
+						</tr>
+						<tr>
+							<th style="padding-top:15px">휴대폰번호</th>
+							<td>
+								<input class="text-input" type="text" name="user_phone1" value="" style="width:155px;"><span class="text">-</span>
+								<input class="text-input" type="text" name="user_phone2" value="" style="width:155px;"><span class="text">-</span>
+								<input class="text-input" type="text" name="user_phone3" value="" style="width:155px;">
+								<input type="hidden" name="user_phone">
+							</td>
+						</tr>
+						<tr>
+							<th style="padding-top:15px">전화번호</th>
+							<td>
+								<input class="text-input" type="text" name="user_homeCall1" value="" style="width:155px;"><span class="text">-</span>
+								<input class="text-input" type="text" name="user_homeCall2" value="" style="width:155px;"><span class="text">-</span>
+								<input class="text-input" type="text" name="user_homeCall3" value="" style="width:155px;">
+								<input type="hidden" name="user_homeCall">
+							</td>
+						</tr>
+						<tr>
+							<th style="padding-top:15px">닉네임</th>
+							<td>
+								<input class="text-input" type="text" name="user_nickName" value="" style="float: left; margin-right: 10px">
+								<div class="dup-check" style="width: 130px; float: left;"><i class="fas fa-check" style="margin-right: 5px"></i>닉네임 중복체크</div>
+							</td>
+						</tr>
+						<tr>
+							<th>생년월일</th>
+							<td>
+								<select class="year" name="user_age1" id="" style="width: 100px">
+									<option value="">선택해주세요</option>
+									<c:forEach begin="1920" end="2006" var="index">
+										<option class="option" value="${index}">${index}</option>
+									</c:forEach>
+								</select>
+								<span class="year-text">년</span>
+								<select class="month" name="user_age2" id="" style="width: 100px">
+									<option value="">선택해주세요</option>
+									<c:forEach begin="0" end="12" var="index">
+										<option class="option" value="${index}">${index}</option>
+									</c:forEach>
+								</select>
+								<span class="year-text">월</span>
+								<select class="date" name="user_age3" id="" style="width: 100px">
+									<option value="">선택해주세요</option>
+									<c:forEach begin="0" end="31" var="index">
+										<option class="option" value="${index}">${index}</option>
+									</c:forEach>
+								</select>
+								<span class="year-text">일</span>
+								<input type="hidden" name="user_age">
+							</td>
+						</tr>
+						<tr>
+							<th>성별</th>
+							<td>
+								<input type="radio" name="user_gender" value="남성"> 남성
+								<input type="radio" name="user_gender" value="여성" style="margin-left: 10px;"> 여성
+							</td>
+						</tr>
+					</table>
+				</div>
+				<div class="bot">
+					<div class="btn-area">
+						<div class="conrfirm-btn"><img src="<%=request.getContextPath()%>/resources/img/btn_confirm.gif"></div>
+						<div class="cancel-btn"><img src="<%=request.getContextPath()%>/resources/img/btn_cancel02.gif"></div>
+					</div>
+				</div>
+			</form>
 		</div>
 	</div>
+	<script>
+		$('.dup-check').click(function(){
+			var obj = $(this);
+   			var user_nickName = $('input[name=user_nickName]').val();
+       		if(user_nickName == ''){
+       			alert('닉네임을 입력하세요');
+       			return;
+       		}
+       		var data = { 'user_nickName' : user_nickName };	// 'id' - 멤버변수 이름 id - 위에서 만든 변수의 값
+       		$.ajax({
+				url : '<%=request.getContextPath()%>/nickNameDup',
+				type : 'post',
+				data : data,
+				success : function(data){	// 성공하면 서버에서 데이터 받음
+					if(data == 'user'){
+						alert('사용중인 닉네임 입니다.');
+						obj.siblings('input').val('');
+						
+					}else{
+						alert('사용 가능한 닉네임 입니다.');
+						dup = true;
+					}
+				},
+				error : function(){
+					console.log('실패');
+				}
+			})
+		})
+		$('.conrfirm-btn').click(function(){
+			var phone1 = $('input[name=user_phone1]').val();
+			var phone2 = $('input[name=user_phone2]').val();
+			var phone3 = $('input[name=user_phone3]').val();	
+			var user_phone = phone1 + '-' + phone2 + '-' + phone3;
+			
+			var homeCall1 = $('input[name=user_homeCall1]').val();
+			var homeCall2 = $('input[name=user_homeCall2]').val();
+			var homeCall3 = $('input[name=user_homeCall3]').val();	
+			var user_homeCall = homeCall1 + '-' + homeCall2 + '-' + homeCall3;
+			
+			var year = $('select[name=user_age1]').val();
+			var month = $('select[name=user_age2]').val();
+			var date = $('select[name=user_age3]').val();
+			var user_age = year + '.' + month + '.' + date;
+			
+			var email1 = $('input[name=user_email1]').val();
+			var email2 = $('input[name=user_email2]').val();
+			var user_email = email1 + '@' + email2;
+			
+			$('input[name=user_phone]').val(user_phone);
+			$('input[name=user_homeCall]').val(user_homeCall);
+			$('input[name=user_age]').val(user_age);
+			$('input[name=user_email]').val(user_email);
+			
+			var pw1 = $('input[name=user_pw]').val();
+			var pw2 = $('input[name=user_pw_confirm]').val();
+			if( pw1 != pw2){
+				alert("비밀번호가 일치하지 않습니다.");
+				$('input[name=user_pw]').val('');
+				$('input[user_pw_confirm]').val('');
+				return false;
+			}
+			$('#myInfoModi').submit();
+		})
+	</script>
 </body>
 </html>

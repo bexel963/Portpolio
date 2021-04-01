@@ -16,31 +16,32 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `mybox`
+-- Table structure for table `payment`
 --
 
-DROP TABLE IF EXISTS `mybox`;
+DROP TABLE IF EXISTS `payment`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `mybox` (
-  `myBox_num` int NOT NULL AUTO_INCREMENT,
-  `product_num` int NOT NULL,
-  `user_id` varchar(20) NOT NULL,
-  PRIMARY KEY (`myBox_num`),
-  KEY `product_num_idx` (`product_num`),
-  KEY `user_id_idx` (`user_id`),
-  CONSTRAINT `product_num2` FOREIGN KEY (`product_num`) REFERENCES `product` (`product_num`),
-  CONSTRAINT `user_id2` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=122 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+CREATE TABLE `payment` (
+  `payment_num` int NOT NULL AUTO_INCREMENT,
+  `payment_way` varchar(45) DEFAULT NULL,
+  `payment_cost` int DEFAULT NULL,
+  `payment_date` datetime DEFAULT CURRENT_TIMESTAMP,
+  `user_id` varchar(20) DEFAULT NULL,
+  PRIMARY KEY (`payment_num`),
+  KEY `user_id8_idx` (`user_id`),
+  CONSTRAINT `user_id8` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=86 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `mybox`
+-- Dumping data for table `payment`
 --
 
-LOCK TABLES `mybox` WRITE;
-/*!40000 ALTER TABLE `mybox` DISABLE KEYS */;
-/*!40000 ALTER TABLE `mybox` ENABLE KEYS */;
+LOCK TABLES `payment` WRITE;
+/*!40000 ALTER TABLE `payment` DISABLE KEYS */;
+INSERT INTO `payment` VALUES (83,'신용카드',1785000,'2021-03-31 14:21:54','dd'),(84,'신용카드',1380000,'2021-03-31 14:50:04','dd'),(85,'신용카드',100000,'2021-03-31 15:05:18','aa');
+/*!40000 ALTER TABLE `payment` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -52,4 +53,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-03-31 17:46:04
+-- Dump completed on 2021-04-01 17:42:01

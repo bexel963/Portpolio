@@ -16,33 +16,37 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `likes`
+-- Table structure for table `order`
 --
 
-DROP TABLE IF EXISTS `likes`;
+DROP TABLE IF EXISTS `order`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `likes` (
-  `num` int NOT NULL AUTO_INCREMENT,
-  `boardNum` int NOT NULL,
-  `userId` varchar(45) NOT NULL,
-  `up` int NOT NULL,
-  PRIMARY KEY (`num`),
-  KEY `boardNum_idx` (`boardNum`),
-  KEY `userId_idx` (`userId`),
-  CONSTRAINT `boardNum` FOREIGN KEY (`boardNum`) REFERENCES `board` (`num`),
-  CONSTRAINT `userId` FOREIGN KEY (`userId`) REFERENCES `user` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+CREATE TABLE `order` (
+  `order_num` int NOT NULL AUTO_INCREMENT,
+  `order_amount` int NOT NULL DEFAULT '1',
+  `order_cost` int NOT NULL DEFAULT '0',
+  `product_num` int NOT NULL,
+  `order_date` datetime DEFAULT CURRENT_TIMESTAMP,
+  `user_id` varchar(20) NOT NULL,
+  `payment_completion` varchar(2) NOT NULL DEFAULT 'N',
+  `isDel` varchar(2) NOT NULL DEFAULT 'N',
+  PRIMARY KEY (`order_num`),
+  KEY `product_num3_idx` (`product_num`),
+  KEY `user_id3_idx` (`user_id`),
+  CONSTRAINT `product_num3` FOREIGN KEY (`product_num`) REFERENCES `product` (`product_num`),
+  CONSTRAINT `user_id3` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=130 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `likes`
+-- Dumping data for table `order`
 --
 
-LOCK TABLES `likes` WRITE;
-/*!40000 ALTER TABLE `likes` DISABLE KEYS */;
-INSERT INTO `likes` VALUES (3,40,'cc',-1),(4,37,'cc',1),(5,38,'cc',1),(6,39,'cc',-1),(7,45,'aa',1);
-/*!40000 ALTER TABLE `likes` ENABLE KEYS */;
+LOCK TABLES `order` WRITE;
+/*!40000 ALTER TABLE `order` DISABLE KEYS */;
+INSERT INTO `order` VALUES (123,3,75000,15,'2021-03-31 14:21:45','dd','Y','N'),(124,4,760000,16,'2021-03-31 14:21:47','dd','Y','N'),(125,5,950000,17,'2021-03-31 14:21:48','dd','Y','N'),(126,2,50000,15,'2021-03-31 14:34:32','dd','Y','N'),(127,3,570000,16,'2021-03-31 14:34:33','dd','Y','N'),(128,4,760000,17,'2021-03-31 14:34:35','dd','Y','N'),(129,1,100000,7,'2021-03-31 15:05:18','aa','Y','N');
+/*!40000 ALTER TABLE `order` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -54,4 +58,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-03-31 17:46:04
+-- Dump completed on 2021-04-01 17:42:01

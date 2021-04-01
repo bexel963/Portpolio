@@ -8,9 +8,13 @@
     select * from portpolio.user where user_id = #{id}
   </select>
   
+  <select id="getUser2" resultType="kr.green.portpolio.vo.UserVo">
+    select * from portpolio.user where user_nickName = #{user_nickName}
+  </select>
+  
   <insert id="userRegis" parameterType="kr.green.portpolio.vo.UserVo">
-  	insert into portpolio.user(user_id, user_pw, user_name, user_age, user_email, user_phone, user_grade)
-  				values(#{user.user_id},#{user.user_pw},#{user.user_name},#{user.user_age},#{user.user_email},#{user.user_phone},#{user.user_grade})
+  	insert into portpolio.user(user_id, user_pw, user_name, user_age, user_email, user_phone, user_grade, user_homeCall, user_nickName, user_gender)
+  				values(#{user.user_id},#{user.user_pw},#{user.user_name},#{user.user_age},#{user.user_email},#{user.user_phone},#{user.user_grade},#{user.user_homeCall},#{user.user_nickName},#{user.user_gender})
   </insert>
   
   <select id="getAllUser" resultType="kr.green.portpolio.vo.UserVo">
@@ -19,6 +23,11 @@
   
   <update id="updateGrade">
   	update portpolio.user set user_grade = #{user.user_grade} where user_id = #{user.user_id}
+  </update>
+  
+  <update id="modifyUser">
+  	update portpolio.user set user_pw=#{user.user_pw}, user_email=#{user.user_email}, user_homeCall=#{user.user_homeCall}, user_phone=#{user.user_phone}, user_nickName=#{user.user_nickName}
+  		where user_id = #{user.user_id}
   </update>
  
 </mapper>

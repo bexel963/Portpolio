@@ -156,21 +156,30 @@ public class HomeController {
 	}
 	/* 회원가입 POST */
 	@RequestMapping(value= "/signup", method = RequestMethod.POST)
-	public ModelAndView signupPost(Locale locale, ModelAndView mv, UserVo user){
-		System.out.println("입력한 회원가입 정보: " + user);
+	public ModelAndView signupPost( ModelAndView mv, UserVo user){
 		userService.userRegis(user);
 	    mv.setViewName("redirect:/");
 	    return mv;
 	}
-	/* 회원정보 GET */
-	@RequestMapping(value= "/userInfo", method = RequestMethod.GET)
-	public ModelAndView userInfoGet(Locale locale, ModelAndView mv){
-		ArrayList<UserVo> userList = new ArrayList<UserVo>();
-		userList = userService.getAllUser();
-		mv.addObject("list", userList);
-	    mv.setViewName("/main/userInfo");
-	    return mv;
+	/* 아이디 중복검사 */
+	@RequestMapping(value = "/idDup", method = RequestMethod.POST)		//url이 localhost:8080/spring 가 기본 입력 되어있음
+	@ResponseBody
+	public String idDupPost(String user_id) {
+		UserVo user = userService.getUser(user_id);
+		if(user == null)
+			return "not user";
+		return "user";
 	}
+	/* 닉네임 중복검사 */
+	@RequestMapping(value = "/nickNameDup", method = RequestMethod.POST)		//url이 localhost:8080/spring 가 기본 입력 되어있음
+	@ResponseBody
+	public String nickNameDupPost(String user_nickName) {
+		UserVo user = userService.getUser2(user_nickName);
+		if(user == null)
+			return "not user";
+		return "user";
+	}
+	
 	/* 회원등급 변경 */
 	@RequestMapping(value = "/grade/modify", method = RequestMethod.POST)		
 	@ResponseBody
@@ -180,20 +189,29 @@ public class HomeController {
 		return map;
 	}
 	
-	/* 내정보 */
+	/* 내정보 리스트 */
 	@RequestMapping(value= "/myInfo", method = RequestMethod.GET)
 	public ModelAndView myInfo(Locale locale, ModelAndView mv){
-		
 		
 	    mv.setViewName("/main/myInfo");
 	    return mv;
 	}
 	
-	/* 내정보 변경 */
+	/* 내정보 변경 GET */
 	@RequestMapping(value= "/myInfoAmend", method = RequestMethod.GET)
 	public ModelAndView myInfoAmendGet(Locale locale, ModelAndView mv){
 
 	    mv.setViewName("/main/myInfoAmend");
+	    return mv;
+	}
+	
+	/* 내정보 변경 POST*/
+	@RequestMapping(value= "/myInfoAmend", method = RequestMethod.POST)
+	public ModelAndView myInfoAmendPost(Locale locale, ModelAndView mv, UserVo user){
+
+		System.out.println(user);
+		userService.modifyUser(user, user.getUser_pw());
+	    mv.setViewName("redirect:/");
 	    return mv;
 	}
 	
