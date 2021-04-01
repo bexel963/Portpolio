@@ -187,8 +187,8 @@
 		<div class="left after">
 			<div><img src="<%=request.getContextPath()%>/resources/img/my_information.gif"></div>
 			<ul>
-				<li>개인정보수정</li>
-				<li>나의 주소록</li>
+				<li><a href="<%=request.getContextPath()%>/myInfoAmend">개인정보수정</a></li>
+				<li><a href="<%=request.getContextPath()%>/addressList">나의 주소록</a></li>
 				<li>1:1 상담 내역</li>
 				<li>회원탈퇴</li>
 			</ul>
@@ -315,6 +315,7 @@
 		</div>
 	</div>
 	<script>
+		var dup = false;
 		$('.dup-check').click(function(){
 			var obj = $(this);
    			var user_nickName = $('input[name=user_nickName]').val();
@@ -376,6 +377,16 @@
 				return false;
 			}
 			$('#myInfoModi').submit();
+			
+			$('input[name=user_nickName]').change(function(){ 
+		   		dup = false;
+		   	})
+		   	$('form').submit(function(){
+		   		if(!dup){
+		   			alert('아이디 중복검사를 하세요');
+		   			return false;
+		   		}
+		   	})
 		})
 	</script>
 </body>

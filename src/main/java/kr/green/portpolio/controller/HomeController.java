@@ -215,4 +215,18 @@ public class HomeController {
 	    return mv;
 	}
 	
+	/* 내 주소 리스트 GET */
+	@RequestMapping(value= "/addressList", method = RequestMethod.GET)
+	public ModelAndView addressListGet(Locale locale, ModelAndView mv){
+
+	    mv.setViewName("/main/addressList");
+	    return mv;
+	}
+	/* 내 주소록 추가 GET */
+	@RequestMapping(value= "/addressAdd", method = RequestMethod.GET)
+	public ModelAndView addressAddGet(Locale locale, ModelAndView mv){
+
+	    mv.setViewName("/main/addressAdd");
+	    return mv;
+	}
 }

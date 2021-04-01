@@ -84,8 +84,8 @@
 		<div class="left after">
 			<div><img src="<%=request.getContextPath()%>/resources/img/my_information.gif"></div>
 			<ul>
-				<li>개인정보수정</li>
-				<li>나의 주소록</li>
+				<li><a href="<%=request.getContextPath()%>/myInfoAmend">개인정보수정</a></li>
+				<li><a href="<%=request.getContextPath()%>/addressList">나의 주소록</a></li>
 				<li>1:1 상담 내역</li>
 				<li>회원탈퇴</li>
 			</ul>
@@ -105,7 +105,9 @@
 				<img class="text_go" src="<%=request.getContextPath()%>/resources/img/txt_go.gif">
 			</div>
 			<div class="address">
-				<img src="<%=request.getContextPath()%>/resources/img/address.gif">
+				<a href="<%=request.getContextPath()%>/addressList">
+					<img src="<%=request.getContextPath()%>/resources/img/address.gif">
+				</a>
 				<img class="text_go" src="<%=request.getContextPath()%>/resources/img/txt_go.gif">
 			</div>
 			<div class="counsel">
