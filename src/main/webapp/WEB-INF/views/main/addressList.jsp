@@ -192,20 +192,21 @@
 						<th>주소</th>
 						<th>관리</th>
 					</tr>
-					<tr class="row2">
-						<th><input type="checkbox"></th>
-						<th>우리집</th>
-						<th>임재형</th>
-						<th>010-5608-0601</th>
-						<th>070-4578-1248</th>
-						<th>
-							<span>충청북도 청주시 서원구 수곡로 88 (수곡동, 세원홍실아파트)</span><br>
-							<span>101동 408호</span>
-						</th>
-						<th>
-							<button class="amend-btn">수정</button>
-						</th>
-					</tr>
+					<c:forEach items="${addressList}" var="address">
+						<tr class="row2">
+							<th><input type="checkbox"></th>
+							<th>${address.delivery_name}</th>
+							<th>${address.recipient}</th>
+							<th>${address.phone_call}</th>
+							<th>${address.home_call}</th>
+							<th>
+								<span>${address.address}</span>
+							</th>
+							<th>
+								<button class="amend-btn">수정</button>
+							</th>
+						</tr>
+					</c:forEach>
 				</table>
 			</div>
 			<div class="delete">

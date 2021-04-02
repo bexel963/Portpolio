@@ -29,7 +29,15 @@
   	update portpolio.user set user_pw=#{user.user_pw}, user_email=#{user.user_email}, user_homeCall=#{user.user_homeCall}, user_phone=#{user.user_phone}, user_nickName=#{user.user_nickName}
   		where user_id = #{user.user_id}
   </update>
- 
+ 	
+  <insert id="regisAddress" parameterType="kr.green.portpolio.vo.AddressVo">
+  	insert into portpolio.address(delivery_name, recipient, phone_call, home_call, address, user_id)
+  				values(#{address.delivery_name},#{address.recipient},#{address.phone_call},#{address.home_call},#{address.address},#{user.user_id})
+  </insert>
+  
+  <select id="getAddressList" resultType="kr.green.portpolio.vo.AddressVo">
+    select * from portpolio.address where user_id = #{user.user_id}
+  </select>
 </mapper>
 
 

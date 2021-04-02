@@ -19,6 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import kr.green.portpolio.service.ProductService;
 import kr.green.portpolio.service.UserService;
+import kr.green.portpolio.vo.AddressVo;
 import kr.green.portpolio.vo.FileVo;
 import kr.green.portpolio.vo.ProductVo;
 import kr.green.portpolio.vo.UserVo;
@@ -217,16 +218,33 @@ public class HomeController {
 	
 	/* 내 주소 리스트 GET */
 	@RequestMapping(value= "/addressList", method = RequestMethod.GET)
-	public ModelAndView addressListGet(Locale locale, ModelAndView mv){
-
+	public ModelAndView addressListGet(Locale locale, ModelAndView mv, HttpServletRequest request){
+		
+		UserVo user = userService.getUser(request);
+		ArrayList<AddressVo> addressList = new ArrayList<AddressVo>();
+		
+		addressList = userService.getAddressList(user);
+		
+		mv.addObject("addressList", addressList);
 	    mv.setViewName("/main/addressList");
 	    return mv;
 	}
+	
 	/* 내 주소록 추가 GET */
 	@RequestMapping(value= "/addressAdd", method = RequestMethod.GET)
 	public ModelAndView addressAddGet(Locale locale, ModelAndView mv){
-
+		
 	    mv.setViewName("/main/addressAdd");
+	    return mv;
+	}
+	/* 내 주소록 추가 POST */
+	@RequestMapping(value= "/addressAdd", method = RequestMethod.POST)
+	public ModelAndView addressAddPost(Locale locale, ModelAndView mv, AddressVo address, HttpServletRequest request){
+
+		UserVo user = userService.getUser(request);
+		userService.regisAddress(user, address);
+		
+	    mv.setViewName("redirect:/addressList");
 	    return mv;
 	}
 }

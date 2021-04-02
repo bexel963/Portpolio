@@ -157,30 +157,28 @@
             </div>
         </div>
         <div class="list">
-            <div class="container2">
-                <ul class="row1">
-                	<c:forEach items="${productList}" var="product">
-	                    <li>
-	                    	<c:if test="${product.product_amount == 0}">
-	                    		<div class="sold-out">품절</div>
-	                    	</c:if>
-	                    	<c:forEach items="${fileList}" var="file">
-                   		      	<a href="<%=request.getContextPath()%>/productDetail?product_num=${product.product_num}" class="img-box">
-			                        <c:if test="${file.product_num == product.product_num}">			                        	
-			                            <img src="<%=request.getContextPath() %>/resources/img${file.file_name}" alt="" width="100%" height="248px">			                           
-			                        </c:if>
-			                    </a>
-	                        </c:forEach>
-	                        <a href="<%=request.getContextPath()%>/productDetail?product_num=${product.product_num}">
-	                            <div class="title">${product.product_title}</div>
-	                            <div class="category">${product.product_category}</div>
-	                            <div class="date">${product.product_registerDate}</div>
-	                            <div class="article">${product.product_content}</div>
-	                        </a>
-	                    </li>
-                    </c:forEach>
-                </ul>
-            </div>
+	        <ul class="row1">
+	        	<c:forEach items="${productList}" var="product">
+	             <li>
+	             	<c:if test="${product.product_amount == 0}">
+	             		<div class="sold-out">품절</div>
+	             	</c:if>
+	             	<c:forEach items="${fileList}" var="file">
+	           		      	<a href="<%=request.getContextPath()%>/productDetail?product_num=${product.product_num}" class="img-box">
+	                   <c:if test="${file.product_num == product.product_num}">			                        	
+	                       <img src="<%=request.getContextPath() %>/resources/img${file.file_name}" alt="" width="100%" height="248px">			                           
+	                   </c:if>
+	               </a>
+	                 </c:forEach>
+	                 <a href="<%=request.getContextPath()%>/productDetail?product_num=${product.product_num}">
+	                     <div class="title">${product.product_title}</div>
+	                     <div class="category">${product.product_category}</div>
+	                     <div class="date">${product.product_registerDate}</div>
+	                     <div class="article">${product.product_content}</div>
+	                 </a>
+	             </li>
+	            </c:forEach>
+	        </ul>        
         </div>
     </div>
     	

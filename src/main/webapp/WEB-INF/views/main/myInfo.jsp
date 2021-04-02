@@ -102,13 +102,17 @@
 				<a href="<%=request.getContextPath()%>/myInfoAmend">
 					<img src="<%=request.getContextPath()%>/resources/img/amand.gif">
 				</a>
-				<img class="text_go" src="<%=request.getContextPath()%>/resources/img/txt_go.gif">
+				<a href="<%=request.getContextPath()%>/myInfoAmend">
+					<img class="text_go" src="<%=request.getContextPath()%>/resources/img/txt_go.gif">
+				</a>
 			</div>
 			<div class="address">
 				<a href="<%=request.getContextPath()%>/addressList">
 					<img src="<%=request.getContextPath()%>/resources/img/address.gif">
 				</a>
-				<img class="text_go" src="<%=request.getContextPath()%>/resources/img/txt_go.gif">
+				<a href="<%=request.getContextPath()%>/addressList">
+					<img class="text_go" src="<%=request.getContextPath()%>/resources/img/txt_go.gif">
+				</a>
 			</div>
 			<div class="counsel">
 				<img src="<%=request.getContextPath()%>/resources/img/counsel.gif">

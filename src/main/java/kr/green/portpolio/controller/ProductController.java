@@ -18,6 +18,7 @@ import kr.green.portpolio.service.CommentService;
 import kr.green.portpolio.service.ProductService;
 import kr.green.portpolio.service.UserService;
 import kr.green.portpolio.utils.UploadFileUtils;
+import kr.green.portpolio.vo.AddressVo;
 import kr.green.portpolio.vo.CommentFileVo;
 import kr.green.portpolio.vo.CommentVo;
 import kr.green.portpolio.vo.DeliveryVo;
@@ -292,6 +293,7 @@ public class ProductController {
 		ArrayList<ProductVo> productList = new ArrayList<ProductVo>();
 		ArrayList<FileVo> fileList = new ArrayList<FileVo>();
 		ArrayList<OrderVo> orderList = new ArrayList<OrderVo>();
+		ArrayList<AddressVo> addressList = new ArrayList<AddressVo>();
 		for(int product_num : num) {
 			orderList.add(productService.getOrderInfo(product_num, user));
 			
@@ -300,9 +302,11 @@ public class ProductController {
 			productList.add(productService.getProduct(product_num));
 			fileList.add(productService.getMainFile(product_num));
 		}
-		
+		addressList = userService.getAddressList(user);
 		OrderVo order = productService.calTotal(orderList);
 		request.getSession().removeAttribute("order");
+		
+		mv.addObject("addressList", addressList);
 		mv.addObject("order", order);
 		mv.addObject("productList", productList);
 		mv.addObject("fileList", fileList);

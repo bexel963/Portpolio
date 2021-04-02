@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="UTF-8"%>
+	<%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="UTF-8"%>
 <script src="//code.jquery.com/jquery-3.4.1.js"></script>
 <script src="https://kit.fontawesome.com/022cf171a0.js" crossorigin="anonymous"></script>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
@@ -405,6 +405,10 @@
 		.hidden-way.hidden-account .agreement-all{
 			margin-top: 225px;
 		}
+		.delivery-select{
+			width: 150px;
+			margin-right: 20px;
+		}
     </style>
 </head>
 <body>
@@ -426,7 +430,7 @@
 					<li>- 해외 배송은 불가합니다.</li>
 				</ul>
 			</div>
-			<form action="<%=request.getContextPath()%>/payment" method="POST">
+			<form action="<%=request.getContextPath()%>/payment" method="POST" id="submitPayment">
 				<div class="product-box">
 					<h4 class="">주문상품 확인</h4>
 					<div class="table">
@@ -505,40 +509,66 @@
 							<input type="hidden" name="user_name" value="${user.user_name}" >
 							<input type="hidden" name="user_phone" value="${user.user_phone}" >
 							<input type="hidden" name="user_address" value="${user.user_address}" >
-							<table>
+							<table class="address-table">
+								<thead>
 								<tr>
-									<th class="tap">배송지 선택</th>
-									<td class="input1"><input type="checkbox" name="check" class="check_user"> 새주소 입력</td>
-								</tr>
-								<tr>
-									<th class="tap">수령인</th>
-									<td class="empty hidden">
-										<input type="text" name="recipient" style="width:200px">
-									</td>
-									<td class="user1 user_name">
-										${user.user_name}
-										<input type="hidden" name="recipient" value="${user.user_name}">
-									</td>
-								</tr>
-								<tr>
-									<th class="tap">전화번호</th>
-									<td class="empty hidden">
-										<input type="text" style="width:200px" placeholder=" 예) 010-1234-5778">
-									</td>
-									<td class="user1 user_phone">
-										${user.user_phone}
+									<th class="tap">배송지 선택<br><br></th>
+									<td class="input1">
+										<select class="delivery-select" name="delivery_name">
+											<option value="">선택해주세요</option>
+											<c:forEach items="${addressList}" var="address">
+												<option value="${address.address_num}">${address.delivery_name}</option>
+											</c:forEach>
+										</select>
+										<input type="checkbox" name="check" class="check_user"> 새주소 입력
 									</td>
 								</tr>
-								<tr>
-									<th class="tap">주소</th>
-									<td class="empty hidden">
-										<input type="text" name="delivery_address" style="width:200px" placeholder="예) 서울 동대문구 청계천로 539">
-									</td>
-									<td class="user1 user_address">
-										${user.user_address}
-										<input type="hidden" name="delivery_address" value="${user.user_address}"> 
-									</td>
-								</tr>
+								</thead>
+								<tbody>
+								<c:forEach items="${addressList}" var="address">								
+									<tr class="address-sel-${address.address_num} hidden" >
+										<th class="tap">수령인</th>
+										<td class="empty hidden">
+											<input type="text" name="recipient" style="width:200px">
+										</td>
+										<td class="user1 user_name">
+											${address.recipient}
+											<input type="hidden" name="recipient" value="${address.recipient}">
+										</td>
+									</tr>
+									<tr class="address-sel-${address.address_num} hidden">
+										<th class="tap">전화번호</th>
+										<td class="empty hidden">
+											<input type="text" name="home_call" style="width:200px" placeholder=" 예) 010-1234-5778">
+										</td>
+										<td class="user1 user_phone">
+											${address.home_call}
+											<input type="hidden" name="home_call" value="${address.home_call}">
+										</td>
+									</tr>
+									<tr class="address-sel-${address.address_num} hidden">
+										<th class="tap">폰번호</th>
+										<td class="empty hidden">
+											<input type="text" name="phone_call" style="width:200px" placeholder=" 예) 010-1234-5778">
+										</td>
+										<td class="user1 user_phone">
+											${address.phone_call}
+											<input type="hidden" name="phone_call" value="${address.phone_call}">
+										</td>
+									</tr>
+									<tr class="address-sel-${address.address_num} hidden">
+										<th class="tap">주소</th>
+										<td class="empty hidden">
+											<input type="text" name="delivery_address" style="width:200px" placeholder="예) 서울 동대문구 청계천로 539">
+										</td>
+										<td class="user1 user_address">
+											${address.address}
+											<input type="hidden" name="delivery_address" value="${address.address}"> 		
+										</td>
+									</tr>								
+								</c:forEach>
+								</tbody>
+								<tfoot>
 								<tr>
 									<th class="tap">요청사항</th>
 									<td class="input">
@@ -546,6 +576,7 @@
 										- 요청사항 내용 중 [취소요청, 옵션변경] 은 적용이 되지 않습니다. 해당 내용은 고객센터로 문의해 주세요.
 									</td>
 								</tr>
+								</tfoot>
 							</table>
 						</div>
 						<h4 class="choice-title">결제수단 선택</h4>
@@ -708,6 +739,19 @@
 		</div>
 	</div>
 	<script>
+		$('.delivery-select').change(function(){
+			console.log('.address-table tbody address-sel-'+$(this).val());
+			$('.address-table tbody tr').addClass('hidden');
+			$('.address-table tbody .address-sel-'+$(this).val()).removeClass('hidden');
+		})
+		$('#submitPayment').submit(function(){
+			$('.address-table tbody tr').each(function(){
+				if($(this).hasClass('hidden')){
+					$(this).remove();
+				}
+			})
+		})
+		
 		$('.check_user').click(function(){
 			var check_state = $(this).prop("checked");
 			if(!check_state == false){

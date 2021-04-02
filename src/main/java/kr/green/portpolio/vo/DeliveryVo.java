@@ -7,7 +7,23 @@ public class DeliveryVo {
 	private String delivery_address;
 	private String delivery_state = "대기중";
 	private String demand;
+	private String phone_call;
+	private String home_call;
 	
+	
+	
+	public String getPhone_call() {
+		return phone_call;
+	}
+	public void setPhone_call(String phone_call) {
+		this.phone_call = phone_call;
+	}
+	public String getHome_call() {
+		return home_call;
+	}
+	public void setHome_call(String home_call) {
+		this.home_call = home_call;
+	}
 	public String getDemand() {
 		return demand;
 	}

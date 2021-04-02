@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
 
+import kr.green.portpolio.vo.AddressVo;
 import kr.green.portpolio.vo.UserVo;
 
 public interface UserService {
@@ -23,5 +24,9 @@ public interface UserService {
 	public UserVo getUser2(String user_nickName);
 
 	public void modifyUser(UserVo user, String user_pw);
+
+	public void regisAddress(UserVo user, AddressVo address);
+
+	public ArrayList<AddressVo> getAddressList(UserVo user);
 
 }

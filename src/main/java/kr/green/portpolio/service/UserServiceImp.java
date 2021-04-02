@@ -10,6 +10,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import kr.green.portpolio.dao.UserDao;
+import kr.green.portpolio.vo.AddressVo;
 import kr.green.portpolio.vo.UserVo;
 @Service
 public class UserServiceImp implements UserService {
@@ -83,6 +84,16 @@ public class UserServiceImp implements UserService {
 		user.setUser_pw(encPw);
 		
 		userDao.modifyUser(user);
+	}
+
+	@Override
+	public void regisAddress(UserVo user, AddressVo address) {
+		userDao.regisAddress(user, address);
+	}
+
+	@Override
+	public ArrayList<AddressVo> getAddressList(UserVo user) {
+		return userDao.getAddressList(user);
 	}
 	
 }

@@ -152,7 +152,7 @@
 			margin: 0 5px 0 5px;
 		}
 		.right .bot .btn-area{
-			width: 300px;
+			width: 280px;
 			margin: 0 auto;
 		}
 		.right .bot .btn-area .add-btn{
@@ -211,67 +211,88 @@
 					</div>
 				</div>
 			</div>
-			<div class="mid after">
-				<div class="table-title">새로운 주소록 추가</div>
-				<table class="table">
-						<tr>
-							<th style="padding-top:15px">배송지 이름</th>
-							<td>
-								<input class="text-input" type="text" name="user_nickName" value="" style="float: left; margin-right: 10px">
-								<span class="ex-text">예) 우리집</span>
-							</td>
-						</tr>
-						<tr>
-							<th style="padding-top:15px">수령인</th>
-							<td>
-								<input class="text-input" type="text" name="user_nickName" value="" style="float: left; margin-right: 10px">
-								<span class="ex-text">예) 홍길동</span>
-							</td>
-						</tr>
-						<tr>
-							<th style="padding-top:15px">휴대폰번호</th>
-							<td>
-								<input class="text-input" type="text" name="user_phone1" value="" style="width:155px;"><span class="text">-</span>
-								<input class="text-input" type="text" name="user_phone2" value="" style="width:155px;"><span class="text">-</span>
-								<input class="text-input" type="text" name="user_phone3" value="" style="width:155px;">
-								<input type="hidden" name="user_phone">
-							</td>
-						</tr>
-						<tr>
-							<th style="padding-top:15px">전화번호</th>
-							<td>
-								<input class="text-input" type="text" name="user_homeCall1" value="" style="width:155px;"><span class="text">-</span>
-								<input class="text-input" type="text" name="user_homeCall2" value="" style="width:155px;"><span class="text">-</span>
-								<input class="text-input" type="text" name="user_homeCall3" value="" style="width:155px;">
-								<input type="hidden" name="user_homeCall">
-							</td>
-						</tr>
-						<tr>
-							<th style="padding-top:15px">주소</th>
-							<td>
-								<input class="text-input" type="text" name="user_nickName" value="" style="float: left; margin-right: 10px; width: 500px;">
-								<span class="ex-text">예) 서울 동대문구 청계천로 539</span>
-							</td>
-						</tr>
-						<tr>
-							<th style="padding-top:15px">상세주소</th>
-							<td>
-								<input class="text-input" type="text" name="user_nickName" value="" style="float: left; margin-right: 10px; width: 500px;">
-								<span class="ex-text">예) xxxx아파트 xxx동 xxx호</span>
-							</td>
-						</tr>
-					</table>
-			</div>
-			<div class="bot">
-				<div class="btn-area">
-					<button class="add-btn">주소록 추가</button>
-					<button class="x-btn">취  소</button>
+			<form action="<%=request.getContextPath()%>/addressAdd" method="post">
+				<div class="mid after">
+					<div class="table-title">새로운 주소록 추가</div>
+					<table class="table">
+							<tr>
+								<th style="padding-top:15px">배송지 이름</th>
+								<td>
+									<input class="text-input" type="text" name="delivery_name" value="" style="float: left; margin-right: 10px">
+									<span class="ex-text">예) 우리집</span>
+								</td>
+							</tr>
+							<tr>
+								<th style="padding-top:15px">수령인</th>
+								<td>
+									<input class="text-input" type="text" name="recipient" value="" style="float: left; margin-right: 10px">
+									<span class="ex-text">예) 홍길동</span>
+								</td>
+							</tr>
+							<tr>
+								<th style="padding-top:15px">휴대폰번호</th>
+								<td>
+									<input class="text-input" type="text" name="user_phone1" value="" style="width:155px;"><span class="text">-</span>
+									<input class="text-input" type="text" name="user_phone2" value="" style="width:155px;"><span class="text">-</span>
+									<input class="text-input" type="text" name="user_phone3" value="" style="width:155px;">
+									<input type="hidden" name="phone_call">
+								</td>
+							</tr>
+							<tr>
+								<th style="padding-top:15px">전화번호</th>
+								<td>
+									<input class="text-input" type="text" name="user_homeCall1" value="" style="width:155px;"><span class="text">-</span>
+									<input class="text-input" type="text" name="user_homeCall2" value="" style="width:155px;"><span class="text">-</span>
+									<input class="text-input" type="text" name="user_homeCall3" value="" style="width:155px;">
+									<input type="hidden" name="home_call">
+								</td>
+							</tr>
+							<tr>
+								<th style="padding-top:15px">주소</th>
+								<td>
+									<input class="text-input" type="text" name="address1" value="" style="float: left; margin-right: 10px; width: 500px;">
+									<span class="ex-text">예) 서울 동대문구 청계천로 539</span>
+								</td>
+							</tr>
+							<tr>
+								<th style="padding-top:15px">상세주소</th>
+								<td>
+									<input class="text-input" type="text" name="address2" value="" style="float: left; margin-right: 10px; width: 500px;">
+									<span class="ex-text">예) xxxx아파트 xxx동 xxx호</span>
+									<input type="hidden" name="address">
+								</td>
+							</tr>
+						</table>
 				</div>
-			</div>
+				<div class="bot">
+					<div class="btn-area">
+						<button type="submit" class="add-btn">주소록 추가</button>
+						<a href="<%=request.getContextPath()%>/addressList"><button class="x-btn">취  소</button></a>
+					</div>
+				</div>
+			</form>
 		</div>
 	</div>
 	<script>
-	
+		$('.add-btn').click(function(){
+			var phone1 = $('input[name=user_phone1]').val();
+			var phone2 = $('input[name=user_phone2]').val();
+			var phone3 = $('input[name=user_phone3]').val();	
+			var home_call = phone1 + '-' + phone2 + '-' + phone3;
+			
+			var homeCall1 = $('input[name=user_homeCall1]').val();
+			var homeCall2 = $('input[name=user_homeCall2]').val();
+			var homeCall3 = $('input[name=user_homeCall3]').val();	
+			var phone_call = homeCall1 + '-' + homeCall2 + '-' + homeCall3;
+			
+			var address1 = $('input[name=address1]').val();
+			var address2 = $('input[name=address2]').val();
+			var address = address1 + '\n' + address2;
+			
+			$('input[name=phone_call]').val(phone_call);
+			$('input[name=home_call]').val(home_call);
+			$('input[name=address]').val(address);
+		})
 	</script>
 </body>
 </html>

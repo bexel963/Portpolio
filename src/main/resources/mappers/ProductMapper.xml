@@ -108,7 +108,8 @@
 	</insert>
 	
 	<insert id="regisDelivery">
-		insert into portpolio.delivery(payment_num, recipient, delivery_address, demand) values(#{payment_num}, #{delivery.recipient}, #{delivery.delivery_address}, #{delivery.demand})
+		insert into portpolio.delivery(payment_num, recipient, delivery_address, demand, phone_call, home_call)
+			values(#{payment_num}, #{delivery.recipient}, #{delivery.delivery_address}, #{delivery.demand}, #{delivery.phone_call}, #{delivery.home_call})
 	</insert>
 	
 	<insert id="regisPresentPayment">

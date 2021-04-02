@@ -1011,6 +1011,7 @@ response.setDateHeader("Expires", 0L); %>
 				</tr>
 			</table>
 		</div>	
+		<input type="hidden" name="product_amount" value="${product.product_amount}">
 	</div>
 
 	<script type="text/javascript">
@@ -1199,8 +1200,13 @@ response.setDateHeader("Expires", 0L); %>
         $('.myBox-btn').click(function(e){
         	e.preventDefault(); // myBox-btn에 지정한 url로 못가게 막는거
         	var id = '${user.user_id}';
-        	var product_num = $('input[name=product_num]').val();	
+        	var product_num = $('input[name=product_num]').val();
+        	var amount = $('input[name=product_amount]').val();
         	
+        	if(amount < 1){
+        		alert('품절 입니다.');
+        		return false;
+        	}
         	if(id == ''){
         		alert('로그인하세요.');
         		return;
@@ -1230,6 +1236,12 @@ response.setDateHeader("Expires", 0L); %>
 				alert('로그인하세요.');
 				return;
 			}
+			var amount = $('input[name=product_amount]').val();
+        	
+        	if(amount < 1){
+        		alert('품절 입니다.');
+        		return false;
+        	}
         	e.preventDefault();	//buy-btn에 지정한 url로 못가게 막고
         	$('#formSubmit').submit();	// formsubmit을 실행
         })

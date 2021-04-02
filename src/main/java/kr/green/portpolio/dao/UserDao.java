@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import org.apache.ibatis.annotations.Param;
 
+import kr.green.portpolio.vo.AddressVo;
 import kr.green.portpolio.vo.UserVo;
 
 public interface UserDao {
@@ -18,6 +19,10 @@ public interface UserDao {
 	public void updateGrade(@Param("user")UserVo userVo);
 
 	public void modifyUser(@Param("user")UserVo user);
+
+	public void regisAddress(@Param("user")UserVo user, @Param("address")AddressVo address);
+
+	public ArrayList<AddressVo> getAddressList(@Param("user")UserVo user);
 
 
 }

@@ -162,9 +162,21 @@ public class ProductServiceImp implements ProductService {
 	public void regisPayment(UserVo user, PaymentVo payment) {
 		productDao.regisPayment(user, payment);
 	}
+	
 
 	@Override
 	public void regisDelivery(int payment_num, DeliveryVo delivery) {
+		String[] address = delivery.getDelivery_address().split(",");
+		String[] recipient = delivery.getRecipient().split(",");
+		String[] home_call = delivery.getHome_call().split(",");
+		String[] phone_call = delivery.getPhone_call().split(",");
+		
+		
+		delivery.setDelivery_address(address[address.length]);
+		delivery.setRecipient(address[recipient.length]);
+		delivery.setHome_call(address[home_call.length]);
+		delivery.setPhone_call(address[phone_call.length]);
+		
 		productDao.regisDelivery(payment_num, delivery);			
 	}
 
